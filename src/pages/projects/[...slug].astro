@@ -1,0 +1,93 @@
+---
+/*
+  Project detail pages.
+
+  FIXES A LATENT BUG: both the Projects index and Home link to
+  /projects/<id> whenever an entry has hasPage: true, but no route existed to
+  serve those URLs. Nothing 404s today only because every project is still a
+  draft and therefore filtered out. The first entry to go live would have
+  shipped a broken link.
+
+  Only non-draft entries with hasPage get a page. A tier-3 card that links
+  nowhere is intentional.
+*/
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Todo from '../../components/Todo.astro';
+import { published, clientLabel } from '../../lib/content';
+
+export async function getStaticPaths() {
+	const projects = published(await getCollection('projects'));
+	return projects
+		.filter((project) => project.data.hasPage)
+		.map((project) => ({
+			params: { slug: project.id },
+			props: { project },
+		}));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+const client = clientLabel(project.data);
+const years = [project.data.year, project.data.yearEnd]
+	.filter(Boolean)
+	.join('–');
+
+const meta = [years, project.data.role, client].filter(Boolean).join(' · ');
+---
+
+<Base title={project.data.title} description={project.data.summary}>
+	<article>
+		<h1 class="text-4xl">{project.data.title}</h1>
+
+		{meta && <p class="mt-3 text-sm text-muted">{meta}</p>}
+
+		<p class="mt-2 text-sm text-muted">{project.data.tools.join(', ')}</p>
+
+		<p class="mt-6 text-lg">{project.data.summary}</p>
+
+		{
+			project.data.links.length > 0 && (
+				<ul class="mt-4 space-y-1 text-sm">
+					{project.data.links.map((l) => (
+						<li>
+							<a href={l.url}>{l.label}</a>
+						</li>
+					))}
+				</ul>
+			)
+		}
+
+		{
+			/* Through Astro's asset pipeline like the gallery: responsive WebP,
+			   explicit dimensions, no client-side JS. The raw <img> this replaced
+			   would have shipped the full committed derivative to every visitor. */
+			project.data.cover && (
+				<figure class="mt-8">
+					<Image
+						src={project.data.cover.src}
+						alt={project.data.cover.alt}
+						widths={[768, 1200, 1600]}
+						sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
+						class="w-full border border-line bg-white"
+					/>
+				</figure>
+			)
+		}
+
+		{/*
+		  Case-study body. The required shape is problem, approach, what was
+		  delivered, outcome — enforced by review, not by the schema, since
+		  Markdown bodies are free-form.
+		*/}
+		<div class="mt-8 space-y-4 text-base">
+			<Content />
+		</div>
+
+		<p class="mt-12 border-t border-line pt-6 text-sm">
+			<a href="/projects">All projects</a>
+		</p>
+	</article>
+</Base>

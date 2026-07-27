@@ -1,0 +1,29 @@
+---
+/*
+  Footer.astro — repeats contact at the end of every page.
+
+  Someone who reads to the bottom of a project page should not have to scroll
+  back up to find an address. Year is rendered from the build date, which is a
+  fact about the build, not an unconfirmed project fact.
+*/
+import { site } from '../site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-20 border-t border-line">
+	<div
+		class="mx-auto flex max-w-3xl flex-wrap items-baseline justify-between gap-x-6 gap-y-2 px-6 py-8 text-sm text-muted"
+	>
+		<p>
+			{
+				site.email ? (
+					<a href={`mailto:${site.email}`}>{site.email}</a>
+				) : (
+					<span class="text-accent">TODO: contact email</span>
+				)
+			}
+		</p>
+		<p>© {year} {site.name}</p>
+	</div>
+</footer>

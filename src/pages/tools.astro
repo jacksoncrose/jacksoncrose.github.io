@@ -1,0 +1,43 @@
+---
+/*
+  Tools — live, linked tools with a two-sentence description each (sitemap).
+
+  A tool with no confirmed URL still renders, but says so rather than linking
+  somewhere invented.
+*/
+import Base from '../layouts/Base.astro';
+import Todo from '../components/Todo.astro';
+import { getCollection } from 'astro:content';
+import { published } from '../lib/content';
+
+const tools = published(await getCollection('tools'));
+---
+
+<Base title="Tools" description="TODO: meta description for the Tools page.">
+	<h1 class="text-4xl">Tools</h1>
+	<Todo note="One-paragraph intro: what these tools are for and who uses them." />
+
+	{
+		tools.length === 0 ? (
+			<Todo note="No published tools yet. Known candidates: the renewable energy tax calculators, the Montana frost-free days calculator, and the River Conditions Tool if permissions allow. Each needs its live URL confirmed." />
+		) : (
+			<ul class="mt-8 space-y-8">
+				{tools.map((tool) => (
+					<li class="border-t border-line pt-6">
+						<h2 class="text-2xl">
+							{tool.data.url ? (
+								<a href={tool.data.url}>{tool.data.title}</a>
+							) : (
+								tool.data.title
+							)}
+						</h2>
+						<p class="mt-2 text-base">{tool.data.blurb}</p>
+						{!tool.data.url && (
+							<Todo note={`Live URL for "${tool.data.title}" not confirmed.`} />
+						)}
+					</li>
+				))}
+			</ul>
+		)
+	}
+</Base>

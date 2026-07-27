@@ -1,0 +1,55 @@
+---
+/*
+  Maps — visual gallery grid: image, title, 1-2 sentences, year, tools.
+  No case-study prose (sitemap).
+
+  Each image renders through Astro's <Image>, which generates responsive
+  sizes from the derivative in src/assets/images/ at build time — plain
+  <img> output, no client-side JavaScript. The first two images load
+  eagerly because they sit above the fold; the rest lazy-load.
+*/
+import Base from '../layouts/Base.astro';
+import Todo from '../components/Todo.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { published } from '../lib/content';
+
+const gallery = published(await getCollection('gallery'));
+---
+
+<Base title="Maps" description="TODO: meta description for the Maps gallery.">
+	<h1 class="text-4xl">Maps</h1>
+	<Todo note="One or two sentences framing the gallery — cartographic and analytical work that does not need a full case study." />
+
+	{
+		gallery.length === 0 ? (
+			<Todo note="Gallery inventory is unconfirmed: which maps, figures, and orthomosaic stills go here, and in what order. Images and real alt text needed for each." />
+		) : (
+			<ul class="mt-8 grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2">
+				{gallery.map((entry, i) => (
+					<li>
+						<figure>
+							<Image
+								src={entry.data.image}
+								alt={entry.data.alt}
+								widths={[480, 800, 1200]}
+								sizes="(min-width: 640px) 21.5rem, calc(100vw - 3rem)"
+								loading={i < 2 ? 'eager' : 'lazy'}
+								class="w-full border border-line bg-white"
+							/>
+							<figcaption class="mt-3">
+								<h2 class="text-xl">{entry.data.title}</h2>
+								<p class="mt-1 text-sm text-muted">
+									{[entry.data.year?.toString(), entry.data.tools.join(', ')]
+										.filter(Boolean)
+										.join(' · ')}
+								</p>
+								<p class="mt-2 text-base">{entry.data.blurb}</p>
+							</figcaption>
+						</figure>
+					</li>
+				))}
+			</ul>
+		)
+	}
+</Base>

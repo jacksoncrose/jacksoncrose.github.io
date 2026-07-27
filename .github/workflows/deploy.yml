@@ -1,0 +1,44 @@
+# Deploys the site to GitHub Pages on every push to master.
+#
+# Build and deploy are split into two jobs on purpose: the build job turns
+# the repo into a static artifact (withastro/action runs the install and
+# `astro build`, then uploads dist/), and the deploy job publishes that
+# artifact through GitHub's Pages deployment API. The permissions block is
+# the minimum Pages publishing requires; id-token lets GitHub verify the
+# artifact came from this workflow run.
+#
+# One-time setup in the repo on github.com:
+#   Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  # Allows manual runs from the Actions tab.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v7
+      - name: Install, build, and upload the site
+        uses: withastro/action@v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

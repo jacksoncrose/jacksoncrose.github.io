@@ -1,0 +1,19 @@
+---
+/*
+  404. GitHub Pages serves /404.html automatically for unmatched paths, so
+  this costs one file and prevents visitors landing on the host's default
+  error page, which looks like the site is broken rather than the link.
+*/
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found" description="That page does not exist.">
+	<h1 class="text-4xl">Page not found</h1>
+	<p class="mt-4 text-base">
+		That link does not point anywhere on this site. It may be out of date.
+	</p>
+	<p class="mt-6 text-base">
+		Try <a href="/projects">projects</a>, <a href="/tools">tools</a>, or
+		<a href="/maps">maps</a>.
+	</p>
+</Base>

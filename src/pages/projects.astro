@@ -1,0 +1,75 @@
+---
+/*
+  Projects — index of cards, grouped by tier (sitemap). Tier 1 is the spine and
+  leads; tier 2 gets full pages; tier 3 are cards only.
+
+  Client names pass through clientLabel(), the single gate that refuses to
+  print a name whose permission is not confirmed.
+*/
+import Base from '../layouts/Base.astro';
+import Todo from '../components/Todo.astro';
+import { getCollection } from 'astro:content';
+import { published, clientLabel } from '../lib/content';
+
+const projects = published(await getCollection('projects'));
+
+const tiers = [
+	{ tier: 1 as const, heading: 'Spatial fiscal analysis' },
+	{ tier: 2 as const, heading: 'Data collection and engineering' },
+	{ tier: 3 as const, heading: 'Other work' },
+];
+---
+
+<Base title="Projects" description="TODO: meta description for Projects.">
+	<h1 class="text-4xl">Projects</h1>
+	<Todo note="One-paragraph intro for this page. Also confirm the tier headings, which are working titles: Spatial fiscal analysis / Data collection and engineering / Other work." />
+
+	{
+		projects.length === 0 && (
+			<Todo note="No published projects yet. Drafts exist but stay hidden until their unconfirmed facts (dates, clients, metrics) are filled in." />
+		)
+	}
+
+	{
+		tiers.map(({ tier, heading }) => {
+			const inTier = projects.filter((p) => p.data.tier === tier);
+			if (inTier.length === 0) return null;
+			return (
+				<section class="mt-12 border-t border-line pt-8">
+					<h2 class="text-3xl">{heading}</h2>
+					<ul class="mt-6 space-y-8">
+						{inTier.map((project) => {
+							const client = clientLabel(project.data);
+							return (
+								<li>
+									<h3 class="text-xl">
+										{project.data.hasPage ? (
+											<a href={`/projects/${project.id}`}>
+												{project.data.title}
+											</a>
+										) : (
+											project.data.title
+										)}
+									</h3>
+									<p class="mt-1 text-sm text-muted">
+										{[
+											project.data.year?.toString(),
+											project.data.role,
+											client,
+										]
+											.filter(Boolean)
+											.join(' · ')}
+									</p>
+									<p class="mt-2 text-base">{project.data.summary}</p>
+									<p class="mt-2 text-sm text-muted">
+										{project.data.tools.join(', ')}
+									</p>
+								</li>
+							);
+						})}
+					</ul>
+				</section>
+			);
+		})
+	}
+</Base>

@@ -1,0 +1,21 @@
+---
+/*
+  Todo.astro — a visible placeholder for copy or facts awaiting Jackson.
+
+  Deliberately loud: dashed rule, monospace-ish label, accent color. The point
+  is that an unfinished page can never be mistaken for a finished one, and
+  every open question is greppable in the source as <Todo>.
+*/
+interface Props {
+  /** What Jackson needs to supply or decide. */
+  note: string;
+}
+const { note } = Astro.props;
+---
+
+<p
+	class="my-3 border-l-2 border-accent bg-white px-3 py-2 text-sm text-muted"
+>
+	<span class="font-semibold tracking-wide text-accent uppercase">TODO</span>
+	{' '}{note}
+</p>

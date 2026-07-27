@@ -1,0 +1,109 @@
+/*
+  global.css — the single source of truth for the site's design tokens.
+
+  Every color, font, and text size used anywhere on the site must come from
+  the tokens defined in the @theme block below. Tailwind v4 generates its
+  utility classes (text-accent, font-serif, text-3xl, ...) directly from
+  these variables, and the `--color-*: initial` / `--font-*: initial` /
+  `--text-*: initial` resets DELETE Tailwind's default palette, fonts, and
+  type scale. A class like `text-blue-500` simply does not exist in this
+  project — the one-accent rule is enforced by the build, not by memory.
+*/
+
+@import "tailwindcss";
+
+/* Self-hosted variable fonts (Fontsource). No third-party requests, no JS. */
+@import "@fontsource-variable/source-serif-4";
+@import "@fontsource-variable/inter";
+
+@theme {
+  /* ------------------------------------------------------------------ */
+  /* Color — one accent (copper rust), warm neutrals, nothing else.     */
+  /* All pairings verified against WCAG 2.1 AA:                         */
+  /*   accent on white 5.00:1, on paper 4.75:1  (≥ 4.5 required)        */
+  /*   white on accent 5.00:1                                           */
+  /*   accent-deep on white 6.76:1 (hover/active)                       */
+  /*   ink on paper 16.62:1, muted on paper 6.5:1                       */
+  /* ------------------------------------------------------------------ */
+  --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-paper: #faf9f7; /* page background, warm off-white */
+  --color-ink: #1c1917; /* primary text */
+  --color-muted: #57534e; /* secondary text: captions, metadata */
+  --color-line: #e5e1dc; /* hairline borders, dividers */
+  --color-accent: #b3541e; /* copper rust — links, emphasis, buttons */
+  --color-accent-deep: #96430f; /* hover/active state of accent */
+
+  /* ------------------------------------------------------------------ */
+  /* Fonts — serif for headings (editorial voice), sans for body/UI.    */
+  /* ------------------------------------------------------------------ */
+  --font-*: initial;
+
+  --font-serif: "Source Serif 4 Variable", "Source Serif 4", Georgia,
+    "Times New Roman", serif;
+  --font-sans: "Inter Variable", Inter, ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* ------------------------------------------------------------------ */
+  /* Type scale — major third (×1.25) above a 1rem base, with line      */
+  /* heights that tighten as sizes grow. Generous body leading for      */
+  /* long-form case-study prose.                                        */
+  /* ------------------------------------------------------------------ */
+  --text-*: initial;
+
+  --text-xs: 0.75rem; /* 12px — fine print, figure credits */
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.875rem; /* 14px — captions, metadata rows */
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem; /* 16px — body */
+  --text-base--line-height: 1.65;
+  --text-lg: 1.125rem; /* 18px — leads, large body */
+  --text-lg--line-height: 1.6;
+  --text-xl: 1.25rem; /* 20px — h4 / card titles */
+  --text-xl--line-height: 1.4;
+  --text-2xl: 1.5625rem; /* 25px — h3 */
+  --text-2xl--line-height: 1.3;
+  --text-3xl: 1.953rem; /* ~31px — h2 / section headings */
+  --text-3xl--line-height: 1.2;
+  --text-4xl: 2.441rem; /* ~39px — page titles */
+  --text-4xl--line-height: 1.15;
+  --text-5xl: 3.052rem; /* ~49px — home hero name only */
+  --text-5xl--line-height: 1.1;
+}
+
+/* Site-wide element defaults. Kept deliberately small: real layout and
+   components come in later steps; this only encodes what the tokens mean. */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  a:hover {
+    color: var(--color-accent-deep);
+  }
+
+  /* Visible keyboard focus everywhere (WCAG 2.4.7). */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
