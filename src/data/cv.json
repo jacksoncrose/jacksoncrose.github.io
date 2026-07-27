@@ -1,0 +1,131 @@
+{
+  "updated": "July 2026",
+  "name": "Jackson C. Rose",
+  "appointments": [
+    {
+      "org": "Montana State University",
+      "place": "Bozeman, MT",
+      "title": "Geospatial Research Scientist and Instructor",
+      "dates": "January 2023 – Present",
+      "bullets": [
+        "Assistant Director and Operations Manager of the Geospatial Core Facility, which provides professional GIS services to the campus research community and external collaborators.",
+        "Non-tenure-track faculty member, Department of Earth Sciences.",
+        "Manage a $319,887 operating budget across four institutional indexes for a university recharge facility, where half of all revenue is now earned through billed services.",
+        "Oversaw billing growth of 181% in two years, from $44,530 in FY24 to $125,142 in FY26, with FY27 budgeted at $160,140.",
+        "Oversaw development of the facility's external client business from $6,466 to a peak of $49,103 in three years, opening a revenue channel spanning municipal, federal, nonprofit, and private-sector clients.",
+        "Built and maintain the facility's central invoicing and rate infrastructure, and rebuilt the FY27 operating budget and service center rate template.",
+        "Teach GPHY 384/504, a co-convened undergraduate and graduate GIS and spatial analysis lecture with a separate graduate lab and recitation, and GPHY 484R Applied GIS and Spatial Analysis.",
+        "Delivered 1,652 billable hours across 9 published service lines and 38 invoices to 25 clients in FY26.",
+        "Collect and process UAS imagery and LiDAR for research and client projects as a certified remote pilot.",
+        "Set published service rates across 9 service lines and prepared client quotes and scopes of work."
+      ]
+    },
+    {
+      "org": "Salmon Valley Stewardship & Jervois Mining",
+      "place": "Salmon, ID",
+      "title": "Consultant",
+      "dates": "October 2021 – December 2023",
+      "bullets": [
+        "Led a project exploring development of a community benefits agreement tied to Jervois' Idaho Cobalt Operations.",
+        "Researched and advised on agreement structure, mechanisms, and initiatives toward a final agreement."
+      ]
+    },
+    {
+      "org": "Meagher County Stewardship Council",
+      "place": "White Sulphur Springs, MT",
+      "title": "Executive Director",
+      "dates": "June 2021 – January 2023",
+      "bullets": [
+        "Directed a grassroots 501(c)(3) working in conservation and community development.",
+        "Led community-side negotiations with an international mining company toward a community benefits agreement for the Black Butte Copper Project, covering impact mitigation and long-term community investment.",
+        "Continued to help lead the negotiations as a board member after the executive director term. In March 2026 the parties announced a memorandum of understanding establishing a framework for a binding agreement, covering a community investment fund, a revolving loan fund, educational programming, and environmental stewardship."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "dates": "2017 – 2020",
+      "school": "Montana State University",
+      "place": "Bozeman, MT",
+      "degree": "Master of Science in Earth Sciences, Geography Focus"
+    },
+    {
+      "dates": "2013 – 2017",
+      "school": "Montana State University",
+      "place": "Bozeman, MT",
+      "degree": "Bachelor of Science in Earth Sciences, Geography Major"
+    }
+  ],
+  "skills": [
+    {
+      "label": "Analysis",
+      "known": "ArcGIS Pro, Python"
+    },
+    {
+      "label": "Data collection",
+      "known": "UAS survey, airborne and terrestrial LiDAR, photogrammetry"
+    },
+    {
+      "label": "Data management",
+      "known": "Geospatial data management and archiving"
+    },
+    {
+      "label": "Certifications",
+      "known": "Certified GIS Professional (GISP), GIS Certification Institute, since May 2022. FAA Part 107 Remote Pilot (small unmanned aircraft systems)"
+    }
+  ],
+  "publications": [
+    {
+      "year": "2023",
+      "text": "Haggerty, M.N., J. Rose & T. Ruth. A Framework for Federal Mining Reform: Impact Planning, Benefits Sharing, and Asset-Based Revenue Management. Center for American Progress, Washington, D.C.",
+      "url": "https://www.americanprogress.org/article/a-framework-for-federal-mining-reform-impact-planning-benefits-sharing-and-asset-based-revenue-management/"
+    },
+    {
+      "year": "2022",
+      "text": "Haggerty, J. H., K. Epstein, H. Gosnell, J. Rose, and M. Stone. Rural Land Concentration & Protected Areas: Recent Trends from Montana and Greater Yellowstone. Society and Natural Resources 35(6): 692-700. DOI: 10.1080/08941920.2022.2038318"
+    },
+    {
+      "year": "2021",
+      "text": "Smith, K., M. Haggerty, and J. Rose. Federal Fossil Fuel Disbursements to States. Headwaters Economics, Bozeman, MT.",
+      "url": "https://headwaterseconomics.org/wp-content/uploads/HE_Federal_Fossil_Fuel_Disbursements_Report.pdf"
+    },
+    {
+      "year": "2020",
+      "text": "Rose, J. C. Navigating the Local Costs and Benefits of Modern Mineral Mines: The Role of Non-Regulatory Agreements. Master's Thesis. Montana State University.",
+      "url": "https://scholarworks.montana.edu/items/7353780d-2d0d-4295-b31f-80aefe0aa89f/full"
+    },
+    {
+      "year": "2018",
+      "text": "Haggerty, J. H., M. N. Haggerty, J. Rose, and K. Roemer. Planning for the Local Economic Impacts of Coal Facility Closure: Emerging Strategies in the American West. Resources Policy 57(Aug.): 69-80. DOI: 10.1016/j.resourpol.2018.01.010"
+    },
+    {
+      "year": "2018",
+      "text": "Rose, J. C. and J. Haggerty. Community Benefits Agreements and Funds: A summary of key literature and case studies. Whitepaper. Resources and Communities Research Group, Montana State University."
+    }
+  ],
+  "presentations": [
+    {
+      "date": "May 2024",
+      "venue": "National Academies of Sciences, Engineering & Medicine, Washington, D.C.",
+      "title": "Leveraging Community Benefit Frameworks: Empowering Communities to Benefit from Federally Funded Energy Projects"
+    },
+    {
+      "date": "December 2023",
+      "venue": "U.S. Department of Energy and U.S. Energy Association webinar",
+      "title": "Building Understanding and Improving Engagement through Community Benefits Plans"
+    }
+  ],
+  "service": [
+    {
+      "org": "Montana Association of Geographic Information Professionals",
+      "role": "Past President",
+      "dates": "January 2023 – Present",
+      "detail": "President, June 2025 – June 2026; Vice President, November 2024 – June 2025; member since January 2023."
+    },
+    {
+      "org": "Meagher County Stewardship Council",
+      "role": "Board Member",
+      "dates": "July 2021 – Present"
+    }
+  ]
+}
