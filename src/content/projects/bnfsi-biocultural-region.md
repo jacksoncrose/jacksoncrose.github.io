@@ -1,0 +1,84 @@
+---
+# Condensed from Jackson's write-up, supplied 2026-07-28 for the site.
+# Client naming granted by Jackson same day. Role per Jackson: "doesn't
+# need to be overly specific — I did the analysis and cartography."
+# The write-up's credit line named an abandoned LLC that must never
+# appear on the site (see AGENTS.md); the body says "contracted
+# independently" with no entity. Web map mentioned, not linked (his
+# call: ArcGIS Hub migration is underway and the URL may change).
+title: "Buffalo Nations Biocultural Region Map"
+summary: "Biocultural region mapping for the Buffalo Nations Food Systems Initiative: a public interactive web map and a large-format static map assembled from a dozen sources across two countries, with hand-built treaty and council layers and custom cultural symbology, delivered for the initiative to maintain independently."
+year: 2023
+tier: 3
+role: "Analysis and cartography"
+tools: ["ArcGIS Pro", "ArcGIS Online"]
+client: "Buffalo Nations Food Systems Initiative"
+clientPermission: "granted"
+hasPage: true
+cover:
+  src: "../../assets/images/bnfsi-biocultural-region.jpg"
+  alt: "Large-format map titled Buffalo Nations Biocultural Region of the Northern Plains and Rockies on a satellite-imagery base: bison symbols mark Buffalo Treaty signatories, feather symbols mark named Indigenous Advisory Council members, lodge symbols mark tribal colleges and universities, and an inset locates the region within North America."
+draft: false
+---
+
+## Problem
+
+The Buffalo Nations Food Systems Initiative (BNFSI) is an Indigenous-led
+initiative at Montana State University working to restore intertribal food
+sovereignty across the Northwestern Plains and Northern Rockies. The
+initiative needed a way to show the region it serves as a biocultural
+homeland rather than a set of administrative jurisdictions, and no single
+dataset describes a biocultural region. Contracted independently, I built
+that picture twice over: as an interactive public web map, and as a
+large-format static map used for signage in MSU's American Indian Hall and
+on the BNFSI website.
+
+## Approach
+
+The map was assembled from roughly a dozen sources spanning two countries,
+including U.S. Census TIGER American Indian/Alaska Native areas, Natural
+Resources Canada Aboriginal Lands and First Nations locations, ORNL/USGS
+post-secondary institutions, Natural Earth shaded relief, and the USGS
+North American Atlas. Several layers did not exist and had to be built by
+hand in ArcGIS Pro, including Buffalo Treaty signatory locations digitized
+from the Treaty's own records, Indigenous Advisory Council member
+locations, medicine wheel concentrations, and the biocultural region
+boundary itself.
+
+Cross-border integration was the bulk of the analytical work. U.S. and
+Canadian land datasets use different projections, schemas, and naming
+conventions, so reconciling reserves, reservations, trust lands, and
+tribal and band names into unified layers required substantial cleanup and
+a merged authority table.
+
+Design choices reinforced the initiative's framing. The published web map
+omits state, provincial, and federal boundaries so the region reads as a
+network of relationships rather than a set of borders. Symbology was drawn
+from cultural imagery, including a hand-scanned medicine wheel vectorized
+to SVG and custom bison, feather, and lodge symbols, packaged into a
+reusable style library so future editors inherit the same visual language.
+
+Working inside ArcGIS Online meant designing around its limits. Cree place
+names render in syllabics because the platform does not support standard
+Roman orthography, and I built a filter system to handle duplicate labels
+across dense clusters of small land parcels, which the platform cannot
+deduplicate on its own.
+
+## What was delivered
+
+A published ArcGIS Online web map and interactive web application with
+narrative and user guide; the large-format static map for American Indian
+Hall signage and web publication; hosted feature layers with full
+metadata, transferred to the initiative's ownership; data dictionaries for
+both maps documenting source, projection, scale, purpose, and citation for
+every layer; and a project overview and maintenance methodology enabling
+the initiative to make future edits independently.
+
+## Outcome
+
+The work ran from 2021 to 2023, an original contract plus an extension.
+The static map hangs in MSU's American Indian Hall and is published on the
+BNFSI website, and the interactive map is public. Because the feature
+layers, style library, and documentation were transferred to BNFSI's
+ownership, the initiative can extend and maintain the maps on its own. The
+published maps are currently being migrated into an ArcGIS Hub site.

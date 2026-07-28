@@ -11,20 +11,21 @@ export const site = {
   name: 'Jackson Rose',
 
   /**
-   * Roles, one compressed line (Home, above the fold).
+   * Roles, one compressed line (Home, above the fold; also under the About
+   * H1).
    *
    * GCF role wording settled 2026-07-25: "Assistant Director and Operations
    * Manager." Use this phrasing everywhere; earlier drafts and the 2025
    * resume variously said "co-leads", "Assistant Director and Manager", and
    * MSU's own team page says "Assistant Director and Geospatial Analyst".
    *
-   * TODO (Jackson): the first half still says "Research Faculty", but the
-   * resume's position title is "Geospatial Research Scientist and
-   * Instructor". Pick one. Also worth checking this line is not too long
-   * once both halves are final — the sitemap calls for ONE compressed line.
+   * Title question settled 2026-07-28 (About line-edit session): the GCF
+   * role LEADS, and the Earth Sciences affiliation is "Instructor" — not
+   * "Research Faculty", not "Geospatial Research Scientist". Jackson's
+   * words: "Lead with GCF then instructor for ESCI comes second."
    */
   roles:
-    'Research Faculty, Earth Sciences, Montana State University · Assistant Director and Operations Manager, MSU Geospatial Core Facility · Bozeman, Montana',
+    'Assistant Director and Operations Manager, MSU Geospatial Core Facility · Instructor, Earth Sciences, Montana State University · Bozeman, Montana',
 
   /**
    * Confirmed by Jackson. MSU address, chosen "for now" — if he later wants a

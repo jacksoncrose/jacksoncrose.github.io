@@ -1,46 +1,147 @@
 ---
 /*
-  About — bio, the community-organizing to research-faculty arc, teaching
-  (two lines), link to the CV page, one-line consulting mention (RCRC). Per
-  the sitemap (revised 2026-07-27: the CV is an HTML page at /cv, not a PDF).
+  About — bio, the community-organizing to faculty arc, teaching, link to
+  the CV page, consulting (RCRC). Per the sitemap (revised 2026-07-27: the
+  CV is an HTML page at /cv, not a PDF).
 
-  The arc is Jackson's own history: every date, title, and organization here
-  comes from him, not from inference.
+  Every date, title, and organization here comes from Jackson or a verified
+  source recorded in AGENTS.md — nothing is inferred. Full-page line edit
+  with Jackson 2026-07-28: GCF role now leads and the title question is
+  settled ("instructor," not "research faculty"); Bio paragraph 3 rebuilt
+  on a means-to-end pattern (bio-research session, modeled on Sarah
+  Williams / MIT); MCSC board dates corrected (board July 2023, after the
+  ED term — supersedes the July 2021 answer); SVS engagement dateless in
+  prose (2022 on the CV); the CAP whitepaper generalized to "published work
+  and invited presentations in national forums"; Teaching expanded from the
+  Fall 2025 / Spring 2026 syllabi (capstone is 484R per Jackson, though the
+  syllabus header says 484); Bozeman line removed from the Bio. RCRC
+  "partner" and "consulting arm" phrasing is Jackson's (reconfirmed
+  2026-07-28; independence line considered and declined).
 */
 import Base from '../layouts/Base.astro';
-import Todo from '../components/Todo.astro';
 import { site } from '../site';
 ---
 
-<Base title="About" description="TODO: meta description for About.">
+<Base
+	title="About"
+	description="Jackson Rose is Assistant Director and Operations Manager of the MSU Geospatial Core Facility, an instructor in Earth Sciences at Montana State University, and a consultant on the community dimensions of energy and extractive development."
+>
 	<h1 class="text-4xl">About</h1>
 	<p class="mt-3 text-sm text-muted">{site.roles}</p>
 
 	<section class="mt-10">
 		<h2 class="text-3xl">Bio</h2>
-		<Todo note="Two or three paragraphs. Written with Jackson." />
+		<p class="mt-4">
+			Jackson Rose is Assistant Director and Operations Manager of the
+			Montana State University Geospatial Core Facility, which provides
+			professional GIS services to the campus research community and
+			external collaborators, and an instructor in MSU's Department of
+			Earth Sciences.
+		</p>
+		<p class="mt-4">
+			His research and consulting focus on the economic and social
+			dimensions of extractive and energy-sector development: how mines
+			and energy projects change the fiscal ground under rural
+			communities, and how communities can negotiate durable benefit
+			from them. For nearly a decade his work has centered on community
+			benefits agreements, from a master's thesis on non-regulatory
+			agreements at modern mineral mines, to CBA engagements in Montana
+			and Idaho, to published work and invited presentations in national
+			forums on mining reform and community benefits.
+		</p>
+		<p class="mt-4">
+			He pairs that work with professional GIS practice, using spatial
+			and statistical analysis (Python, ArcGIS Pro, open-source GIS),
+			geospatial data management, and UAS and LiDAR collection to put
+			concrete numbers and maps under the questions rural communities
+			face about energy and extractive development. He is a Certified
+			GIS Professional and holds an FAA Part 107 remote pilot
+			certificate.
+		</p>
 	</section>
 
 	<section class="mt-12 border-t border-line pt-8">
 		<h2 class="text-3xl">Background</h2>
-		<Todo note="The community-organizing to research-faculty arc. Executive Director tenure dates are unconfirmed — needed before this can be written." />
+		<p class="mt-4">
+			Before joining MSU's faculty, Jackson ran a community organization
+			at the center of negotiations over a controversial copper mining
+			project in central Montana. From 2021 to 2023 he was Executive
+			Director of the Meagher County Stewardship Council, a grassroots
+			501(c)(3) in White Sulphur Springs, where he helped lead
+			negotiations with an international mining company over a community
+			benefits agreement tied to the Black Butte Copper Project. He has
+			served on the Council's board since 2023 and has continued helping
+			lead the negotiation; in March 2026 the parties announced a
+			framework for a binding agreement covering a long-term community
+			investment fund, economic development lending, educational
+			programming, and environmental stewardship.
+		</p>
+		<p class="mt-4">
+			Over the same period he consulted for Salmon Valley Stewardship in
+			Salmon, Idaho, advising on the structure and mechanisms of a
+			potential community benefits agreement tied to the Idaho Cobalt
+			Operations.
+		</p>
+		<p class="mt-4">
+			Jackson joined Montana State University in January 2023. He holds
+			a B.S. (2017) and an M.S. (2020) in Earth Sciences from MSU, where
+			his master's research examined the local costs and benefits of
+			modern mineral mines and the role of non-regulatory agreements. He
+			has presented this work to the National Academies of Sciences,
+			Engineering, and Medicine (2024) and in a U.S. Department of
+			Energy / U.S. Energy Association webinar on community benefits
+			plans (2023).
+		</p>
 	</section>
 
 	<section class="mt-12 border-t border-line pt-8">
 		<h2 class="text-3xl">Teaching</h2>
-		<Todo note="Two lines. Which courses, and at what level." />
+		<p class="mt-4">
+			Jackson teaches the advanced and capstone courses in the
+			Department of Earth Sciences' three-course GIS sequence, along
+			with the graduate companion course.
+		</p>
+		<p class="mt-4">
+			<strong>GPHY 384 — Advanced Geographic Information Science and
+			Spatial Analysis.</strong> The second course in the sequence:
+			spatial data models, analytical methods, error and uncertainty,
+			database design, and Python in Jupyter notebooks, with weekly labs
+			in both proprietary and open-source software.
+		</p>
+		<p class="mt-4">
+			<strong>GPHY 504 — GIS Research Fundamentals.</strong> The
+			graduate companion, co-convened with 384 and designed for graduate
+			students new to GIS. It adds a weekly recitation where students
+			lead discussions of spatial-science literature from their own
+			fields, and a project tied to each student's research program.
+		</p>
+		<p class="mt-4">
+			<strong>GPHY 484R — Applied GIS and Spatial Analysis.</strong> The
+			capstone. One half is quantitative and statistical analysis of
+			geospatial data; the other is a semester-long team project for a
+			real client, ending in professional deliverables and each
+			student's own portfolio.
+		</p>
 	</section>
 
 	<section class="mt-12 border-t border-line pt-8">
 		<h2 class="text-3xl">CV</h2>
-		<p class="mt-3 text-base">
-			A selected CV — appointments, education, certifications, publications,
-			presentations, and service — is on the <a href="/cv">CV page</a>.
+		<p class="mt-4">
+			A selected CV — appointments, education, certifications,
+			publications, presentations, and service — is on the
+			<a href="/cv">CV page</a>.
 		</p>
 	</section>
 
 	<section class="mt-12 border-t border-line pt-8">
 		<h2 class="text-3xl">Consulting</h2>
-		<Todo note="One line on consulting through Resources and Communities Research & Consulting (RCRC). Confirm how the relationship should be described." />
+		<p class="mt-4">
+			Jackson is a partner with <a href="https://rcrcgroup.org">Resources
+			and Communities Research &amp; Consulting</a> (RCRC), the
+			consulting arm of the Resources and Communities Research Group,
+			delivering policy-relevant work on community, natural resource,
+			and development challenges for governments, community
+			organizations, and coalitions across the American West.
+		</p>
 	</section>
 </Base>
