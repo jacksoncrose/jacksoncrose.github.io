@@ -5,29 +5,19 @@
     {
       "org": "Montana State University",
       "place": "Bozeman, MT",
-      "title": "Geospatial Research Scientist and Instructor",
+      "title": "Assistant Director and Operations Manager, Geospatial Core Facility; Instructor, Department of Earth Sciences",
       "dates": "January 2023 – Present",
       "bullets": [
-        "Assistant Director and Operations Manager of the Geospatial Core Facility, which provides professional GIS services to the campus research community and external collaborators.",
+        "Run day-to-day operations of the Geospatial Core Facility, which provides professional GIS services to the campus research community and external collaborators.",
         "Non-tenure-track faculty member, Department of Earth Sciences.",
         "Manage a $319,887 operating budget across four institutional indexes for a university recharge facility, where half of all revenue is now earned through billed services.",
         "Oversaw billing growth of 181% in two years, from $44,530 in FY24 to $125,142 in FY26, with FY27 budgeted at $160,140.",
         "Oversaw development of the facility's external client business from $6,466 to a peak of $49,103 in three years, opening a revenue channel spanning municipal, federal, nonprofit, and private-sector clients.",
         "Built and maintain the facility's central invoicing and rate infrastructure, and rebuilt the FY27 operating budget and service center rate template.",
-        "Teach GPHY 384/504, a co-convened undergraduate and graduate GIS and spatial analysis lecture with a separate graduate lab and recitation, and GPHY 484R Applied GIS and Spatial Analysis.",
+        "Teach GPHY 384/504, a co-convened undergraduate and graduate GIS and spatial analysis lecture with a separate graduate lab and recitation, and GPHY 484R Applied GIS and Spatial Analysis, a capstone with a semester-long client project.",
         "Delivered 1,652 billable hours across 9 published service lines and 38 invoices to 25 clients in FY26.",
         "Collect and process UAS imagery and LiDAR for research and client projects as a certified remote pilot.",
         "Set published service rates across 9 service lines and prepared client quotes and scopes of work."
-      ]
-    },
-    {
-      "org": "Salmon Valley Stewardship & Jervois Mining",
-      "place": "Salmon, ID",
-      "title": "Consultant",
-      "dates": "October 2021 – December 2023",
-      "bullets": [
-        "Led a project exploring development of a community benefits agreement tied to Jervois' Idaho Cobalt Operations.",
-        "Researched and advised on agreement structure, mechanisms, and initiatives toward a final agreement."
       ]
     },
     {
@@ -39,6 +29,16 @@
         "Directed a grassroots 501(c)(3) working in conservation and community development.",
         "Led community-side negotiations with an international mining company toward a community benefits agreement for the Black Butte Copper Project, covering impact mitigation and long-term community investment.",
         "Continued to help lead the negotiations as a board member after the executive director term. In March 2026 the parties announced a memorandum of understanding establishing a framework for a binding agreement, covering a community investment fund, a revolving loan fund, educational programming, and environmental stewardship."
+      ]
+    },
+    {
+      "org": "Salmon Valley Stewardship & Jervois Mining",
+      "place": "Salmon, ID",
+      "title": "Consultant",
+      "dates": "2022",
+      "bullets": [
+        "Led a project exploring development of a community benefits agreement tied to Jervois' Idaho Cobalt Operations.",
+        "Researched and advised on agreement structure, mechanisms, and initiatives toward a final agreement."
       ]
     }
   ],
@@ -125,7 +125,7 @@
     {
       "org": "Meagher County Stewardship Council",
       "role": "Board Member",
-      "dates": "July 2021 – Present"
+      "dates": "July 2023 – Present"
     }
   ]
 }
