@@ -1,14 +1,18 @@
 ---
-# Condensed from Jackson's write-up, supplied 2026-07-28 for the site.
-# Client naming granted by Jackson same day. Role per Jackson: "doesn't
-# need to be overly specific — I did the analysis and cartography."
-# The write-up's credit line named an abandoned LLC that must never
-# appear on the site (see AGENTS.md); the body says "contracted
-# independently" with no entity. Web map mentioned, not linked (his
-# call: ArcGIS Hub migration is underway and the URL may change).
+# Condensed from Jackson's write-up, supplied 2026-07-28 for the site,
+# and UPDATED same day from his revised summary: timeline now runs to
+# 2024, with a second phase (custom raster-function relief; geodatabase
+# and hosted-feature-service consolidation). Year 2024 = contract end,
+# same rule that previously set 2023. Client naming granted by Jackson
+# same day. Role per Jackson: "doesn't need to be overly specific — I
+# did the analysis and cartography." The write-up's credit line named
+# an abandoned LLC that must never appear on the site (see AGENTS.md);
+# the body says "contracted independently" with no entity. Web map
+# mentioned, not linked (his call); revisit once a stable public URL
+# exists.
 title: "Buffalo Nations Biocultural Region Map"
 summary: "Biocultural region mapping for the Buffalo Nations Food Systems Initiative: a public interactive web map and a large-format static map assembled from a dozen sources across two countries, with hand-built treaty and council layers and custom cultural symbology, delivered for the initiative to maintain independently."
-year: 2023
+year: 2024
 tier: 3
 role: "Analysis and cartography"
 tools: ["ArcGIS Pro", "ArcGIS Online"]
@@ -64,21 +68,32 @@ Roman orthography, and I built a filter system to handle duplicate labels
 across dense clusters of small land parcels, which the platform cannot
 deduplicate on its own.
 
+A second phase in 2023 and 2024 rebuilt the map's terrain treatment.
+Rather than rely on a stock hillshade, I derived a custom relief from
+continental elevation data using chained raster functions, generating
+slope, edge, highlight, and multi-radius blur components and compositing
+them into a single blended surface. The result gives the static map its
+depth without the flat, mechanical look of a default hillshade. The same
+phase consolidated the project's scattered working data into a single
+geodatabase and migrated the shared thematic layers to hosted ArcGIS
+Online feature services, so the web map and static map draw from one
+authoritative source rather than divergent copies.
+
 ## What was delivered
 
 A published ArcGIS Online web map and interactive web application with
 narrative and user guide; the large-format static map for American Indian
-Hall signage and web publication; hosted feature layers with full
-metadata, transferred to the initiative's ownership; data dictionaries for
+Hall signage and web publication, revised through 2024; hosted feature
+layers with full metadata, transferred to the initiative's ownership;
+data dictionaries for
 both maps documenting source, projection, scale, purpose, and citation for
 every layer; and a project overview and maintenance methodology enabling
 the initiative to make future edits independently.
 
 ## Outcome
 
-The work ran from 2021 to 2023, an original contract plus an extension.
-The static map hangs in MSU's American Indian Hall and is published on the
-BNFSI website, and the interactive map is public. Because the feature
-layers, style library, and documentation were transferred to BNFSI's
-ownership, the initiative can extend and maintain the maps on its own. The
-published maps are currently being migrated into an ArcGIS Hub site.
+The work ran from 2021 to 2024. The static map hangs in MSU's American
+Indian Hall and is published on the BNFSI website, and the interactive
+map is public. Because the feature layers, style library, and
+documentation were transferred to BNFSI's ownership, the initiative can
+extend and maintain the maps on its own.

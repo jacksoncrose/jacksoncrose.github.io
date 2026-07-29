@@ -35,7 +35,12 @@ const projects = defineCollection({
       /** 1 = spine case study, 2 = full project page, 3 = card/gallery only. */
       tier: z.union([z.literal(1), z.literal(2), z.literal(3)]),
       role: z.string(),
-      tools: z.array(z.string()).min(1),
+      /**
+       * Optional since 2026-07-29 (Jackson's call): a negotiation case study
+       * like the MCSC CBA has no tool stack to credit. When present it must
+       * still be non-empty. Templates guard for its absence.
+       */
+      tools: z.array(z.string()).min(1).optional(),
       /** Real client name. Only ever rendered when clientPermission is "granted". */
       client: z.string().optional(),
       clientPermission: z

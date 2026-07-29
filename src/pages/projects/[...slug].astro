@@ -44,7 +44,11 @@ const meta = [years, project.data.role, client].filter(Boolean).join(' · ');
 
 		{meta && <p class="mt-3 text-sm text-muted">{meta}</p>}
 
-		<p class="mt-2 text-sm text-muted">{project.data.tools.join(', ')}</p>
+		{
+			project.data.tools && (
+				<p class="mt-2 text-sm text-muted">{project.data.tools.join(', ')}</p>
+			)
+		}
 
 		<p class="mt-6 text-lg">{project.data.summary}</p>
 

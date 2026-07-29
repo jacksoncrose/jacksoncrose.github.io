@@ -61,9 +61,11 @@ const tiers = [
 											.join(' · ')}
 									</p>
 									<p class="mt-2 text-base">{project.data.summary}</p>
-									<p class="mt-2 text-sm text-muted">
-										{project.data.tools.join(', ')}
-									</p>
+									{project.data.tools && (
+										<p class="mt-2 text-sm text-muted">
+											{project.data.tools.join(', ')}
+										</p>
+									)}
 								</li>
 							);
 						})}

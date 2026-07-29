@@ -1,68 +1,80 @@
 ---
 # DRAFT — not rendered anywhere while draft: true.
 #
-# Context below is verified from public sources (MCSC's own site and Black
-# Butte Copper's FAQ). Jackson's ROLE is not publicly documented anywhere —
-# it comes from him alone and is still TODO. Do not infer it.
+# Body drafted 2026-07-29 from Jackson's own Spring 2026 presentation
+# ("Navigating modern mineral mines," supplied in chat) and the council's
+# public website, for his line edit. Facts trace to his slides, his resume,
+# or verified public sources (MCSC site, Black Butte Copper news/FAQ).
+#
+# SETTLED 2026-07-29 by Jackson: Sandfire and Black Butte Copper ARE
+# named on this page; the council founding year is 2018 (his slide 8
+# note saying 2019 is superseded); the tools field is DROPPED for this
+# entry (schema made optional the same day).
+# NOTE for later: Jackson built a mining claims map during this work.
+# Not credited yet ("We may add that later") — if it joins the page,
+# restore a tools list and consider the map as a visual.
+# OPEN before this publishes: card summary and body prose sign-off.
 title: "Community Benefits Agreement, Meagher County Stewardship Council"
-summary: "TODO: 1-2 sentence card summary, written with Jackson."
-# year: omitted — dates of Jackson's involvement not yet confirmed
+summary: "Five years helping lead a rural Montana community's negotiation of a community benefits agreement with the developer of the Black Butte Copper Project, first as the council's Executive Director and then from its board, through the framework agreement reached in March 2026."
+year: 2021
 tier: 1
-role: "Executive Director, Meagher County Stewardship Council; helped lead negotiations with the mine"
-# This is a leadership and negotiation case study, not a tool build. See the
-# note in AGENTS.md about whether `tools` should stay required for entries
-# like this one.
-tools: ["TODO: confirm whether any analytical or geospatial work was involved"]
+role: "Executive Director (2021–2023), then board member, Meagher County Stewardship Council"
 # Not client work — Jackson ran the organization. Nothing to gate.
 clientPermission: "not-applicable"
 hasPage: true
-# links: the Rural Assembly webinar that anchors this work is referenced in
-# the brief but I could not locate it. Jackson to supply the URL.
+# links: the Rural Assembly webinar remains unlocated (open question 8).
 draft: true
 ---
 
-TODO: Case study body in the required shape — problem, approach, what was
-delivered, outcome.
+## Problem
 
-Verified public context, for reference while writing:
+White Sulphur Springs, Montana is a town of about 900 people, the seat of
+a county of roughly 2,000 permanent residents with a median age of 57.
+Census data shows the town lost 190 residents between 2010 and 2024. It
+was a timber town until its two sawmills closed in the 1980s; the economy
+now runs on agriculture, the public sector, and recreation.
 
-- The Meagher County Stewardship Council is a 501(c)(3) formed in 2018 in
-  Meagher County, Montana, whose stated mission is to safeguard the county's
-  natural resources, culture, and economic interests.
-- The mine is the Black Butte Copper project, operated by Sandfire Resources
-  America Inc.
-- OUTCOME, verified 2026-07-25 from Black Butte Copper's news page: on
-  17 March 2026 the parties announced a memorandum of understanding
-  establishing a framework for a binding community benefits agreement. It
-  covers a long-term community investment fund, an economic development
-  revolving loan fund, educational programming, and environmental stewardship
-  commitments.
-- A later item, 8 June 2026, describes a Smith River watershed riparian
-  restoration project among Montana Trout Unlimited, Black Butte Copper, and
-  MCSC, funded through Sandfire and coordinated by the council. Jackson's role
-  in that, if any, is unknown — ask before using it.
+Nineteen miles north sits the Black Butte Copper Project, one of the
+highest-grade undeveloped copper deposits in the world. If the mine
+proceeds, a town of 900 will host a project with roughly 250 full-time
+employees. That means high-paying jobs, a larger tax base, and
+infrastructure upgrades. It also means cultural disruption, environmental
+risk, and the boom-and-bust cycle Montana's mining towns know well. The
+question the community was asking: how do we make sure the mine benefits
+Meagher County in the long run, not just while it operates?
 
-PRECISION REQUIRED: the March 2026 announcement is an MOU and a FRAMEWORK.
-It states that a binding decision to proceed "remains subject to final
-approval." Copy must not describe a signed or binding CBA, and must not imply
-the negotiation has concluded. A reader who checks will find the qualifier,
-and overstating it would undermine the whole page.
+## Approach
 
-Jackson was the Council's Executive Director from June 2021 to January 2023,
-principal on the community side of the table, not an outside analyst. He has
-also served on the board since July 2021, throughout the ED term and
-continuously since, and kept helping lead the negotiations through the
-March 2026 framework.
+In 2018, the mine's developer and area nonprofit organizations
+established the Meagher County Stewardship Council, a local 501(c)(3)
+whose mission is to safeguard and enhance the natural resources, culture,
+and economic interests of Meagher County. After much discussion, the
+community and the company elected to pursue a community benefits
+agreement: a formal contract specifying benefits, mitigations, and
+responsibilities tied to the project, and a vehicle for delivering
+long-term benefits from a theoretically short-term development.
 
-Get the sequence right in copy: ED and board member from 2021, board member
-only after January 2023, framework announced March 2026. Do not imply he was
-ED when the framework landed, and do not imply his involvement stopped when
-the ED term did. The second error is the more likely one and it undersells
-him.
+I served as the council's Executive Director from June 2021 to January
+2023, principal on the community side of the negotiation with Sandfire
+Resources America. When I moved to Montana State University I stepped
+down as director, joined the council's board in July 2023, and have
+stayed at the negotiating table since.
 
-FRAMING, needs Jackson's words: Black Butte Copper's FAQ says the company
-funded the council's creation, while MCSC presents itself as an independent
-citizens group. Both are public and findable, and a reader in the nonprofit
-or policy world may know the project. Jackson ran the organization, so he is
-the authority on how that relationship actually worked. Write what he says.
-Do not let this draft imply an arm's-length independence he has not claimed.
+## What was delivered
+
+A negotiation sustained across roughly five years and two roles, through
+a period when the mine's own development timeline was anything but
+certain. In March 2026, Sandfire and the council announced a memorandum
+of understanding establishing the framework for a binding community
+benefits agreement: a long-term community investment fund, an economic
+development revolving loan fund, educational programming, and
+environmental stewardship commitments.
+
+## Outcome
+
+The framework is not the finish line. A binding decision remains subject
+to final approval, and the parties are now working to turn the framework
+into a final, legally binding contract. The mine's development timeline
+remains uncertain, which is exactly why the structure matters: whatever
+happens and whenever it happens, the community holds a negotiated
+framework for benefits that are meant to outlast the boom.

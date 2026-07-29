@@ -13,16 +13,39 @@
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { published } from '../lib/content';
 import { site } from '../site';
+import heroImage from '../assets/images/az-renewable-energy-estimator.png';
 
 const projects = published(await getCollection('projects'));
 const tools = published(await getCollection('tools'));
 const gallery = published(await getCollection('gallery'));
 
-/** Home shows the spine work: tier 1 first, capped at four cards. */
-const selected = projects.filter((p) => p.data.tier === 1).slice(0, 4);
+/**
+ * Selected projects — an editorial pick, settled with Jackson 2026-07-28,
+ * not a tier filter. The three tell one story in sequence: the
+ * spatial-fiscal tool, community-side negotiation leadership, and the
+ * national data layer built to power a fiscal tool. Entries render as they
+ * become publishable (published() drops drafts), so this list is the
+ * intent and the section grows into it:
+ *
+ *   1. renewable-energy-revenue-estimator — entry not yet created
+ *   2. mcsc-community-benefits-agreement  — draft, body TODO
+ *   3. national-land-ownership            — live
+ *
+ * Campus at Night is deliberately NOT here: UAS is secondary and does not
+ * lead (AGENTS.md). It reaches Home through the Maps teaser instead.
+ */
+const selectedIds = [
+	'renewable-energy-revenue-estimator',
+	'mcsc-community-benefits-agreement',
+	'national-land-ownership',
+];
+const selected = selectedIds
+	.map((id) => projects.find((p) => p.id === id))
+	.filter((p) => p !== undefined);
 ---
 
 <Base title="Home" description="TODO: meta description, written with Jackson.">
@@ -39,7 +62,29 @@ const selected = projects.filter((p) => p.data.tier === 1).slice(0, 4);
 			)
 		}
 
-		<Todo note="Hero visual: a tax-tool interface screenshot (not a point cloud). Needs the image file plus alt text describing what the tool shows." />
+		{/*
+		  Hero: interface of the renewable energy revenue estimator (settled
+		  2026-07-28). Deliberately NOT a link — the tool's only URL is a draft
+		  address; add one when a final public URL exists (AGENTS.md open
+		  question). No client is named. Eager + fetchpriority=high because this
+		  is the page's largest above-the-fold element.
+		*/}
+		<figure class="mt-10">
+			<Image
+				src={heroImage}
+				alt="Interface of a renewable energy revenue estimator: an Arizona map shaded by county revenue potential for a 164-megawatt wind project, a pin dropped in Coconino County, and a results panel estimating $5.83 million in public revenue over 25 years, with an annual revenue chart and a flow diagram of where year-one revenue goes."
+				widths={[480, 800, 1440]}
+				sizes="(min-width: 48rem) 45rem, calc(100vw - 3rem)"
+				loading="eager"
+				fetchpriority="high"
+				class="w-full border border-line bg-white"
+			/>
+			<figcaption class="mt-3 text-sm text-muted">
+				Renewable energy revenue estimator. Estimated public revenue from a
+				utility-scale clean energy project, by taxing authority, over a
+				25-year term.
+			</figcaption>
+		</figure>
 	</section>
 
 	{/* ---------- tools strip ---------- */}
@@ -66,20 +111,41 @@ const selected = projects.filter((p) => p.data.tier === 1).slice(0, 4);
 	<section class="mt-16 border-t border-line pt-8">
 		<h2 class="text-3xl">Selected projects</h2>
 		{
-			selected.length === 0 ? (
-				<Todo note="No published tier-1 projects yet: renewable energy tax calculators, Maine plant-to-TIF crosswalk, copper mine CBA, Montana rural typology PCA." />
-			) : (
-				<ul class="mt-4 space-y-6">
+			selected.length < selectedIds.length && (
+				<Todo note="Selected-projects slots still pending: the renewable energy revenue estimator card (entry not yet created) and the MCSC community benefits agreement page (draft, body written with Jackson)." />
+			)
+		}
+		{
+			selected.length > 0 && (
+				<ul class="mt-6 space-y-10">
 					{selected.map((project) => (
-						<li>
-							<h3 class="text-xl">
-								{project.data.hasPage ? (
-									<a href={`/projects/${project.id}`}>{project.data.title}</a>
-								) : (
-									project.data.title
-								)}
-							</h3>
-							<p class="mt-1 text-base">{project.data.summary}</p>
+						<li class="sm:flex sm:gap-6">
+							{/*
+							  Small card image (AGENTS.md visual-hierarchy decision
+							  2026-07-25): tier-1 cards carry policy visuals so the page's
+							  image count favors the primary work. Kept visibly smaller
+							  than the hero.
+							*/}
+							{project.data.cover && (
+								<Image
+									src={project.data.cover.src}
+									alt={project.data.cover.alt}
+									widths={[320, 640]}
+									sizes="(min-width: 640px) 11rem, calc(100vw - 3rem)"
+									loading="lazy"
+									class="w-full self-start border border-line bg-white sm:w-44 sm:shrink-0"
+								/>
+							)}
+							<div class="mt-3 sm:mt-0">
+								<h3 class="text-xl">
+									{project.data.hasPage ? (
+										<a href={`/projects/${project.id}`}>{project.data.title}</a>
+									) : (
+										project.data.title
+									)}
+								</h3>
+								<p class="mt-1 text-base">{project.data.summary}</p>
+							</div>
 						</li>
 					))}
 				</ul>
