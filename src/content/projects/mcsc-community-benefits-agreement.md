@@ -72,8 +72,7 @@ environmental stewardship commitments.
 
 ## Outcome
 
-The framework is not the finish line. A binding decision remains subject
-to final approval, and the parties are now working to turn the framework
+A binding decision remains subject to final approval, and the parties are now working to turn the framework
 into a final, legally binding contract. The mine's development timeline
 remains uncertain, which is exactly why the structure matters: whatever
 happens and whenever it happens, the community holds a negotiated

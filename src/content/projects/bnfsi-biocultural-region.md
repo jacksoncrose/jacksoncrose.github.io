@@ -2,8 +2,11 @@
 # Condensed from Jackson's write-up, supplied 2026-07-28 for the site,
 # and UPDATED same day from his revised summary: timeline now runs to
 # 2024, with a second phase (custom raster-function relief; geodatabase
-# and hosted-feature-service consolidation). Year 2024 = contract end,
-# same rule that previously set 2023. Client naming granted by Jackson
+# and hosted-feature-service consolidation). Year 2022 is Jackson's
+# EXPLICIT call (2026-07-29), overriding the contract-end rule — do not
+# "correct" it. Also his direction 2026-07-29: American Indian Hall is
+# not mentioned anywhere on the site (page or gallery), and the body
+# does not state the work's date range. Client naming granted by Jackson
 # same day. Role per Jackson: "doesn't need to be overly specific — I
 # did the analysis and cartography." The write-up's credit line named
 # an abandoned LLC that must never appear on the site (see AGENTS.md);
@@ -12,7 +15,7 @@
 # exists.
 title: "Buffalo Nations Biocultural Region Map"
 summary: "Biocultural region mapping for the Buffalo Nations Food Systems Initiative: a public interactive web map and a large-format static map assembled from a dozen sources across two countries, with hand-built treaty and council layers and custom cultural symbology, delivered for the initiative to maintain independently."
-year: 2024
+year: 2022
 tier: 3
 role: "Analysis and cartography"
 tools: ["ArcGIS Pro", "ArcGIS Online"]
@@ -34,8 +37,7 @@ initiative needed a way to show the region it serves as a biocultural
 homeland rather than a set of administrative jurisdictions, and no single
 dataset describes a biocultural region. Contracted independently, I built
 that picture twice over: as an interactive public web map, and as a
-large-format static map used for signage in MSU's American Indian Hall and
-on the BNFSI website.
+large-format static map published on the BNFSI website.
 
 ## Approach
 
@@ -82,18 +84,16 @@ authoritative source rather than divergent copies.
 ## What was delivered
 
 A published ArcGIS Online web map and interactive web application with
-narrative and user guide; the large-format static map for American Indian
-Hall signage and web publication, revised through 2024; hosted feature
-layers with full metadata, transferred to the initiative's ownership;
-data dictionaries for
+narrative and user guide; the large-format static map for web
+publication, revised through 2024; hosted feature layers with full
+metadata, transferred to the initiative's ownership; data dictionaries for
 both maps documenting source, projection, scale, purpose, and citation for
 every layer; and a project overview and maintenance methodology enabling
 the initiative to make future edits independently.
 
 ## Outcome
 
-The work ran from 2021 to 2024. The static map hangs in MSU's American
-Indian Hall and is published on the BNFSI website, and the interactive
+The static map is published on the BNFSI website, and the interactive
 map is public. Because the feature layers, style library, and
 documentation were transferred to BNFSI's ownership, the initiative can
 extend and maintain the maps on its own.
