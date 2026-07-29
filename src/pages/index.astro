@@ -54,6 +54,23 @@ const selectedIds = [
 const selected = selectedIds
 	.map((id) => projects.find((p) => p.id === id))
 	.filter((p) => p !== undefined);
+
+/**
+ * Maps teaser — three thumbnails instead of a bare count (Jackson,
+ * 2026-07-29). Picked for range across the three kinds of map work:
+ * the national land-ownership choropleth, the overnight campus
+ * orthomosaic, and a custom-hillshade ranch map. Swap ids to change
+ * the picks; entries must exist in the gallery collection and not be
+ * drafts, or the slot silently drops.
+ */
+const mapsTeaserIds = [
+	'federal-land-share-2024',
+	'msu-campus-lighting-2023',
+	'rooney-north-hillshade',
+];
+const mapsTeaser = mapsTeaserIds
+	.map((id) => gallery.find((g) => g.id === id))
+	.filter((g) => g !== undefined);
 ---
 
 <Base title="Home" description="Portfolio of Jackson Rose: geographer, Certified GIS Professional, and consultant on the community dimensions of energy and extractive development. Projects, maps, and tools.">
@@ -178,12 +195,29 @@ const selected = selectedIds
 	<section class="mt-16 border-t border-line pt-8">
 		<h2 class="text-3xl">Maps</h2>
 		{
-			gallery.length === 0 ? (
+			mapsTeaser.length === 0 ? (
 				<Todo note="Gallery inventory unconfirmed — which maps and figures go here is still an open question." />
 			) : (
-				<p class="mt-4 text-base">{gallery.length} entries in the gallery.</p>
+				<a
+					href="/maps"
+					aria-label={`Map gallery — ${gallery.length} maps`}
+					class="mt-6 grid grid-cols-3 gap-4"
+				>
+					{mapsTeaser.map((entry) => (
+						<Image
+							src={entry.data.image}
+							alt={entry.data.alt}
+							widths={[240, 480, 720]}
+							sizes="(min-width: 48rem) 14rem, 33vw"
+							loading="lazy"
+							class="aspect-[4/3] w-full border border-line bg-white object-cover"
+						/>
+					))}
+				</a>
 			)
 		}
-		<p class="mt-4 text-sm"><a href="/maps">Map gallery</a></p>
+		<p class="mt-4 text-sm">
+			<a href="/maps">All {gallery.length} maps in the gallery</a>
+		</p>
 	</section>
 </Base>
