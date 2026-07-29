@@ -48,7 +48,7 @@ const selected = selectedIds
 	.filter((p) => p !== undefined);
 ---
 
-<Base title="Home" description="TODO: meta description, written with Jackson.">
+<Base title="Home" description="Portfolio of Jackson Rose: geographer, Certified GIS Professional, and consultant on the community dimensions of energy and extractive development. Projects, maps, and tools.">
 	{/* ---------- above the fold ---------- */}
 	<section>
 		<h1 class="text-5xl">{site.name}</h1>
@@ -154,10 +154,28 @@ const selected = selectedIds
 		<p class="mt-4 text-sm"><a href="/projects">All projects</a></p>
 	</section>
 
-	{/* ---------- technical credibility band ---------- */}
+	{/*
+	  ---------- technical credibility band ----------
+	  TEXT-ONLY per Jackson 2026-07-29 ("Keep, text-only"), revising the
+	  2026-07-25 plan that put the campus LiDAR render here. The render can
+	  join later; if it does, keep it constrained and visibly smaller than
+	  the hero (the original hierarchy reasoning in AGENTS.md still holds).
+	  Copy settled with Jackson same day: first person to match the identity
+	  sentence, capability stated in one sentence, proof carried by two
+	  linked tier-2/3 projects. UAS stays secondary — this section must not
+	  outweigh Selected projects above it.
+	*/}
 	<section class="mt-16 border-t border-line pt-8">
 		<h2 class="text-3xl">Data collection and processing</h2>
-		<Todo note="Credibility band copy: UAS/LiDAR collection, photogrammetry, and processing — the layer that makes the tax tools unusual. Two or three sentences, plus the MSU campus LiDAR render as the below-fold visual." />
+		<p class="mt-4">
+			When a project needs data that doesn't exist yet, I collect it: UAS
+			flights under an FAA Part 107 certificate, LiDAR, and photogrammetry,
+			processed into orthomosaics, terrain, and 3D models. Recent examples:
+			a <a href="/projects/msu-campus-at-night">236-hectare overnight
+			orthomosaic of the MSU campus</a> and a
+			<a href="/projects/montana-hall">building model measured from a
+			2.05-million-point laser scan</a>.
+		</p>
 	</section>
 
 	{/* ---------- maps teaser ---------- */}

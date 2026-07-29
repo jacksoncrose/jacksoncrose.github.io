@@ -34,8 +34,13 @@ export const site = {
    */
   email: 'jackson.rose1@montana.edu' as string | null,
 
-  /** Identity sentence is written WITH Jackson (AGENTS.md). Never autogenerate. */
-  identitySentence: null as string | null,
+  /**
+   * Identity sentence — SETTLED with Jackson 2026-07-29, written together
+   * over several rounds (his calls: first person, high level, love of maps,
+   * resources folded into the policy beat). Do not rewrite without him.
+   */
+  identitySentence:
+    'I’m a geographer interested in rural places, energy and natural resource policy, and, most of all, making maps.' as string | null,
 } as const;
 
 export const nav = [
