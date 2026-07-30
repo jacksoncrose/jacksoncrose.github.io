@@ -43,9 +43,14 @@ export const site = {
     'I’m a geographer interested in rural places, energy and natural resource policy, and, most of all, making maps.' as string | null,
 } as const;
 
+/**
+ * Nav order settled by Jackson 2026-07-30: Projects leads (the case
+ * studies are the spine of the site), then Maps, then Tools, About last.
+ * Replaces the original Tools-first order.
+ */
 export const nav = [
-  { label: 'Tools', href: '/tools' },
   { label: 'Projects', href: '/projects' },
   { label: 'Maps', href: '/maps' },
+  { label: 'Tools', href: '/tools' },
   { label: 'About', href: '/about' },
 ] as const;

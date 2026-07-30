@@ -4,9 +4,17 @@
 
   A tool with no confirmed URL still renders, but says so rather than linking
   somewhere invented.
+
+  CARDS added 2026-07-30 (Jackson: "The Tools page needs cards or some sort
+  of a visual for the tool") — same card treatment as the Home tools strip:
+  cover screenshot, stretched link so the accessible link text stays the
+  tool title, hover/focus border in accent. This supersedes the earlier
+  "cards on Home only" scoping from the same day; his call both times.
+  A tool without a cover renders a text-only card.
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { published } from '../lib/content';
 
@@ -31,20 +39,34 @@ const tools = published(await getCollection('tools'));
 		tools.length === 0 ? (
 			<Todo note="No published tools yet. Known candidates: the renewable energy tax calculators, the Montana frost-free days calculator, and the River Conditions Tool if permissions allow. Each needs its live URL confirmed." />
 		) : (
-			<ul class="mt-8 space-y-8">
+			<ul class="mt-8 grid gap-6 sm:grid-cols-2">
 				{tools.map((tool) => (
-					<li class="border-t border-line pt-6">
-						<h2 class="text-2xl">
-							{tool.data.url ? (
-								<a href={tool.data.url}>{tool.data.title}</a>
-							) : (
-								tool.data.title
-							)}
-						</h2>
-						<p class="mt-2 text-base">{tool.data.blurb}</p>
-						{!tool.data.url && (
-							<Todo note={`Live URL for "${tool.data.title}" not confirmed.`} />
+					<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent">
+						{tool.data.cover && (
+							<Image
+								src={tool.data.cover.src}
+								alt={tool.data.cover.alt}
+								widths={[400, 800]}
+								sizes="(min-width: 640px) 21rem, calc(100vw - 3rem)"
+								loading="lazy"
+								class="aspect-video w-full border-b border-line object-cover"
+							/>
 						)}
+						<div class="p-4">
+							<h2 class="text-xl">
+								{tool.data.url ? (
+									<a href={tool.data.url} class="after:absolute after:inset-0">
+										{tool.data.title}
+									</a>
+								) : (
+									tool.data.title
+								)}
+							</h2>
+							<p class="mt-2 text-sm text-muted">{tool.data.blurb}</p>
+							{!tool.data.url && (
+								<Todo note={`Live URL for "${tool.data.title}" not confirmed.`} />
+							)}
+						</div>
 					</li>
 				))}
 			</ul>

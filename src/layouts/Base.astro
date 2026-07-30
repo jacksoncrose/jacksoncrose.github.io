@@ -14,6 +14,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../site';
+import contours from '../assets/images/bridger-contours.svg';
 
 interface Props {
 	/** Page title, without the site name. */
@@ -80,6 +81,38 @@ const shareImage = new URL('/share-card.png', Astro.site);
 		>
 			Skip to content
 		</a>
+
+		{/*
+		  ---------- contour background ----------
+		  Settled with Jackson 2026-07-30 (rendered mockups, his pick of five
+		  options), extended from Home-only to EVERY page later the same day
+		  (his call). Faint topographic contours behind the header and the top
+		  of each page, fading to plain paper before long-form content. The
+		  linework is REAL terrain, cut from the USGS 1/3 arc-second DEM he
+		  supplied (tile n46w111): the Bridger Range, lat 45.80–45.98, lon
+		  −111.00–−110.75, 50 m interval with 250 m index contours — the
+		  crop's high point is Sacagawea Peak. Regenerate with
+		  scripts/make-contour-background.py; the SVG is 84 KB raw / ~35 KB
+		  gzipped, ink-colored strokes, no JavaScript.
+
+		  Tuning knobs: overall strength is the wrapper's opacity-[0.12]
+		  (effective ~5% regular / ~8% index lines against paper); the fade is
+		  the mask-image gradient; the band height is h-[64rem]. Decorative
+		  only — aria-hidden, empty alt, fetchpriority low so it never
+		  competes with page content.
+		*/}
+		<div
+			aria-hidden="true"
+			class="absolute inset-x-0 top-0 -z-10 h-[64rem] overflow-hidden opacity-[0.12] [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]"
+		>
+			<img
+				src={contours.src}
+				alt=""
+				class="h-full w-full object-cover"
+				decoding="async"
+				fetchpriority="low"
+			/>
+		</div>
 
 		<Header />
 

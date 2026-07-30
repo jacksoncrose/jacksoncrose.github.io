@@ -26,7 +26,6 @@ import { published, clientLabel } from '../lib/content';
 import { site } from '../site';
 import heroImage from '../assets/images/az-renewable-energy-estimator.png';
 import portraitImage from '../assets/images/jackson-rose-portrait.jpg';
-import contours from '../assets/images/bridger-contours.svg';
 
 const projects = published(await getCollection('projects'));
 const tools = published(await getCollection('tools'));
@@ -76,35 +75,10 @@ const mapsTeaser = mapsTeaserIds
 
 <Base title="Home" description="Portfolio of Jackson Rose: geographer, Certified GIS Professional, and consultant on the community dimensions of energy and extractive development. Projects, maps, and tools.">
 	{/*
-	  ---------- contour background ----------
-	  Settled with Jackson 2026-07-30 (rendered mockups, his pick of five
-	  options): faint topographic contours behind the header and fold, fading
-	  to plain paper before the long-form content starts. The linework is REAL
-	  terrain, cut from the USGS 1/3 arc-second DEM he supplied (tile
-	  n46w111): the Bridger Range, lat 45.80–45.98, lon −111.00–−110.75,
-	  50 m interval with 250 m index contours — the crop's high point is
-	  Sacagawea Peak. Regenerate with scripts/make-contour-background.py;
-	  the SVG is 84 KB raw / ~35 KB gzipped, ink-colored strokes, no
-	  JavaScript.
-
-	  Tuning knobs: overall strength is the wrapper's opacity-[0.12]
-	  (effective ~5% regular / ~8% index lines against paper); the fade is
-	  the mask-image gradient; the band height is h-[64rem]. Decorative
-	  only — aria-hidden, empty alt, fetchpriority low so it never competes
-	  with the hero. Home only, by design.
+	  The contour background (Bridger Range linework) MOVED to Base.astro
+	  2026-07-30 when Jackson extended it from Home-only to every page.
+	  Decision history and tuning knobs live with the markup there.
 	*/}
-	<div
-		aria-hidden="true"
-		class="absolute inset-x-0 top-0 -z-10 h-[64rem] overflow-hidden opacity-[0.12] [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]"
-	>
-		<img
-			src={contours.src}
-			alt=""
-			class="h-full w-full object-cover"
-			decoding="async"
-			fetchpriority="low"
-		/>
-	</div>
 
 	{/* ---------- above the fold ---------- */}
 	<section>
