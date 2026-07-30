@@ -33,6 +33,18 @@
 # agreement announced" so no reached-agreement implication).
 # NOTHING remains open on content; Jackson flipped the publish switch
 # 2026-07-29 (tappable question, "Publish now").
+#
+# CONVERTED .md → .mdx 2026-07-30 to place two figures in the body
+# (Jackson's placement call: both on this page, in the Challenge
+# section). Body prose is UNCHANGED from the signed-off version.
+# Figure provenance, from Jackson 2026-07-30:
+#   - meagher-county-map.jpg — his map, caption "2021 map by Jackson
+#     Rose" (his wording).
+#   - white-sulphur-springs-aerial.jpg — courtesy of Brickhouse
+#     Creative, permission confirmed by Jackson, link to their site
+#     approved. Original is 677×381 (largest supplied); a higher-res
+#     export can drop into _staging/ under the same name and re-ingest.
+# Originals renamed in _staging/ to match the ingest naming rule.
 title: "Community Benefits Agreement, Meagher County Stewardship Council"
 summary: "More than five years helping lead a rural Montana community's negotiation of a community benefits agreement with the developer of the Black Butte Copper Project, through the framework for a binding agreement announced in March 2026."
 year: 2021
@@ -45,6 +57,10 @@ hasPage: true
 draft: false
 ---
 
+import { Image } from 'astro:assets';
+import meagherMap from '../../assets/images/meagher-county-map.jpg';
+import wssAerial from '../../assets/images/white-sulphur-springs-aerial.jpg';
+
 ## Challenge
 
 White Sulphur Springs, Montana, is a town of about 900 people, the seat of
@@ -52,6 +68,19 @@ a county of roughly 2,000 permanent residents with a median age of 57.
 The town lost 190 residents between 2010 and 2024. It
 was a timber town until its two sawmills closed in the 1980s; the economy
 now runs on agriculture, the public sector, and recreation.
+
+<figure class="my-8">
+  <Image
+    src={wssAerial}
+    alt="Aerial view of White Sulphur Springs, Montana, in evening light: a small grid of tree-lined streets and rooftops surrounded by open ranchland, with mountains on the horizon."
+    widths={[677]}
+    sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
+    class="w-full border border-line bg-white"
+  />
+  <figcaption class="mt-3 text-sm text-muted">
+    White Sulphur Springs. Photo courtesy of <a href="https://www.brickhousecreative.com/">Brickhouse Creative</a>.
+  </figcaption>
+</figure>
 
 Nineteen miles north sits the Black Butte Copper Project, one of the
 highest-grade undeveloped copper deposits in the world. If the mine
@@ -61,6 +90,19 @@ infrastructure upgrades. It also means cultural disruption, environmental
 risk, and the boom-and-bust cycle Montana's mining towns know well. The
 question the community was asking: how do we make sure the mine benefits
 Meagher County in the long run, not just while it operates?
+
+<figure class="my-8">
+  <Image
+    src={meagherMap}
+    alt="Reference map of Meagher County, Montana, on shaded-relief terrain: the county outlined in black with White Sulphur Springs near its center, the Big Belt Mountains along the western boundary, the Castle Mountains and Whetstone Ridge to the southeast, and an inset locating the county in central Montana."
+    widths={[768, 1200, 1600]}
+    sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
+    class="w-full border border-line bg-white"
+  />
+  <figcaption class="mt-3 text-sm text-muted">
+    Meagher County. 2021 map by Jackson Rose.
+  </figcaption>
+</figure>
 
 ## Approach
 

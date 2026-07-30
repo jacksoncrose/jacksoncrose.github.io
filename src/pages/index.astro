@@ -22,10 +22,11 @@ import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { published } from '../lib/content';
+import { published, clientLabel } from '../lib/content';
 import { site } from '../site';
 import heroImage from '../assets/images/az-renewable-energy-estimator.png';
 import portraitImage from '../assets/images/jackson-rose-portrait.jpg';
+import contours from '../assets/images/bridger-contours.svg';
 
 const projects = published(await getCollection('projects'));
 const tools = published(await getCollection('tools'));
@@ -74,6 +75,37 @@ const mapsTeaser = mapsTeaserIds
 ---
 
 <Base title="Home" description="Portfolio of Jackson Rose: geographer, Certified GIS Professional, and consultant on the community dimensions of energy and extractive development. Projects, maps, and tools.">
+	{/*
+	  ---------- contour background ----------
+	  Settled with Jackson 2026-07-30 (rendered mockups, his pick of five
+	  options): faint topographic contours behind the header and fold, fading
+	  to plain paper before the long-form content starts. The linework is REAL
+	  terrain, cut from the USGS 1/3 arc-second DEM he supplied (tile
+	  n46w111): the Bridger Range, lat 45.80–45.98, lon −111.00–−110.75,
+	  50 m interval with 250 m index contours — the crop's high point is
+	  Sacagawea Peak. Regenerate with scripts/make-contour-background.py;
+	  the SVG is 84 KB raw / ~35 KB gzipped, ink-colored strokes, no
+	  JavaScript.
+
+	  Tuning knobs: overall strength is the wrapper's opacity-[0.12]
+	  (effective ~5% regular / ~8% index lines against paper); the fade is
+	  the mask-image gradient; the band height is h-[64rem]. Decorative
+	  only — aria-hidden, empty alt, fetchpriority low so it never competes
+	  with the hero. Home only, by design.
+	*/}
+	<div
+		aria-hidden="true"
+		class="absolute inset-x-0 top-0 -z-10 h-[64rem] overflow-hidden opacity-[0.12] [-webkit-mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)] [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]"
+	>
+		<img
+			src={contours.src}
+			alt=""
+			class="h-full w-full object-cover"
+			decoding="async"
+			fetchpriority="low"
+		/>
+	</div>
+
 	{/* ---------- above the fold ---------- */}
 	<section>
 		<div class="sm:flex sm:items-start sm:justify-between sm:gap-10">
@@ -124,18 +156,46 @@ const mapsTeaser = mapsTeaserIds
 		</figure>
 	</section>
 
-	{/* ---------- tools strip ---------- */}
+	{/*
+	  ---------- tools strip ----------
+	  Cards + links settled with Jackson 2026-07-30 (rendered mockups, his
+	  pick): tools render as linked cards with cover screenshots (the tools
+	  schema gained an optional cover the same day), Home only — the Tools
+	  index page keeps its editorial list. The whole card is clickable via a
+	  stretched link (after:absolute after:inset-0) so the accessible link
+	  text stays the tool title, not the entire card contents.
+	*/}
 	<section class="mt-16 border-t border-line pt-8">
 		<h2 class="text-3xl">Tools</h2>
 		{
 			tools.length === 0 ? (
 				<Todo note="No published tools yet. Each needs a title, two-sentence description, and a confirmed live URL." />
 			) : (
-				<ul class="mt-4 space-y-3">
+				<ul class="mt-6 grid gap-5 sm:grid-cols-2">
 					{tools.slice(0, 4).map((tool) => (
-						<li>
-							<span class="font-semibold">{tool.data.title}</span>
-							<span class="text-muted"> — {tool.data.blurb}</span>
+						<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent">
+							{tool.data.cover && (
+								<Image
+									src={tool.data.cover.src}
+									alt={tool.data.cover.alt}
+									widths={[400, 800]}
+									sizes="(min-width: 640px) 21rem, calc(100vw - 3rem)"
+									loading="lazy"
+									class="aspect-video w-full border-b border-line object-cover"
+								/>
+							)}
+							<div class="p-4">
+								<h3 class="text-xl">
+									{tool.data.url ? (
+										<a href={tool.data.url} class="after:absolute after:inset-0">
+											{tool.data.title}
+										</a>
+									) : (
+										tool.data.title
+									)}
+								</h3>
+								<p class="mt-1 text-sm text-muted">{tool.data.blurb}</p>
+							</div>
 						</li>
 					))}
 				</ul>
@@ -144,7 +204,19 @@ const mapsTeaser = mapsTeaserIds
 		<p class="mt-4 text-sm"><a href="/tools">All tools</a></p>
 	</section>
 
-	{/* ---------- selected projects ---------- */}
+	{/*
+	  ---------- selected projects ----------
+	  Card treatment settled with Jackson 2026-07-30 (rendered mockups, his
+	  pick, Home only). Each entry is a bordered card; when a page exists the
+	  whole card is clickable via a stretched link. The meta line is year +
+	  client only — the role line stays on the Projects index, where there is
+	  room for it (the MCSC role is a full sentence). Client names still pass
+	  through clientLabel(), the single naming gate.
+
+	  Small card image (AGENTS.md visual-hierarchy decision 2026-07-25):
+	  tier-1 cards carry policy visuals so the page's image count favors the
+	  primary work. Kept visibly smaller than the hero.
+	*/}
 	<section class="mt-16 border-t border-line pt-8">
 		<h2 class="text-3xl">Selected projects</h2>
 		{
@@ -154,37 +226,43 @@ const mapsTeaser = mapsTeaserIds
 		}
 		{
 			selected.length > 0 && (
-				<ul class="mt-6 space-y-10">
-					{selected.map((project) => (
-						<li class="sm:flex sm:gap-6">
-							{/*
-							  Small card image (AGENTS.md visual-hierarchy decision
-							  2026-07-25): tier-1 cards carry policy visuals so the page's
-							  image count favors the primary work. Kept visibly smaller
-							  than the hero.
-							*/}
-							{project.data.cover && (
-								<Image
-									src={project.data.cover.src}
-									alt={project.data.cover.alt}
-									widths={[320, 640]}
-									sizes="(min-width: 640px) 11rem, calc(100vw - 3rem)"
-									loading="lazy"
-									class="w-full self-start border border-line bg-white sm:w-44 sm:shrink-0"
-								/>
-							)}
-							<div class="mt-3 sm:mt-0">
-								<h3 class="text-xl">
-									{project.data.hasPage ? (
-										<a href={`/projects/${project.id}`}>{project.data.title}</a>
-									) : (
-										project.data.title
-									)}
-								</h3>
-								<p class="mt-1 text-base">{project.data.summary}</p>
-							</div>
-						</li>
-					))}
+				<ul class="mt-6 grid gap-5">
+					{selected.map((project) => {
+						const client = clientLabel(project.data);
+						const meta = [project.data.year?.toString(), client]
+							.filter(Boolean)
+							.join(' · ');
+						return (
+							<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
+								{project.data.cover && (
+									<Image
+										src={project.data.cover.src}
+										alt={project.data.cover.alt}
+										widths={[320, 640]}
+										sizes="(min-width: 640px) 13rem, calc(100vw - 3rem)"
+										loading="lazy"
+										class="w-full border-b border-line object-cover sm:w-52 sm:shrink-0 sm:border-r sm:border-b-0"
+									/>
+								)}
+								<div class="p-5">
+									<h3 class="text-xl">
+										{project.data.hasPage ? (
+											<a
+												href={`/projects/${project.id}`}
+												class="after:absolute after:inset-0"
+											>
+												{project.data.title}
+											</a>
+										) : (
+											project.data.title
+										)}
+									</h3>
+									{meta && <p class="mt-1 text-sm text-muted">{meta}</p>}
+									<p class="mt-2 text-base">{project.data.summary}</p>
+								</div>
+							</li>
+						);
+					})}
 				</ul>
 			)
 		}

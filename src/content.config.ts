@@ -70,15 +70,29 @@ const projects = defineCollection({
 
 const tools = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/tools' }),
-  schema: z.object({
-    title: z.string(),
-    /** Exactly the "2-sentence description" from the sitemap. */
-    blurb: z.string().max(300),
-    /** Live URL. Omit until confirmed — the Tools page shows a TODO state. */
-    url: z.string().url().optional(),
-    order: z.number().default(0),
-    draft: z.boolean().default(false),
-  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      /** Exactly the "2-sentence description" from the sitemap. */
+      blurb: z.string().max(300),
+      /** Live URL. Omit until confirmed — the Tools page shows a TODO state. */
+      url: z.string().url().optional(),
+      /**
+       * Card screenshot for the Home tools strip (added 2026-07-30, Jackson's
+       * cards decision). Optional — a tool without one renders a text-only
+       * card. Same enforced-alt pattern as project covers.
+       */
+      cover: z
+        .object({
+          src: image(),
+          alt: z
+            .string()
+            .min(15, 'Describe what the screenshot shows, never just the tool name'),
+        })
+        .optional(),
+      order: z.number().default(0),
+      draft: z.boolean().default(false),
+    }),
 });
 
 const gallery = defineCollection({
