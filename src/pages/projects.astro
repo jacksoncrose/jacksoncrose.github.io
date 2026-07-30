@@ -13,16 +13,28 @@ import { published, clientLabel } from '../lib/content';
 
 const projects = published(await getCollection('projects'));
 
+/*
+  Tier headings settled with Jackson 2026-07-29 (replacing the working
+  titles): tier 1 "Fiscal analysis and community policy" (covers both the
+  estimator and the MCSC negotiation), tier 2 "Applied research" (his pick
+  from nine options; holds the disbursements report and the land ownership
+  dataset), tier 3 "Other work" (kept as was). Intro below is his pick,
+  "shortest" of three drafts, approved verbatim.
+*/
 const tiers = [
-	{ tier: 1 as const, heading: 'Spatial fiscal analysis' },
-	{ tier: 2 as const, heading: 'Data collection and engineering' },
+	{ tier: 1 as const, heading: 'Fiscal analysis and community policy' },
+	{ tier: 2 as const, heading: 'Applied research' },
 	{ tier: 3 as const, heading: 'Other work' },
 ];
 ---
 
 <Base title="Projects" description="Case studies of Jackson Rose's work: a renewable energy revenue estimator, a national land ownership analysis, a community benefits agreement negotiation, and mapping work across Montana.">
 	<h1 class="text-4xl">Projects</h1>
-	<Todo note="One-paragraph intro for this page. Also confirm the tier headings, which are working titles: Spatial fiscal analysis / Data collection and engineering / Other work." />
+	<p class="mt-6 text-lg">
+		Selected client and research work. The case studies describe the problem,
+		the approach, and what was delivered; client names appear where I have
+		permission to use them.
+	</p>
 
 	{
 		projects.length === 0 && (

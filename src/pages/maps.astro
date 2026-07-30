@@ -19,7 +19,11 @@ const gallery = published(await getCollection('gallery'));
 
 <Base title="Maps" description="Selected maps by Jackson Rose: national land ownership choropleths, custom-hillshade ranch maps, an overnight UAV orthomosaic of the MSU campus, and a biocultural region map spanning two countries.">
 	<h1 class="text-4xl">Maps</h1>
-	<Todo note="One or two sentences framing the gallery — cartographic and analytical work that does not need a full case study." />
+	{/* Intro is Jackson's own wording, verbatim (2026-07-29). Do not rewrite. */}
+	<p class="mt-6 text-lg">
+		Maps from client and research projects, and some just for the sake of
+		mapping.
+	</p>
 
 	{
 		gallery.length === 0 ? (

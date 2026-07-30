@@ -1,47 +1,66 @@
 ---
-# DRAFT — not rendered anywhere while draft: true.
-#
-# Every fact below is verified against the published report PDF (June 2021):
+# Facts verified against the published report PDF (June 2021):
 # https://headwaterseconomics.org/wp-content/uploads/HE_Federal_Fossil_Fuel_Disbursements_Report.pdf
-# Nothing here is inferred. Fields Jackson still has to settle are TODO.
+# The PDF's byline for Jackson uses an abandoned LLC name ("SunRose
+# Consulting LLC") that must never appear on this site; he is described
+# simply as a co-author. Tier 2, Headwaters naming, and publishing were
+# Jackson's explicit calls, 2026-07-29. Outcome citations verified online
+# same day: RFF WP 22-3 / Review of Environmental Economics and Policy
+# 17(2) cites the report on p.3; CAP "Quitting Fossil Fuels and Reviving
+# Rural America" (2022-09) endnotes 8 and 28; CAP "Investing in the
+# Nation's Future" (2025-02) endnote 30. CRS R46537 checked: no citation.
+# Links kept to the report PDF only (Jackson approved prose-only
+# citations).
 title: "Federal fossil fuel disbursements to states"
-summary: "TODO: 1-2 sentence card summary, written with Jackson."
+summary: "How 14 states receive, spend, and depend on federal fossil fuel revenue — roughly $2 billion a year — using ONRR and state budget data from FY2016 to 2020. Co-authored report for Headwaters Economics, June 2021."
 year: 2021
-# tier: PROPOSED as 1. It is public, citable, co-authored, and squarely the
-# energy-fiscal-analysis headline — the strongest candidate for the spine.
-# Jackson to confirm.
-tier: 1
-# NOTE: the PDF credits Jackson to "SunRose Consulting LLC," an LLC name he
-# has abandoned. That name must NOT appear on this site in any form.
-role: "TODO: which parts of the analysis were Jackson's. Three co-authors; the report does not divide the work."
-tools: ["TODO: confirm — the report does not state the analysis stack"]
+tier: 2
+role: "Co-author, with Kristin Smith and Mark Haggerty of Headwaters Economics"
 client: "Headwaters Economics"
-# The partnership is public (his name is on the published report), so this is
-# almost certainly grantable, but Jackson has not said so in words yet.
-clientPermission: "pending"
+clientPermission: "granted"
 hasPage: true
 links:
   - label: "Report PDF (Headwaters Economics, June 2021)"
     url: "https://headwaterseconomics.org/wp-content/uploads/HE_Federal_Fossil_Fuel_Disbursements_Report.pdf"
-draft: true
+cover:
+  src: "../../assets/images/federal-fossil-fuel-recipient-states.png"
+  # Original figure made for this site (2026-07-29) from the report's state
+  # list — NOT reproduced from the report PDF. d3 + us-atlas, site palette,
+  # CVD-validated green/blue pair.
+  alt: "Map of the United States highlighting the 14 states that receive federal fossil fuel disbursements: ten onshore recipients in the West and Alaska, and four offshore recipients along the Gulf of Mexico."
+draft: false
 ---
 
-TODO: Case study body in the required shape — problem, approach, what was
-delivered, outcome.
+## Problem
 
-Verified material available for the write-up:
+States receive a share of the revenue the federal government collects from
+fossil fuel leasing and production on federal lands and waters —
+disbursements that averaged roughly $2 billion a year over the preceding
+decade. That money matters most in the states that receive the most of it,
+and how it arrives, how much it swings year to year, and what state budgets
+do with it are questions with real consequences for the communities involved.
 
-- Co-authored with Kristin Smith, Ph.D. and Mark Haggerty of Headwaters
-  Economics. Describe Jackson simply as a co-author; do not reproduce the
-  PDF's byline for him, which uses an abandoned LLC name.
-- Tracks how states receive and manage federal revenue from fossil fuel
-  leasing and production on federal lands and waters.
-- 14 states: Alaska, California, Colorado, Montana, Nevada, New Mexico, North
-  Dakota, Oklahoma, Utah, and Wyoming as the largest onshore recipients, plus
-  Alabama, Louisiana, Mississippi, and Texas offshore.
-- Data from the Office of Natural Resources Revenue (ONRR) and state budget
-  documents, covering FY2016-2020.
-- Examines disbursement volatility, whether states spend or save the money,
-  government dependence on the revenue, and the risk of relying on it.
-- Disbursements averaged roughly $2 billion per year over the preceding
-  decade.
+## Approach
+
+With co-authors Kristin Smith and Mark Haggerty of Headwaters Economics, I
+compiled disbursement data from the Office of Natural Resources Revenue and
+state budget documents for fiscal years 2016 through 2020, covering the 14
+states that receive the most: Alaska, California, Colorado, Montana, Nevada,
+New Mexico, North Dakota, Oklahoma, Utah, and Wyoming onshore, and Alabama,
+Louisiana, Mississippi, and Texas offshore. The analysis examined
+disbursement volatility, whether states spend or save the money, how
+dependent their governments are on it, and the risk of relying on it.
+
+## What was delivered
+
+A public report, published by Headwaters Economics in June 2021, documenting
+how each of the 14 states receives and manages its federal fossil fuel
+revenue. The full report is linked below.
+
+## Outcome
+
+The report has been cited in subsequent research and policy work on the
+fiscal side of the energy transition, including a Resources for the Future
+analysis published in the Review of Environmental Economics and Policy and
+Center for American Progress work on the management of federal mineral
+revenue.

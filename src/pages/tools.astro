@@ -15,7 +15,17 @@ const tools = published(await getCollection('tools'));
 
 <Base title="Tools" description="Live interactive tools built by Jackson Rose, from a scan-measured procedural 3D model of MSU's Montana Hall to geospatial and revenue tools as they come online.">
 	<h1 class="text-4xl">Tools</h1>
-	<Todo note="One-paragraph intro: what these tools are for and who uses them." />
+	{/*
+	  Intro settled with Jackson 2026-07-29 (his pick of three drafts,
+	  verbatim). Incoming: his Montana frost-free days app, being built in
+	  another project — gets a tools entry (title, blurb, URL, order) when he
+	  imports it. If it's a static web app it can be site-hosted under
+	  public/ like /montana-hall/.
+	*/}
+	<p class="mt-6 text-lg">
+		Interactive tools from client work and side projects. Each entry says
+		what the tool does and links it where a public version exists.
+	</p>
 
 	{
 		tools.length === 0 ? (
