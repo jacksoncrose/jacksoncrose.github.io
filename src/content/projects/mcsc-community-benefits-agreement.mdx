@@ -42,8 +42,16 @@
 #     Rose" (his wording).
 #   - white-sulphur-springs-aerial.jpg — courtesy of Brickhouse
 #     Creative, permission confirmed by Jackson, link to their site
-#     approved. Original is 677×381 (largest supplied); a higher-res
-#     export can drop into _staging/ under the same name and re-ingest.
+#     approved. UPGRADED 2026-07-30: high-res zip from Brickhouse via
+#     Jackson replaced the original 677×381 with the same shot at
+#     2560×1440 (their Wss2.jpg), same-name re-ingest.
+#   - white-sulphur-springs-evening.jpg — SECOND Brickhouse aerial
+#     (their Wss1.png, converted PNG→JPEG at ingest since it is a
+#     photograph), added 2026-07-30 on Jackson's "use both 1 and 2".
+#     Placed at the end of Outcome — the page opens on the town and
+#     closes on it. Same credit and permission. Two more Brickhouse
+#     shots (Wss3 low neighborhood pass, Wss4 rodeo) are unused;
+#     Jackson has the originals.
 # Originals renamed in _staging/ to match the ingest naming rule.
 title: "Community Benefits Agreement, Meagher County Stewardship Council"
 summary: "More than five years helping lead a rural Montana community's negotiation of a community benefits agreement with the developer of the Black Butte Copper Project, through the framework for a binding agreement announced in March 2026."
@@ -60,6 +68,7 @@ draft: false
 import { Image } from 'astro:assets';
 import meagherMap from '../../assets/images/meagher-county-map.jpg';
 import wssAerial from '../../assets/images/white-sulphur-springs-aerial.jpg';
+import wssEvening from '../../assets/images/white-sulphur-springs-evening.jpg';
 
 ## Challenge
 
@@ -136,3 +145,16 @@ that framework into a contract. The mine's timeline remains uncertain,
 which is exactly why the structure matters: whatever happens and whenever
 it happens, the community holds a negotiated basis for benefits that are
 meant to outlast the boom.
+
+<figure class="my-8">
+  <Image
+    src={wssEvening}
+    alt="Aerial view of White Sulphur Springs at golden hour: a creek winding through cottonwoods in the foreground, the town's rooftops beyond, and grassy hills on the horizon."
+    widths={[768, 1200, 1600]}
+    sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
+    class="w-full border border-line bg-white"
+  />
+  <figcaption class="mt-3 text-sm text-muted">
+    Evening over White Sulphur Springs. Photo courtesy of <a href="https://www.brickhousecreative.com/">Brickhouse Creative</a>.
+  </figcaption>
+</figure>

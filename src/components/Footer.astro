@@ -5,6 +5,11 @@
   Someone who reads to the bottom of a project page should not have to scroll
   back up to find an address. Year is rendered from the build date, which is a
   fact about the build, not an unconfirmed project fact.
+
+  TWO addresses since 2026-07-30 (Jackson: "Can we list two?"). Labelled,
+  because two bare addresses side by side make a reader guess which one to
+  use. The header keeps the MSU address alone — adding a second there would
+  crowd a row that already carries the name and four nav items.
 */
 import { site } from '../site';
 
@@ -15,15 +20,24 @@ const year = new Date().getFullYear();
 	<div
 		class="mx-auto flex max-w-3xl flex-wrap items-baseline justify-between gap-x-6 gap-y-2 px-6 py-8 text-sm text-muted"
 	>
-		<p>
+		<div class="flex flex-wrap gap-x-6 gap-y-1">
 			{
 				site.email ? (
-					<a href={`mailto:${site.email}`}>{site.email}</a>
+					<p>
+						<span class="text-muted">Montana State</span>{' '}
+						<a href={`mailto:${site.email}`}>{site.email}</a>
+					</p>
 				) : (
-					<span class="text-accent">TODO: contact email</span>
+					<p class="text-accent">TODO: contact email</p>
 				)
 			}
-		</p>
+			{site.emailConsulting && (
+				<p>
+					<span class="text-muted">Consulting</span>{' '}
+					<a href={`mailto:${site.emailConsulting}`}>{site.emailConsulting}</a>
+				</p>
+			)}
+		</div>
 		<p>© {year} {site.name}</p>
 	</div>
 </footer>

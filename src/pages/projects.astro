@@ -9,7 +9,7 @@
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
 import { getCollection } from 'astro:content';
-import { published, clientLabel } from '../lib/content';
+import { published, clientLabel, cardTarget } from '../lib/content';
 
 const projects = published(await getCollection('projects'));
 
@@ -52,13 +52,14 @@ const tiers = [
 					<ul class="mt-6 space-y-8">
 						{inTier.map((project) => {
 							const client = clientLabel(project.data);
+							/* Card-only entries link to their first link when they have
+							   one (2026-07-30) — see cardTarget in lib/content. */
+							const target = cardTarget(project.data, project.id);
 							return (
 								<li>
 									<h3 class="text-xl">
-										{project.data.hasPage ? (
-											<a href={`/projects/${project.id}`}>
-												{project.data.title}
-											</a>
+										{target ? (
+											<a href={target.href}>{project.data.title}</a>
 										) : (
 											project.data.title
 										)}
@@ -68,6 +69,7 @@ const tiers = [
 											project.data.year?.toString(),
 											project.data.role,
 											client,
+											target?.external ? 'Live tool' : null,
 										]
 											.filter(Boolean)
 											.join(' · ')}

@@ -127,12 +127,32 @@ import { site } from '../site';
 	<section class="mt-12 border-t border-line pt-8">
 		<h2 class="text-3xl">CV</h2>
 		<p class="mt-4">
+			{/* Explicit {' '} — the line break before the link was being
+			    collapsed, rendering "is on theCV page". Found 2026-07-30. */}
 			A selected CV — appointments, education, certifications,
-			publications, presentations, and service — is on the
+			publications, presentations, and service — is on the{' '}
 			<a href="/cv">CV page</a>.
 		</p>
 	</section>
 
+	{/*
+	  Consulting. The RCRC paragraph is Jackson's own phrasing ("partner",
+	  "consulting arm"), reconfirmed 2026-07-28 — do not rewrite it.
+
+	  AVAILABILITY paragraph added 2026-07-30, when he decided the site
+	  should say he is for hire (it previously described the affiliation
+	  without ever stating he takes work or how to start). Placement is his:
+	  Home and About. Voice matches the Home line he picked, and the service
+	  list is fuller here because About is not bound by Home's rule against
+	  naming UAS and LiDAR. The three areas are the ones he selected as work
+	  he wants more of: community and policy consulting, geospatial
+	  production, and tool building. Research partnerships were on the menu
+	  and he did NOT select them — do not add them back.
+
+	  SCOPE, his words the same day: "This portfolio site is not intended to
+	  drive work to the GCF." No page routes consulting inquiries to the
+	  Geospatial Core Facility, and the address here is the RCRC one.
+	*/}
 	<section class="mt-12 border-t border-line pt-8">
 		<h2 class="text-3xl">Consulting</h2>
 		<p class="mt-4">
@@ -143,5 +163,25 @@ import { site } from '../site';
 			and development challenges for governments, community
 			organizations, and coalitions across the American West.
 		</p>
+		<p class="mt-4">
+			He is available for consulting work in three areas: community
+			benefits agreements and the fiscal analysis that supports them,
+			including negotiation support for community organizations and
+			local governments; geospatial collection and analysis, from UAS
+			and LiDAR survey through spatial analysis and cartography; and
+			custom tools that put those numbers in front of the people who
+			need them.
+		</p>
+		{
+			site.emailConsulting && (
+				<p class="mt-4">
+					Inquiries:{' '}
+					<a href={`mailto:${site.emailConsulting}`}>
+						{site.emailConsulting}
+					</a>
+					.
+				</p>
+			)
+		}
 	</section>
 </Base>

@@ -1,0 +1,10 @@
+# robots.txt — added 2026-07-30.
+#
+# The site is public and wants to be found (noindex was removed at launch,
+# 2026-07-29). Everything is crawlable; the only job here is pointing
+# crawlers at the sitemap, which @astrojs/sitemap generates at build time.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://jacksoncrose.github.io/sitemap-index.xml

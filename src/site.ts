@@ -35,6 +35,21 @@ export const site = {
   email: 'jackson.rose1@montana.edu' as string | null,
 
   /**
+   * Consulting address, added 2026-07-30 when Jackson decided the site
+   * should say he is for hire. His answer, verbatim: "Can we list two?
+   * Jackson@rcrcgroup.org". Capitalization is his — do not "normalize" it.
+   *
+   * This is the address attached to work inquiries (the consulting line on
+   * Home and the Consulting section on About). The MSU address above stays
+   * the institutional one and keeps the header.
+   *
+   * SCOPE DECISION, same day, his words: "This portfolio site is not
+   * intended to drive work to the GCF." Nothing here or on any page should
+   * route consulting inquiries to the Geospatial Core Facility.
+   */
+  emailConsulting: 'Jackson@rcrcgroup.org' as string | null,
+
+  /**
    * Identity sentence — SETTLED with Jackson 2026-07-29, written together
    * over several rounds (his calls: first person, high level, love of maps,
    * resources folded into the policy beat). Do not rewrite without him.

@@ -21,9 +21,28 @@ interface Props {
 	title: string;
 	/** Meta description. TODO-marked strings are fine pre-launch. */
 	description?: string;
+	/**
+	 * Per-page share image (added 2026-07-30). Pages that own a strong
+	 * visual pass an absolute URL plus its alt text; everything else falls
+	 * back to the sitewide name card. A project page sharing its own cover
+	 * previews as that project rather than as a generic card.
+	 */
+	shareImageUrl?: string;
+	shareImageAlt?: string;
+	/**
+	 * Extra JSON-LD to emit alongside the sitewide Person block. Project
+	 * pages pass a CreativeWork describing the case study.
+	 */
+	structuredData?: Record<string, unknown>;
 }
 
-const { title, description } = Astro.props;
+const {
+	title,
+	description,
+	shareImageUrl,
+	shareImageAlt,
+	structuredData,
+} = Astro.props;
 
 /*
   Absolute URLs for og:url/og:image, built from `site` in astro.config.mjs
@@ -37,7 +56,53 @@ const { title, description } = Astro.props;
   link previews).
 */
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-const shareImage = new URL('/share-card.png', Astro.site);
+const defaultShareImage = new URL('/share-card.png', Astro.site);
+const defaultShareAlt =
+	'Jackson Rose — rural places, energy and natural resource policy, and, most of all, making maps. Text beside a county-level map of federal land in the western United States.';
+
+/* Per-page override falls back to the sitewide card. Dimensions are only
+   declared for the default card, whose 1200×630 is known; a project cover
+   has its own aspect ratio and lying about it makes previews crop wrong. */
+const shareImage = shareImageUrl ?? defaultShareImage.toString();
+const shareAlt = shareImageAlt ?? defaultShareAlt;
+const isDefaultShareImage = shareImage === defaultShareImage.toString();
+
+/*
+  Sitewide JSON-LD (added 2026-07-30). Every claim here is already stated
+  in prose somewhere on the site and traces to site.ts or the About page —
+  nothing is asserted to search engines that a reader cannot verify on the
+  page. No sameAs array: no social or profile URLs have been confirmed, and
+  guessing at them is exactly the kind of invention this project forbids.
+*/
+const personLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: site.name,
+	url: new URL('/', Astro.site).toString(),
+	jobTitle: [
+		'Assistant Director and Operations Manager, MSU Geospatial Core Facility',
+		'Instructor, Earth Sciences, Montana State University',
+	],
+	worksFor: {
+		'@type': 'CollegeOrUniversity',
+		name: 'Montana State University',
+	},
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Bozeman',
+		addressRegion: 'MT',
+		addressCountry: 'US',
+	},
+	...(site.email ? { email: `mailto:${site.email}` } : {}),
+	knowsAbout: [
+		'Community benefits agreements',
+		'Geographic information systems',
+		'Spatial analysis',
+		'UAS and LiDAR survey',
+		'Energy and natural resource policy',
+		'Rural community development',
+	],
+};
 ---
 
 <html lang="en">
@@ -64,14 +129,37 @@ const shareImage = new URL('/share-card.png', Astro.site);
 		{description && <meta property="og:description" content={description} />}
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:image" content={shareImage} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
-		<meta
-			property="og:image:alt"
-			content="Jackson Rose — rural places, energy and natural resource policy, and, most of all, making maps. Text beside a county-level map of federal land in the western United States."
-		/>
+		{
+			isDefaultShareImage && (
+				<>
+					<meta property="og:image:width" content="1200" />
+					<meta property="og:image:height" content="630" />
+				</>
+			)
+		}
+		<meta property="og:image:alt" content={shareAlt} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:image" content={shareImage} />
+		<meta name="twitter:image:alt" content={shareAlt} />
+
+		{/*
+		  Structured data. The Person block ships on every page; pages that
+		  pass `structuredData` add a second block describing themselves.
+		  set:html is safe here because both objects are built in this
+		  codebase from typed content, never from user input.
+		*/}
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(personLd)}
+		/>
+		{
+			structuredData && (
+				<script
+					type="application/ld+json"
+					set:html={JSON.stringify(structuredData)}
+				/>
+			)
+		}
 	</head>
 
 	<body class="min-h-screen">

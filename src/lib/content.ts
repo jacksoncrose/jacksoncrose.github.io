@@ -32,6 +32,33 @@ export type ClientFields = {
   clientPermission: 'granted' | 'pending' | 'anonymize' | 'not-applicable';
 };
 
+type CardLinkFields = {
+  hasPage: boolean;
+  links: { label: string; url: string }[];
+};
+
+/**
+ * Where a project card should point, and whether that leaves the site.
+ *
+ * Added 2026-07-30. Cards used to link only to internal project pages, so
+ * a card-only entry (hasPage: false) was never clickable. The renewable
+ * energy estimator is card-only but does have a live tool behind it, and
+ * Jackson's call was to link it. Rather than special-case that one entry
+ * in two templates, the rule is general: a card points at its own page
+ * when it has one, otherwise at its first link, otherwise nowhere.
+ *
+ * `external` is what lets the templates warn a reader that the click
+ * leaves the site — the same underlined title otherwise gives no hint.
+ */
+export function cardTarget(
+  data: CardLinkFields,
+  id: string,
+): { href: string; external: boolean } | null {
+  if (data.hasPage) return { href: `/projects/${id}`, external: false };
+  const first = data.links[0];
+  return first ? { href: first.url, external: true } : null;
+}
+
 /**
  * What may be printed for this entry's client.
  * Returns null when nothing should be printed at all.
