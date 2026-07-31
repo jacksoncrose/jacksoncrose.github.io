@@ -52,13 +52,30 @@ const projects = defineCollection({
       links: z
         .array(z.object({ label: z.string(), url: z.string().url() }))
         .default([]),
-      /** Card/hero image through Astro's asset pipeline; alt is mandatory. */
+      /**
+       * Card/hero image through Astro's asset pipeline; alt is mandatory.
+       *
+       * `caption` and `photoCredit` added 2026-07-30. Until then a cover
+       * rendered with no caption at all, which was fine while every cover
+       * was Jackson's own map or screenshot. The moment a cover is someone
+       * else's photograph — the Brickhouse Creative aerial on the MCSC
+       * entry — an uncaptioned cover silently strips the credit that the
+       * permission was granted on. This makes attribution expressible
+       * where the image is declared, so it cannot be lost by moving an
+       * image from the body to the cover.
+       */
       cover: z
         .object({
           src: image(),
           alt: z
             .string()
             .min(15, 'Describe what the image shows, never "map of Montana"'),
+          /** Plain lead sentence, e.g. "White Sulphur Springs." */
+          caption: z.string().optional(),
+          /** Rendered as "Photo courtesy of <name>", linked when a url is given. */
+          photoCredit: z
+            .object({ name: z.string(), url: z.string().url().optional() })
+            .optional(),
         })
         .optional(),
       /** Manual ordering within a tier (lower first). */
@@ -108,6 +125,32 @@ const gallery = defineCollection({
       alt: z
         .string()
         .min(15, 'Describe what the map shows, never "map of Montana"'),
+      /**
+       * Optional grouping, added 2026-07-31 from Jackson's ask: "It needs to
+       * be clear that the poster and ranch division maps are all the same
+       * project/client."
+       *
+       * Entries sharing a `group` id render together under one heading in
+       * their own sub-grid, so a multi-sheet project reads as one job for
+       * one client instead of as unrelated maps that happen to sit near each
+       * other. Ungrouped entries are unaffected.
+       *
+       * The id must exist in `galleryGroups` (src/lib/content.ts), which is
+       * the ONLY place the heading, the note, and the project link are
+       * written. Keeping them there rather than repeating them in each
+       * entry's frontmatter is what stops four copies of the same sentence
+       * from drifting apart. An unknown id fails the build on purpose.
+       */
+      group: z.string().optional(),
+      /** Order WITHIN a group. Ignored when `group` is unset. */
+      groupOrder: z.number().default(0),
+      /**
+       * Which basemap this sheet is drawn on, e.g. "Hillshade" or
+       * "Imagery". Rendered as a small label above the title so a
+       * side-by-side pair reads as one comparison rather than as two
+       * near-duplicate maps with the same name.
+       */
+      basemap: z.string().optional(),
       order: z.number().default(0),
       draft: z.boolean().default(false),
     }),

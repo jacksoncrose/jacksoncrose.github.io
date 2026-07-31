@@ -1,4 +1,30 @@
 ---
+# ============================================================
+# WITHDRAWN FROM THE SITE 2026-07-31 — Jackson's call, his words:
+# "I actually don't want Salmon Valley on the projects because it
+# has no tangible deliverable. It can stay in my CV."
+#
+# This reverses the 2026-07-30 decision to publish it in tier 1.
+# The criterion behind it is general and now lives in AGENTS.md:
+# a Projects entry needs a tangible deliverable. This engagement
+# was advisory groundwork that produced no artifact and reached no
+# agreement, so it had nothing to show.
+#
+# Held as draft: true rather than deleted, so published() drops it
+# from every collection query and no URL renders, while the
+# sourcing record below survives intact. IT STAYS ON THE CV, which
+# names the company (_staging/cv/build/facts.js). Do not delete
+# this file and do not flip draft back without him.
+#
+# The three questions that were open on this entry — whether any
+# geospatial work was in scope, whether he had a Lemhi County
+# image, and firsthand detail for Approach — are CLOSED by the
+# withdrawal. Do not re-ask them.
+#
+# Everything below is the record as published 2026-07-30. It is
+# still accurate and it governs the CV entry.
+# ============================================================
+#
 # PUBLISHED 2026-07-30 — drafted with Jackson from his resume, his CV
 # facts file, six settled answers (below), and web-verified public
 # sources. Replaces the long-standing draft jervois-idaho-cobalt-cba.md,
@@ -88,7 +114,7 @@ hasPage: true
 # tier 1. Without it, sequence among same-order entries is decided by
 # year alone, which is not the reading order he wants here.
 order: 1
-draft: false
+draft: true
 ---
 
 ## Challenge

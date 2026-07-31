@@ -11,6 +11,11 @@
   tool title, hover/focus border in accent. This supersedes the earlier
   "cards on Home only" scoping from the same day; his call both times.
   A tool without a cover renders a text-only card.
+
+  Horizontal, one column since 2026-07-30 ("make the cards more square,
+  less vertical"). Kept deliberately identical to the Home tools strip and
+  to the project cards — one card shape sitewide. If that layout changes
+  here it should change there too, or the two pages drift apart.
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
@@ -39,20 +44,20 @@ const tools = published(await getCollection('tools'));
 		tools.length === 0 ? (
 			<Todo note="No published tools yet. Known candidates: the renewable energy tax calculators, the Montana frost-free days calculator, and the River Conditions Tool if permissions allow. Each needs its live URL confirmed." />
 		) : (
-			<ul class="mt-8 grid gap-6 sm:grid-cols-2">
+			<ul class="mt-8 grid gap-6">
 				{tools.map((tool) => (
-					<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent">
+					<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
 						{tool.data.cover && (
 							<Image
 								src={tool.data.cover.src}
 								alt={tool.data.cover.alt}
 								widths={[400, 800]}
-								sizes="(min-width: 640px) 21rem, calc(100vw - 3rem)"
+								sizes="(min-width: 640px) 16rem, calc(100vw - 3rem)"
 								loading="lazy"
-								class="aspect-video w-full border-b border-line object-cover"
+								class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
 							/>
 						)}
-						<div class="p-4">
+						<div class="p-5">
 							<h2 class="text-xl">
 								{tool.data.url ? (
 									<a href={tool.data.url} class="after:absolute after:inset-0">

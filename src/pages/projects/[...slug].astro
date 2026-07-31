@@ -136,6 +136,29 @@ const projectLd = {
 						sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
 						class="w-full border border-line bg-white"
 					/>
+					{/* Caption and credit (2026-07-30). A cover that is someone
+					    else's photograph has to be able to carry attribution
+					    here, or moving an image from the body to the cover
+					    quietly drops the credit it was licensed under. */}
+					{(project.data.cover.caption || project.data.cover.photoCredit) && (
+						<figcaption class="mt-3 text-sm text-muted">
+							{project.data.cover.caption}
+							{project.data.cover.photoCredit && (
+								<>
+									{project.data.cover.caption ? ' ' : ''}
+									Photo courtesy of{' '}
+									{project.data.cover.photoCredit.url ? (
+										<a href={project.data.cover.photoCredit.url}>
+											{project.data.cover.photoCredit.name}
+										</a>
+									) : (
+										project.data.cover.photoCredit.name
+									)}
+									.
+								</>
+							)}
+						</figcaption>
+					)}
 				</figure>
 			)
 		}

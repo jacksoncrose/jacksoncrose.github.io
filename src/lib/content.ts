@@ -27,6 +27,93 @@ export function published<T extends HasDraft & { data: { order: number; year?: n
     );
 }
 
+/* ---------------------------------------------------------------------
+   Gallery groups
+   ---------------------------------------------------------------------
+
+   Added 2026-07-31. Jackson: "It needs to be clear that the poster and
+   ranch division maps are all the same project/client."
+
+   A gallery entry opts in with `group: "<id>"` in its frontmatter. The
+   heading, the note, and the link to the full project page are written
+   HERE, once per group, rather than repeated in every entry — four copies
+   of the same sentence would drift apart the first time one got edited.
+   Adding a group means adding a key here and tagging the entries.
+*/
+
+export type GalleryGroupMeta = {
+  /** Heading above the group. */
+  title: string;
+  /** One or two sentences: what the set is, and who it was for. */
+  note: string;
+  /** Optional link to the project page carrying the full write-up. */
+  href?: string;
+};
+
+export const galleryGroups: Record<string, GalleryGroupMeta> = {
+  'rooney-ranch-atlas': {
+    title: 'Rooney Angus Ranch Atlas',
+    note: 'Division maps and a ranch-wide poster for Rooney Angus, in central Montana. Each division was drawn on two basemaps from one dataset, so the same tenure, fence, and pasture information reads either against terrain or against aerial imagery.',
+    href: '/projects/rooney-ranch-atlas',
+  },
+};
+
+type GalleryLike = { data: { group?: string; groupOrder: number } };
+
+/**
+ * The Maps page as a vertical stack of blocks: runs of ungrouped entries,
+ * and grouped sets. Block order follows the order entries arrive in, so
+ * `published()` stays the single sort authority; `groupOrder` only sorts
+ * within a group.
+ */
+export type GalleryBlock<T> =
+  | { kind: 'run'; entries: T[] }
+  | { kind: 'group'; id: string; meta: GalleryGroupMeta; entries: T[] };
+
+export function galleryBlocks<T extends GalleryLike>(
+  entries: T[],
+): GalleryBlock<T>[] {
+  const blocks: GalleryBlock<T>[] = [];
+  const groups = new Map<string, Extract<GalleryBlock<T>, { kind: 'group' }>>();
+
+  for (const entry of entries) {
+    const id = entry.data.group;
+
+    if (!id) {
+      const last = blocks.at(-1);
+      if (last?.kind === 'run') last.entries.push(entry);
+      else blocks.push({ kind: 'run', entries: [entry] });
+      continue;
+    }
+
+    let block = groups.get(id);
+    if (!block) {
+      const meta = galleryGroups[id];
+      /* Fail loudly at build time. A typo'd id would otherwise drop an
+         entry silently out of its group and back into the ungrouped flow,
+         which is exactly the "reads as unrelated maps" problem the group
+         exists to fix. */
+      if (!meta) {
+        throw new Error(
+          `Gallery group "${id}" is not defined in galleryGroups (src/lib/content.ts).`,
+        );
+      }
+      block = { kind: 'group', id, meta, entries: [] };
+      groups.set(id, block);
+      blocks.push(block);
+    }
+    block.entries.push(entry);
+  }
+
+  for (const block of blocks) {
+    if (block.kind === 'group') {
+      block.entries.sort((a, b) => a.data.groupOrder - b.data.groupOrder);
+    }
+  }
+
+  return blocks;
+}
+
 export type ClientFields = {
   client?: string;
   clientPermission: 'granted' | 'pending' | 'anonymize' | 'not-applicable';

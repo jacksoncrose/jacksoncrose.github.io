@@ -19,25 +19,56 @@
     showModal(), not from a library. Backdrop click closes (the dialog
     itself is the click target only when the click lands outside the
     figure). No dependencies.
+
+  GROUPED SETS added 2026-07-31, from Jackson: "It needs to be clear that
+  the poster and ranch division maps are all the same project/client."
+
+  The page is now a vertical stack of blocks rather than one flat grid.
+  A block is either a run of ungrouped entries (rendered exactly as
+  before) or a group: a heading, a note naming the client, a link to the
+  project page, and the group's own sub-grid. `galleryBlocks()` builds the
+  stack; `published()` remains the only sort authority for where blocks
+  land, with `groupOrder` sorting only within a group.
+
+  Card markup moved to components/MapCard.astro in the same change, since
+  it is now rendered from two places.
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
-import { Image, getImage } from 'astro:assets';
+import MapCard from '../components/MapCard.astro';
+import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import { published } from '../lib/content';
+import { published, galleryBlocks } from '../lib/content';
 
 const gallery = published(await getCollection('gallery'));
 
 /** Full-size derivative per entry for the lightbox / no-JS link target. */
-const entries = await Promise.all(
-	gallery.map(async (entry) => ({
-		entry,
-		full: await getImage({
-			src: entry.data.image,
-			width: entry.data.image.width,
-		}),
-	})),
+const fullById = new Map(
+	await Promise.all(
+		gallery.map(
+			async (entry) =>
+				[
+					entry.id,
+					await getImage({
+						src: entry.data.image,
+						width: entry.data.image.width,
+					}),
+				] as const,
+		),
+	),
 );
+
+const blocks = galleryBlocks(gallery);
+
+/*
+  Eager-load the first two images on the page. The flat grid could read
+  this off the map index; with blocks, position has to be tracked across
+  them, so it is resolved once here by entry id.
+*/
+const eagerIds = new Set(gallery.slice(0, 2).map((entry) => entry.id));
+
+const GRID =
+	'grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2';
 ---
 
 <Base title="Maps" description="Selected maps by Jackson Rose: national land ownership choropleths, custom-hillshade ranch maps, an overnight UAV orthomosaic of the MSU campus, and a biocultural region map spanning two countries.">
@@ -52,39 +83,64 @@ const entries = await Promise.all(
 		gallery.length === 0 ? (
 			<Todo note="Gallery inventory is unconfirmed: which maps, figures, and orthomosaic stills go here, and in what order. Images and real alt text needed for each." />
 		) : (
-			<ul class="mt-8 grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2">
-				{entries.map(({ entry, full }, i) => (
-					<li>
-						<figure>
-							<a
-								href={full.src}
-								data-lightbox
-								data-alt={entry.data.alt}
-								aria-label={`View larger: ${entry.data.title}`}
-								class="block cursor-zoom-in"
-							>
-								<Image
-									src={entry.data.image}
+			blocks.map((block, blockIndex) =>
+				block.kind === 'run' ? (
+					<ul class={`${blockIndex === 0 ? 'mt-8' : 'mt-16'} ${GRID}`}>
+						{block.entries.map((entry) => (
+							<li>
+								<MapCard
+									image={entry.data.image}
 									alt={entry.data.alt}
-									widths={[480, 800, 1200]}
-									sizes="(min-width: 640px) 21.5rem, calc(100vw - 3rem)"
-									loading={i < 2 ? 'eager' : 'lazy'}
-									class="w-full border border-line bg-white transition-colors hover:border-accent"
+									title={entry.data.title}
+									blurb={entry.data.blurb}
+									year={entry.data.year}
+									tools={entry.data.tools}
+									basemap={entry.data.basemap}
+									fullSrc={fullById.get(entry.id)!.src}
+									eager={eagerIds.has(entry.id)}
 								/>
-							</a>
-							<figcaption class="mt-3">
-								<h2 class="text-xl">{entry.data.title}</h2>
-								<p class="mt-1 text-sm text-muted">
-									{[entry.data.year?.toString(), entry.data.tools.join(', ')]
-										.filter(Boolean)
-										.join(' · ')}
-								</p>
-								<p class="mt-2 text-base">{entry.data.blurb}</p>
-							</figcaption>
-						</figure>
-					</li>
-				))}
-			</ul>
+							</li>
+						))}
+					</ul>
+				) : (
+					<section
+						class={
+							blockIndex === 0
+								? 'mt-8 border-t border-line pt-8'
+								: 'mt-16 border-t border-line pt-8'
+						}
+						aria-labelledby={`gallery-group-${block.id}`}
+					>
+						<h2 id={`gallery-group-${block.id}`} class="text-3xl">
+							{block.meta.title}
+						</h2>
+						<p class="mt-3 text-base">{block.meta.note}</p>
+						{block.meta.href && (
+							<p class="mt-2 text-sm">
+								<a href={block.meta.href}>Read the project</a>
+							</p>
+						)}
+						<ul class={`mt-8 ${GRID}`}>
+							{block.entries.map((entry) => (
+								<li>
+									<MapCard
+										image={entry.data.image}
+										alt={entry.data.alt}
+										title={entry.data.title}
+										blurb={entry.data.blurb}
+										year={entry.data.year}
+										tools={entry.data.tools}
+										basemap={entry.data.basemap}
+										fullSrc={fullById.get(entry.id)!.src}
+										eager={eagerIds.has(entry.id)}
+										headingLevel={3}
+									/>
+								</li>
+							))}
+						</ul>
+					</section>
+				),
+			)
 		)
 	}
 

@@ -1,0 +1,93 @@
+---
+/*
+  MapCard — one gallery thumbnail with its caption.
+
+  Extracted out of maps.astro 2026-07-31, when the Maps page gained grouped
+  sets. The card is now rendered from two places (ungrouped runs and a
+  group's sub-grid), and a second copy of this markup would drift from the
+  first the moment either was edited.
+
+  Nothing about the card's behaviour changed in the move: the thumbnail is
+  still a REAL <a> to the full-size derivative so the lightbox stays
+  progressive enhancement, and the alt text still comes from the entry.
+
+  Two things are parameterised because grouping needs them:
+
+  - `headingLevel`. Ungrouped cards title themselves with an h2 under the
+    page h1. Inside a group the group's own title takes the h2, so the
+    cards drop to h3. Getting this wrong skips a heading level, which the
+    accessibility audit checks for.
+  - `basemap`. Two sheets of the same division carry the SAME title
+    ("Rooney North" twice), which is the point — they are one map drawn two
+    ways. The basemap leads the meta line so the pair reads as a
+    comparison, and it disambiguates the link's accessible name, which
+    would otherwise be "View larger: Rooney North" on both.
+*/
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	image: ImageMetadata;
+	alt: string;
+	title: string;
+	blurb: string;
+	year?: number;
+	tools: string[];
+	basemap?: string;
+	/** Full-size derivative: the no-JS link target and the lightbox source. */
+	fullSrc: string;
+	eager?: boolean;
+	headingLevel?: 2 | 3;
+}
+
+const {
+	image,
+	alt,
+	title,
+	blurb,
+	year,
+	tools,
+	basemap,
+	fullSrc,
+	eager = false,
+	headingLevel = 2,
+} = Astro.props;
+
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+
+const meta = [
+	basemap && `${basemap} basemap`,
+	year?.toString(),
+	tools.join(', '),
+]
+	.filter(Boolean)
+	.join(' · ');
+
+const linkLabel = basemap
+	? `View larger: ${title}, ${basemap.toLowerCase()} basemap`
+	: `View larger: ${title}`;
+---
+
+<figure>
+	<a
+		href={fullSrc}
+		data-lightbox
+		data-alt={alt}
+		aria-label={linkLabel}
+		class="block cursor-zoom-in"
+	>
+		<Image
+			src={image}
+			alt={alt}
+			widths={[480, 800, 1200]}
+			sizes="(min-width: 640px) 21.5rem, calc(100vw - 3rem)"
+			loading={eager ? 'eager' : 'lazy'}
+			class="w-full border border-line bg-white transition-colors hover:border-accent"
+		/>
+	</a>
+	<figcaption class="mt-3">
+		<Heading class="text-xl">{title}</Heading>
+		<p class="mt-1 text-sm text-muted">{meta}</p>
+		<p class="mt-2 text-base">{blurb}</p>
+	</figcaption>
+</figure>

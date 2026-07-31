@@ -144,10 +144,20 @@ const mapsTeaser = mapsTeaserIds
 	  ---------- tools strip ----------
 	  Cards + links settled with Jackson 2026-07-30 (rendered mockups, his
 	  pick): tools render as linked cards with cover screenshots (the tools
-	  schema gained an optional cover the same day), Home only — the Tools
-	  index page keeps its editorial list. The whole card is clickable via a
-	  stretched link (after:absolute after:inset-0) so the accessible link
-	  text stays the tool title, not the entire card contents.
+	  schema gained an optional cover the same day). The whole card is
+	  clickable via a stretched link (after:absolute after:inset-0) so the
+	  accessible link text stays the tool title, not the entire card
+	  contents. The "Home only" half of that decision was superseded later
+	  the same day — the Tools index page now uses the same cards.
+
+	  HORIZONTAL, ONE COLUMN since 2026-07-30 (Jackson: "make the cards more
+	  square, less vertical"). They were a two-column grid with the image on
+	  top, which measured 350×437 — decidedly portrait, because these blurbs
+	  run long and all that text stacked under a 16:9 image. Image-left at
+	  full width gives ~720×180 and matches the project cards below, so the
+	  site now has one card shape instead of two. Alternatives built and
+	  rejected: letterboxing the cover to 5:2 got the card to 0.92 but cost
+	  Montana Hall its spire.
 	*/}
 	<section class="mt-16 border-t border-line pt-8">
 		<h2 class="text-3xl">Tools</h2>
@@ -155,20 +165,20 @@ const mapsTeaser = mapsTeaserIds
 			tools.length === 0 ? (
 				<Todo note="No published tools yet. Each needs a title, two-sentence description, and a confirmed live URL." />
 			) : (
-				<ul class="mt-6 grid gap-5 sm:grid-cols-2">
+				<ul class="mt-6 grid gap-5">
 					{tools.slice(0, 4).map((tool) => (
-						<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent">
+						<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
 							{tool.data.cover && (
 								<Image
 									src={tool.data.cover.src}
 									alt={tool.data.cover.alt}
 									widths={[400, 800]}
-									sizes="(min-width: 640px) 21rem, calc(100vw - 3rem)"
+									sizes="(min-width: 640px) 16rem, calc(100vw - 3rem)"
 									loading="lazy"
-									class="aspect-video w-full border-b border-line object-cover"
+									class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
 								/>
 							)}
-							<div class="p-4">
+							<div class="p-5">
 								<h3 class="text-xl">
 									{tool.data.url ? (
 										<a href={tool.data.url} class="after:absolute after:inset-0">
@@ -199,7 +209,15 @@ const mapsTeaser = mapsTeaserIds
 
 	  Small card image (AGENTS.md visual-hierarchy decision 2026-07-25):
 	  tier-1 cards carry policy visuals so the page's image count favors the
-	  primary work. Kept visibly smaller than the hero.
+	  primary work.
+
+	  Image column widened 13rem → 16rem on 2026-07-30. The image has no
+	  fixed aspect and stretches to card height, so at 13rem a landscape
+	  photograph was being cropped to roughly 208×260 — a portrait slice of
+	  a horizontal picture, which is what made the White Sulphur Springs
+	  aerial look wrong here. At 16rem the crop lands near square and the
+	  photograph survives it. If a future card's text runs much longer,
+	  check this crop again rather than assuming it still holds.
 	*/}
 	<section class="mt-16 border-t border-line pt-8">
 		<h2 class="text-3xl">Selected projects</h2>
@@ -231,9 +249,9 @@ const mapsTeaser = mapsTeaserIds
 										src={project.data.cover.src}
 										alt={project.data.cover.alt}
 										widths={[320, 640]}
-										sizes="(min-width: 640px) 13rem, calc(100vw - 3rem)"
+										sizes="(min-width: 640px) 16rem, calc(100vw - 3rem)"
 										loading="lazy"
-										class="w-full border-b border-line object-cover sm:w-52 sm:shrink-0 sm:border-r sm:border-b-0"
+										class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
 									/>
 								)}
 								<div class="p-5">
