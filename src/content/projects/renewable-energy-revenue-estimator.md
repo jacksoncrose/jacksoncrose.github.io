@@ -1,72 +1,132 @@
 ---
-# Tier-1 card entry, created 2026-07-29 with Jackson. Fills the first
-# selected-projects slot on Home (id must stay
-# "renewable-energy-revenue-estimator" — index.astro selects by id).
+# Card-only entry created 2026-07-29; promoted to a full case study
+# 2026-07-31 after Jackson supplied the methods report
+# (Methods_Report_Master.docx, revised July 2026, prepared under
+# Resources and Communities Research and Consulting, LLC).
 #
-# SETTLED 2026-07-29 by Jackson (tappable questions): year 2026; card-only
-# for now (hasPage false — the full case-study page comes later from his
-# write-up); NO cover image yet (the hero directly above the Home card
-# already shows this interface; a distinct capture becomes the card image
-# later); publish now. Role wording recommended by the session and
-# accepted: describes the work, asserts no unconfirmed affiliation
-# (BNFSI precedent).
+# CLIENT NAMING GRANTED 2026-07-31, both parties, his call. The
+# relationship has three layers: he works through RCRC, contracts to the
+# Center for American Progress, and CAP's client is the Arizona
+# Governor's Office of Resiliency. `client` carries CAP because they are
+# his direct client; the prose names the Arizona office as the end user.
+# Do NOT write copy implying he was engaged directly by the State.
 #
-# STANDING DECISIONS (AGENTS.md / open question 9): the client is NOT
-# named. clientPermission stays "pending" with no client field, so the
-# naming gate prints nothing. When naming permission lands, add client
-# here.
+# NAME CHECK: he wrote "AZ Office of Government Resiliency"; the body's
+# public name is the Arizona Governor's Office of Resiliency
+# (resilient.az.gov), verified 2026-07-31.
 #
-# LINKING REVERSED 2026-07-30 by Jackson: "link it but we'll replace with
-# the final when it is live." He supplied the URL himself. This overturns
-# the earlier "NOT linked while the only URL is a draft address" rule for
-# this entry only — the draft host name and the tool's own screening-only
-# caveat were both put to him first, and he chose to link anyway.
-#
-# THE URL BELOW IS EXPLICITLY TEMPORARY. When the client's final public
-# address exists, replace it here; nothing else needs to change. Because
-# this entry has hasPage: false, the link is what the card points at, so
-# a dead URL here means a dead card — check it before any future push if
-# time has passed.
-#
-# COVER ADDED 2026-07-30. The original note below said no cover was
-# needed because the Home hero directly above this card already showed
-# the interface. That hero was REMOVED the same day (Jackson's call), so
-# the estimator had no visual anywhere on the site and this card was the
-# only one without an image.
-#
-# The cover is the map panel cropped out of the full-interface capture,
-# not a new screenshot: Jackson picked it ("B — map panel") from three
-# options rendered at actual card size. The full interface and the
-# results panel were both legible at hero size but turn to mush at the
-# 208 px the Home card gives an image; the Arizona choropleth survives
-# the shrink and reads as his work at a glance.
-#
-# Cropped from the 4800 px ORIGINAL in _staging, not from the web
-# derivative, then run through npm run images like any other asset. A
-# fresh capture from the live tool would still be better and can replace
-# this by dropping it into _staging under the same filename and
-# re-running the pipeline. Cloud sessions cannot take that capture: the
-# container's browser cannot reach the netlify host (WebFetch can read
-# the page, Playwright gets ERR_TUNNEL_CONNECTION_FAILED), so it needs
-# Jackson's own browser and his EDGE DevTools recipe.
-title: "Renewable Energy Revenue Estimator"
-summary: "An interactive estimator of the public revenue a utility-scale renewable energy project will generate: pick a county, size the project, and see estimated revenue by taxing authority over a 25-year term. Built for a national nonprofit."
+# Every figure below comes from the methods report. Nothing is inferred.
+# The URL remains the temporary netlify draft; replace it when the final
+# public version ships.
+title: "Arizona Renewable Energy Revenue Estimator"
+summary: "A statewide spatial and fiscal model estimating what a utility-scale energy project would pay in local taxes in Arizona, and which taxing jurisdictions receive it, over a 25-year horizon."
+client: "Center for American Progress"
+clientPermission: "granted"
+role: "Design, analysis, and development"
 year: 2026
 tier: 1
-role: "Design, analysis, and development"
-clientPermission: "pending"
-hasPage: false
+order: 0
+# TOOLS: every entry here is named in the methods report except the
+# build-script language, which the report leaves unstated. Python is NOT
+# listed for that reason — same treatment as the unconfirmed ArcGIS Pro
+# credit on Rooney. Ask him before adding it.
+tools: ["ArcGIS Pro", "Excel", "JavaScript", "Leaflet"]
+cover:
+  src: "../../assets/images/az-renewable-energy-estimator-map.png"
+  # Alt text unchanged from the card-only entry: it describes the actual
+  # image, written by someone looking at it. Do not swap it for a generic
+  # description of what the tool does.
+  alt: "Map panel of the renewable energy revenue estimator: Arizona counties shaded from pale to deep orange by 25-year public revenue potential for a wind project, with a pin dropped in Coconino County."
 links:
   - label: "Open the estimator"
     url: "https://az-re-revenue-full-draft.netlify.app/"
-cover:
-  src: "../../assets/images/az-renewable-energy-estimator-map.png"
-  alt: "Map panel of the renewable energy revenue estimator: Arizona counties shaded from pale to deep orange by 25-year public revenue potential for a wind project, with a pin dropped in Coconino County."
-order: 0
+hasPage: true
 draft: false
 ---
 
-<!-- Card-only entry: no page is generated while hasPage is false, so this
-body is intentionally empty. The full case study (problem, approach, what
-was delivered, outcome) is written with Jackson when the tool's naming and
-URL questions settle. -->
+## Problem
+
+When a utility-scale energy project is proposed in Arizona, the first
+question local officials ask is what it would actually pay, and to whom.
+That answer was hard to get.
+
+Property tax on generation equipment runs through a valuation statute with
+its own assessment factor and depreciation schedule. The resulting money
+then splits across a county, a school tax unit, a community college
+district, and usually a fire district, none of whose boundaries line up
+with each other or with the project footprint. If the site sits on federal
+or state trust land, property tax does not apply at all and different
+payments take its place. Getting from "a 200 MW solar project here" to
+"this much to this school district over 25 years" meant assembling data
+that had never been in one place.
+
+The Center for American Progress commissioned the work for the Arizona
+Governor's Office of Resiliency.
+
+## Approach
+
+The work had a spatial half and a fiscal half, and the point was to make
+them answer to each other.
+
+On the spatial side, every taxing jurisdiction in Arizona was standardized
+into one consistent statewide layer: counties and school districts from
+Census TIGER/Line, fire service areas and other districts from state and
+agency GIS services, incorporated places filtered to those that actually
+levy. Overlapping school boundaries were intersected into composite tax
+units so that any point resolves to exactly one unit. Land ownership was
+dissolved into four non-overlapping taxability buckets, with priority given
+to the non-taxable categories where source polygons disagree, because
+whether ground is private, federal, state trust, or tribal decides whether
+it is taxed at all.
+
+On the fiscal side, Arizona Department of Revenue primary and secondary
+levy tables were combined into a single levy dataset and converted to mill
+rates against net assessed value. School levies took the most work, since
+they are the largest local component: per-district secondary levies were
+built up and reconciled to state totals for all fifteen counties, joint
+technical education district levies were resolved as a residual against
+published totals, and one district's entry was corrected where it had been
+carrying only its high-school component. Equipment valuation follows
+A.R.S. § 42-14155, which sets full cash value at twenty percent of
+depreciated cost, with straight-line depreciation over the useful life the
+Department adopts for each technology and a floor at ten percent. Nuclear
+is valued under a different statute and is handled separately.
+
+Two things get disclosed rather than smoothed over. The twenty percent
+valuation treatment is scheduled to sunset at the end of 2040; the model
+assumes it is extended, as it has been before, and says so, because if it
+lapses as written the assessed values in later years would be roughly five
+times what the tool reports. And several revenue lines are gross rather
+than net, since state trust receipts and school levies both interact with
+state equalization aid.
+
+## What was delivered
+
+An Excel calculator covering six technologies, which remains the
+authoritative source for every rate and cost assumption, and an interactive
+map built from it. The map is a single self-contained HTML file with all
+data and mapping libraries embedded, so it runs with no server and no
+internet connection.
+
+The map does something the calculator cannot. Where the calculator works at
+the county level, the map resolves the specific school tax unit and fire
+district at a clicked point or across a drawn project footprint and applies
+that jurisdiction's actual rate. It computes the federal right-of-way
+capacity fee from the federal land share it resolves spatially, rather than
+from a manual input, and reports a 25-year revenue stream broken out by
+taxing authority, with the first-year figure expressed as a share of that
+county's budget.
+
+The map's revenue math is a re-implementation of the calculator's formulas,
+and the two were validated against each other across 672 input scenarios.
+They match to the cent.
+
+A methods report documents the data sources, the reconciliation decisions,
+the statutory basis for each valuation method, and the limitations.
+
+## Outcome
+
+The tool is delivered and in review. A build covering solar, wind, and
+storage has been circulated to partners for feedback, while the full build
+extends to geothermal and nuclear. A final public version is expected to
+replace the draft linked here.
