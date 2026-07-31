@@ -16,6 +16,14 @@ hasPage: true
 cover:
   src: "../../assets/images/federal-land-share-2024.png"
   alt: "County choropleth of the United States showing federal land as a share of county land area in sequential greens: near-solid dark green across Nevada, Utah, Idaho, and the Intermountain West, pale scattered greens east of the Rockies, with Alaska and Hawaii inset."
+  # fit: contain (2026-07-31). This cover is a self-contained figure with a
+  # title, a legend, and the source line that names Headwaters Economics.
+  # The card box is 256x286, taller than the figure is wide, so object-cover
+  # sliced the title to "...al land" and cut the caption mid-sentence. The
+  # figure's own background is white and so is the card, so containing it
+  # letterboxes invisibly. The project page is unaffected: it renders the
+  # cover at natural aspect, not cropped.
+  fit: "contain"
 order: 1
 draft: false
 ---

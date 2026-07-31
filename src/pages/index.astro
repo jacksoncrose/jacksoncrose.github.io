@@ -172,8 +172,8 @@ const mapsTeaser = mapsTeaserIds
 								<Image
 									src={tool.data.cover.src}
 									alt={tool.data.cover.alt}
-									widths={[400, 800]}
-									sizes="(min-width: 640px) 16rem, calc(100vw - 3rem)"
+									widths={[320, 640, 1024]}
+									sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
 									loading="lazy"
 									class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
 								/>
@@ -248,10 +248,14 @@ const mapsTeaser = mapsTeaserIds
 									<Image
 										src={project.data.cover.src}
 										alt={project.data.cover.alt}
-										widths={[320, 640]}
-										sizes="(min-width: 640px) 16rem, calc(100vw - 3rem)"
+										widths={[320, 640, 1024]}
+										sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
 										loading="lazy"
-										class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
+										class={`w-full border-b border-line sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0 ${
+											project.data.cover.fit === 'contain'
+												? 'object-contain'
+												: 'object-cover'
+										}`}
 									/>
 								)}
 								<div class="p-5">
@@ -296,7 +300,7 @@ const mapsTeaser = mapsTeaserIds
 							src={entry.data.image}
 							alt={entry.data.alt}
 							widths={[240, 480, 720]}
-							sizes="(min-width: 48rem) 14rem, 33vw"
+							sizes="(min-width: 48rem) 20rem, 33vw"
 							loading="lazy"
 							class="aspect-[4/3] w-full border border-line bg-white object-cover"
 						/>

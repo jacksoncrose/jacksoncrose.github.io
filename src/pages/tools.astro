@@ -51,8 +51,8 @@ const tools = published(await getCollection('tools'));
 							<Image
 								src={tool.data.cover.src}
 								alt={tool.data.cover.alt}
-								widths={[400, 800]}
-								sizes="(min-width: 640px) 16rem, calc(100vw - 3rem)"
+								widths={[320, 640, 1024]}
+								sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
 								loading="lazy"
 								class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
 							/>

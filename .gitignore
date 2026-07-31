@@ -31,5 +31,10 @@ _staging/
 # Agent working files. The project brief (AGENTS.md) holds internal facts —
 # contact details, facility finances, client-permission notes — and stays
 # on this machine only. CLAUDE.md is its pointer and goes with it.
+# WORKFLOW.md is Jackson's own reference for the git, image, and deploy
+# machinery. It contains no secrets, but it describes what the private
+# files hold, so it stays local rather than advertising them in a public
+# repo. Move it out of this list if you ever want it published.
 AGENTS.md
 CLAUDE.md
+WORKFLOW.md

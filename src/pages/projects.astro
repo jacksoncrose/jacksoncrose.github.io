@@ -5,9 +5,20 @@
 
   Client names pass through clientLabel(), the single gate that refuses to
   print a name whose permission is not confirmed.
+
+  IMAGES ADDED 2026-07-31. This page was the only content page on the site
+  with no imagery: nine entries, 2,600 px of unbroken prose, on the first nav
+  item and the page the brief says a skimming reader is most likely to open.
+  Every entry already had a cover. The card is the SAME shape as the Home
+  tools strip, Home selected projects, and the Tools page — see the
+  one-card-shape rule in AGENTS.md. Change it here and change it there.
+
+  cover.fit is honoured, so a self-contained figure (the land ownership map)
+  is contained rather than cropped through its own title and caption.
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { published, clientLabel, cardTarget } from '../lib/content';
 
@@ -26,6 +37,9 @@ const tiers = [
 	{ tier: 2 as const, heading: 'Applied research' },
 	{ tier: 3 as const, heading: 'Other work' },
 ];
+
+/* Every tier shows its cover. */
+const showsImage = (_tier: number) => true;
 ---
 
 <Base title="Projects" description="Case studies of Jackson Rose's work: a renewable energy revenue estimator, a national land ownership analysis, a community benefits agreement negotiation, and mapping work across Montana.">
@@ -49,37 +63,56 @@ const tiers = [
 			return (
 				<section class="mt-12 border-t border-line pt-8">
 					<h2 class="text-3xl">{heading}</h2>
-					<ul class="mt-6 space-y-8">
+					<ul class="mt-6 grid list-none gap-5 p-0">
 						{inTier.map((project) => {
 							const client = clientLabel(project.data);
 							/* Card-only entries link to their first link when they have
 							   one (2026-07-30) — see cardTarget in lib/content. */
 							const target = cardTarget(project.data, project.id);
+							const withImage = showsImage(tier) && project.data.cover;
 							return (
-								<li>
-									<h3 class="text-xl">
-										{target ? (
-											<a href={target.href}>{project.data.title}</a>
-										) : (
-											project.data.title
-										)}
-									</h3>
-									<p class="mt-1 text-sm text-muted">
-										{[
-											project.data.year?.toString(),
-											project.data.role,
-											client,
-											target?.external ? 'Live tool' : null,
-										]
-											.filter(Boolean)
-											.join(' · ')}
-									</p>
-									<p class="mt-2 text-base">{project.data.summary}</p>
-									{project.data.tools && (
-										<p class="mt-2 text-sm text-muted">
-											{project.data.tools.join(', ')}
-										</p>
+								<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
+									{withImage && project.data.cover && (
+										<Image
+											src={project.data.cover.src}
+											alt={project.data.cover.alt}
+											widths={[320, 640, 1024]}
+											sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
+											loading="lazy"
+											class={`w-full border-b border-line sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0 ${
+												project.data.cover.fit === 'contain'
+													? 'object-contain'
+													: 'object-cover'
+											}`}
+										/>
 									)}
+									<div class="p-5">
+										<h3 class="text-xl">
+											{target ? (
+												<a href={target.href} class="after:absolute after:inset-0">
+													{project.data.title}
+												</a>
+											) : (
+												project.data.title
+											)}
+										</h3>
+										<p class="mt-1 text-sm text-muted">
+											{[
+												project.data.year?.toString(),
+												project.data.role,
+												client,
+												target?.external ? 'Live tool' : null,
+											]
+												.filter(Boolean)
+												.join(' · ')}
+										</p>
+										<p class="mt-2 text-base">{project.data.summary}</p>
+										{project.data.tools && (
+											<p class="mt-2 text-sm text-muted">
+												{project.data.tools.join(', ')}
+											</p>
+										)}
+									</div>
 								</li>
 							);
 						})}

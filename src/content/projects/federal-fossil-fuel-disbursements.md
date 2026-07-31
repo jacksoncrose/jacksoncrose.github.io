@@ -28,6 +28,16 @@ cover:
   # list — NOT reproduced from the report PDF. d3 + us-atlas, site palette,
   # CVD-validated green/blue pair.
   alt: "Map of the United States highlighting the 14 states that receive federal fossil fuel disbursements: ten onshore recipients in the West and Alaska, and four offshore recipients along the Gulf of Mexico."
+  # fit: contain (2026-07-31). Jackson: "the federal mineral revenues map is
+  # cut off on the edges." He was right: a landscape US map at 1.509 in a
+  # 256x228 card box loses 13% off each side to object-cover, which took
+  # California, Alaska and Maine, and clipped the legend. Same fix as the
+  # land ownership figure. The figure's ground was recoloured from the paper
+  # beige #F5F1E8 to #FFFFFF at the same time so the letterboxing is
+  # invisible against the white card; the no-data state fill is a different
+  # value (#E7E1D3) and was untouched. If this d3 figure is ever
+  # regenerated, keep the white ground.
+  fit: "contain"
 draft: false
 ---
 

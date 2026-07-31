@@ -76,6 +76,23 @@ const projects = defineCollection({
           photoCredit: z
             .object({ name: z.string(), url: z.string().url().optional() })
             .optional(),
+          /*
+            How the CARD should fit this cover. Added 2026-07-31.
+
+            Cards crop with object-cover, which is right for a photograph or
+            a screenshot: it fills the frame and losing the edges costs
+            nothing. It is wrong for a self-contained FIGURE that carries its
+            own title, legend, and caption, because a card box taller than
+            the figure is wide slices straight through that text. The land
+            ownership map is the case: at 256x286 the title read "...al land"
+            and the source line was cut mid-sentence.
+
+            "contain" shows the whole figure instead. The letterboxing is
+            invisible when the figure's own background is white, because the
+            card is white too. Only set this for figures; a photograph set to
+            contain floats in a white band and looks broken.
+          */
+          fit: z.enum(['cover', 'contain']).default('cover'),
         })
         .optional(),
       /** Manual ordering within a tier (lower first). */
