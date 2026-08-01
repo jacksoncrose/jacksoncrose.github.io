@@ -9,7 +9,12 @@
   cv.json or hard-code facts into this page, or the web and document
   versions will drift. The export script's header comment lists what is
   deliberately excluded on the web (phone, working notes, the projects
-  list, service detail pending the client-naming question).
+  list, and service detail on any entry flagged webOmitDetail).
+
+  The service-detail exclusion used to name MCSC specifically, held back
+  while naming Sandfire Resources America on the public site was an open
+  question. Jackson closed that on 2026-07-31 — name it everywhere — so the
+  MCSC detail now renders here and no entry is flagged.
 */
 import Base from '../layouts/Base.astro';
 import cv from '../data/cv.json';
@@ -64,6 +69,31 @@ import cv from '../data/cv.json';
 		</ul>
 	</section>
 
+	{/*
+		Grants added 2026-07-31, his call. Placed after Education and before
+		Skills, matching the docx CV's order, because that is where an
+		academic reader looks for it and three of the four awards are active.
+		No dollar amounts anywhere, deliberately — see site-export.js.
+	*/}
+	<section class="mt-12 border-t border-line pt-8">
+		<h2 class="text-3xl">Grants and Funded Research</h2>
+		<ul class="mt-5 space-y-6">
+			{
+				cv.grants.map((g) => (
+					<li>
+						<p class="text-sm text-muted">{g.dates}</p>
+						<p class="mt-1 text-base font-semibold">{g.sponsor}</p>
+						<p class="text-base">{g.title}</p>
+						<p class="text-base text-muted">
+							{g.role} · Principal Investigator: {g.pi}
+						</p>
+						{g.detail && <p class="mt-1 text-base">{g.detail}</p>}
+					</li>
+				))
+			}
+		</ul>
+	</section>
+
 	<section class="mt-12 border-t border-line pt-8">
 		<h2 class="text-3xl">Technical Skills and Certifications</h2>
 		<dl class="mt-5 space-y-4">
@@ -106,8 +136,29 @@ import cv from '../data/cv.json';
 				cv.presentations.map((t) => (
 					<li>
 						<p class="text-sm text-muted">{t.date}</p>
-						<p class="mt-1 text-base">{t.venue}</p>
-						<p class="text-base italic">{t.title}</p>
+						<p class="mt-1 text-base">
+							{t.role ?? 'Presenter'} · {t.venue}
+						</p>
+						{/*
+							Where a session title exists it carries the italics and the
+							workshop title becomes context beneath it. The session is the
+							specific thing he did; the workshop is where it happened.
+						*/}
+						{t.session ? (
+							<>
+								<p class="text-base italic">{t.session}</p>
+								<p class="text-base text-muted">Workshop: {t.title}</p>
+							</>
+						) : (
+							<p class="text-base italic">{t.title}</p>
+						)}
+						{t.url && (
+							<p class="text-base">
+								<a href={t.url} aria-label={`Published proceedings: ${t.title}`}>
+									Published proceedings
+								</a>
+							</p>
+						)}
 					</li>
 				))
 			}

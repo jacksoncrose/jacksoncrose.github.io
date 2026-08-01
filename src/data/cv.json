@@ -27,18 +27,19 @@
       "dates": "June 2021 – January 2023",
       "bullets": [
         "Directed a grassroots 501(c)(3) working in conservation and community development.",
-        "Led community-side negotiations with an international mining company toward a community benefits agreement for the Black Butte Copper Project, covering impact mitigation and long-term community investment.",
+        "Led community-side negotiations with Sandfire Resources America toward a community benefits agreement for the Black Butte Copper Project, covering impact mitigation and long-term community investment.",
         "Continued to help lead the negotiations as a board member after the executive director term. In March 2026 the parties announced a memorandum of understanding establishing a framework for a binding agreement, covering a community investment fund, a revolving loan fund, educational programming, and environmental stewardship."
       ]
     },
     {
-      "org": "Salmon Valley Stewardship & Jervois Mining",
+      "org": "Salmon Valley Stewardship",
       "place": "Salmon, ID",
       "title": "Consultant",
       "dates": "2022",
       "bullets": [
-        "Led a project exploring development of a community benefits agreement tied to Jervois' Idaho Cobalt Operations.",
-        "Researched and advised on agreement structure, mechanisms, and initiatives toward a final agreement."
+        "Led the organization's exploration of a community benefits agreement tied to Jervois Mining's Idaho Cobalt Operations, working the community side of the table.",
+        "Researched and advised on agreement structure, mechanisms, and initiatives toward a final agreement.",
+        "No agreement was reached. The developer suspended final construction in March 2023, after the engagement had ended."
       ]
     }
   ],
@@ -56,18 +57,58 @@
       "degree": "Bachelor of Science in Earth Sciences, Geography Major"
     }
   ],
+  "grants": [
+    {
+      "sponsor": "U.S. Fish and Wildlife Service",
+      "title": "River Conditions Tool Geographic Expansion for On-the-Ground Conservation Support",
+      "dates": "July 2026 – June 2028",
+      "role": "Co-Principal Investigator",
+      "pi": "Eric A. Sproles"
+    },
+    {
+      "sponsor": "Mississippi State University",
+      "title": "ASSUREd SAFE – Montana State 2026",
+      "dates": "April – August 2026",
+      "role": "Co-Principal Investigator",
+      "pi": "Eric A. Sproles",
+      "detail": "Subaward under ASSURE, the Federal Aviation Administration Center of Excellence for Unmanned Aircraft Systems."
+    },
+    {
+      "sponsor": "U.S. Department of Energy",
+      "title": "Regional Scale Collaboration to Facilitate a Domestic Critical Minerals Future: Carbon Ore, Rare Earth, and Critical Minerals (CORE-CM) Initiative",
+      "dates": "April 2025 – March 2028",
+      "role": "Co-Principal Investigator",
+      "pi": "Madison L. Myers, with Andrew K. Laskowski and Devon A. Orme"
+    },
+    {
+      "sponsor": "National Science Foundation",
+      "title": "Supplement to ART: Mining the Rich Vein of Research in Montana (NSF #2331325)",
+      "dates": "February 2024 – January 2028",
+      "role": "Co-Principal Investigator",
+      "pi": "D. Juliano",
+      "detail": "Wrote the supplemental funding proposal, a program of workshops, peer-to-peer learning, training and an open-source resource database supporting community benefits agreements around critical minerals and new mining projects."
+    }
+  ],
   "skills": [
     {
       "label": "Analysis",
-      "known": "ArcGIS Pro, Python"
+      "known": "ArcGIS Pro, ArcGIS Spatial Analyst, Python (ArcPy, GeoPandas, NumPy, laspy)"
     },
     {
       "label": "Data collection",
-      "known": "UAS survey, airborne and terrestrial LiDAR, photogrammetry"
+      "known": "UAS survey, airborne and terrestrial LiDAR, photogrammetry. Vision Aerial Switchblade with Sony a6000"
+    },
+    {
+      "label": "Processing",
+      "known": "Agisoft Metashape, ArcGIS Pro raster function chains, Python point-cloud processing (laspy, NumPy)"
+    },
+    {
+      "label": "Development",
+      "known": "JavaScript (Three.js, Leaflet, d3), self-contained single-file web applications, Excel model development"
     },
     {
       "label": "Data management",
-      "known": "Geospatial data management and archiving"
+      "known": "Geodatabase design and consolidation, hosted feature services, data dictionaries and metadata transfer to client ownership, imagery cataloging and archiving"
     },
     {
       "label": "Certifications",
@@ -105,9 +146,12 @@
   ],
   "presentations": [
     {
-      "date": "May 2024",
-      "venue": "National Academies of Sciences, Engineering & Medicine, Washington, D.C.",
-      "title": "Leveraging Community Benefit Frameworks: Empowering Communities to Benefit from Federally Funded Energy Projects"
+      "date": "May 16–17, 2024",
+      "venue": "National Academies of Sciences, Engineering, and Medicine, Washington, D.C.",
+      "title": "Leveraging Community Benefit Frameworks: Empowering Communities to Benefit from Federally Funded Energy Projects",
+      "role": "Invited panelist",
+      "session": "Lessons Learned from Decades of Community Benefits Negotiation",
+      "url": "https://doi.org/10.17226/27996"
     },
     {
       "date": "December 2023",
@@ -125,7 +169,8 @@
     {
       "org": "Meagher County Stewardship Council",
       "role": "Board Member",
-      "dates": "July 2023 – Present"
+      "dates": "July 2023 – Present",
+      "detail": "Joined the board after the executive director term and has continued helping lead community benefits agreement negotiations with Sandfire Resources America through the March 2026 framework announcement."
     }
   ]
 }
