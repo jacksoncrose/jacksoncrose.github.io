@@ -14,6 +14,9 @@ alt: "Division map of Rooney North over aerial imagery: the cased orange ranch b
 group: "rooney-ranch-atlas"
 groupOrder: 2
 basemap: "Imagery"
-order: 1
+# Paired 2026-08-01: the two basemaps of one division now render as a
+# single wipe comparison rather than as two cards side by side.
+pair: "rooney-north"
+order: 2
 draft: false
 ---

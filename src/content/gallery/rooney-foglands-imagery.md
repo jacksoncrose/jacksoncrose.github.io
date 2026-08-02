@@ -12,6 +12,9 @@ alt: "Division map of Foglands over aerial imagery: dark conifer stands filling 
 group: "rooney-ranch-atlas"
 groupOrder: 4
 basemap: "Imagery"
-order: 1
+# Paired 2026-08-01: the two basemaps of one division now render as a
+# single wipe comparison rather than as two cards side by side.
+pair: "rooney-foglands"
+order: 2
 draft: false
 ---

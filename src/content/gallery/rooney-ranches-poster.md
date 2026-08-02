@@ -19,6 +19,6 @@ image: "../../assets/images/rooney-ranches-poster.jpg"
 alt: "Wall-scale poster of the four Rooney Angus divisions outlined in orange over satellite imagery of central Montana, pasture boundaries and ranch roads within each, and a headquarters star on Rooney South."
 group: "rooney-ranch-atlas"
 groupOrder: 5
-order: 1
+order: 2
 draft: false
 ---

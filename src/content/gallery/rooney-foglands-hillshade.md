@@ -12,6 +12,9 @@ alt: "Division map of Foglands on a grayscale hillshade: white and hatched parce
 group: "rooney-ranch-atlas"
 groupOrder: 3
 basemap: "Hillshade"
-order: 1
+# Paired 2026-08-01: the two basemaps of one division now render as a
+# single wipe comparison rather than as two cards side by side.
+pair: "rooney-foglands"
+order: 2
 draft: false
 ---
