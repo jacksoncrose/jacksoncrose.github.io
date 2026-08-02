@@ -29,6 +29,7 @@
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
 import { Image } from 'astro:assets';
+import CardCover from '../components/CardCover.astro';
 import { getCollection } from 'astro:content';
 import { published, clientLabel, cardTarget } from '../lib/content';
 import { site } from '../site';
@@ -169,14 +170,7 @@ const mapsTeaser = mapsTeaserIds
 					{tools.slice(0, 4).map((tool) => (
 						<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
 							{tool.data.cover && (
-								<Image
-									src={tool.data.cover.src}
-									alt={tool.data.cover.alt}
-									widths={[320, 640, 1024]}
-									sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
-									loading="lazy"
-									class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
-								/>
+								<CardCover src={tool.data.cover.src} alt={tool.data.cover.alt} />
 							)}
 							<div class="p-5">
 								<h3 class="text-xl">
@@ -189,6 +183,15 @@ const mapsTeaser = mapsTeaserIds
 									)}
 								</h3>
 								<p class="mt-1 text-sm text-muted">{tool.data.blurb}</p>
+								{/* Lifted above the card's stretched link, same as on the
+								    Tools page. */}
+								{tool.data.caseStudy && (
+									<p class="relative z-10 mt-2 text-sm">
+										<a href={`/projects/${tool.data.caseStudy}`}>
+											Read the case study
+										</a>
+									</p>
+								)}
 							</div>
 						</li>
 					))}
@@ -245,17 +248,10 @@ const mapsTeaser = mapsTeaserIds
 						return (
 							<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
 								{project.data.cover && (
-									<Image
+									<CardCover
 										src={project.data.cover.src}
 										alt={project.data.cover.alt}
-										widths={[320, 640, 1024]}
-										sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
-										loading="lazy"
-										class={`w-full border-b border-line sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0 ${
-											project.data.cover.fit === 'contain'
-												? 'object-contain'
-												: 'object-cover'
-										}`}
+										fit={project.data.cover.fit}
 									/>
 								)}
 								<div class="p-5">

@@ -48,6 +48,22 @@ const projects = defineCollection({
         .default('pending'),
       /** true = gets its own project page; false = card on the index only. */
       hasPage: z.boolean().default(false),
+      /**
+       * Whether this entry takes a card on the Projects INDEX. Added
+       * 2026-08-01, from Jackson: "Tools (MT Hall and FFD) are showing up
+       * in projects. That's redundant."
+       *
+       * `hasPage` and `listed` are independent, and both are needed.
+       * Montana Hall keeps its case study at /projects/montana-hall but no
+       * longer takes an index slot, because the same work already has a
+       * card on Tools. Its Tools entry carries `caseStudy`, which is what
+       * keeps that page reachable — an unlisted page with no inbound link
+       * is an orphan, and that is the failure mode to watch for here.
+       *
+       * THIS IS NOT `draft`. A draft is unfinished and unpublishable.
+       * These entries are finished and deliberately indexed elsewhere.
+       */
+      listed: z.boolean().default(true),
       /** Live tool / webinar links. Only confirmed URLs — omit otherwise. */
       links: z
         .array(z.object({ label: z.string(), url: z.string().url() }))
@@ -112,6 +128,18 @@ const tools = defineCollection({
       /** Live URL. Omit until confirmed — the Tools page shows a TODO state. */
       url: z.string().url().optional(),
       /**
+       * Project id of a case study for this tool, e.g. "montana-hall".
+       * Added 2026-08-01 with the de-duplication decision: once the Tools
+       * card became the only index entry for tool-backed work, it has to
+       * carry the route to the write-up, or that page is unreachable from
+       * every index on the site.
+       *
+       * Stored as the id, not a URL, so it cannot drift from the route,
+       * which is always /projects/<id>. The referenced project must have
+       * `hasPage: true`; `listed` may be either.
+       */
+      caseStudy: z.string().optional(),
+      /**
        * Card screenshot for the Home tools strip (added 2026-07-30, Jackson's
        * cards decision). Optional — a tool without one renders a text-only
        * card. Same enforced-alt pattern as project covers.
@@ -168,6 +196,31 @@ const gallery = defineCollection({
        * near-duplicate maps with the same name.
        */
       basemap: z.string().optional(),
+      /**
+       * Comparison pairing, added 2026-08-01, from Jackson: "a swipe
+       * gallery for Rooney Ranch and a swipe tool to compare closure
+       * scenarios for schools."
+       *
+       * EXACTLY TWO entries share a `pair` id, and both must sit in the
+       * same block — same `group`, or both ungrouped. They render as one
+       * wipe comparison instead of two cards, and `groupOrder` decides
+       * which is the base image and which is the overlay the handle
+       * reveals.
+       *
+       * One member, three members, or a pair split across two groups all
+       * fail the build on purpose. A half-built comparison would show one
+       * map on both sides of the handle, which reads as working.
+       *
+       * The two images must be REGISTERED — same extent, same size, same
+       * layout — or the static furniture jumps as the handle moves.
+       */
+      pair: z.string().optional(),
+      /**
+       * Label for this entry's side of a comparison. Falls back to
+       * `basemap`, which already carries "Hillshade" / "Imagery" on the
+       * Rooney sheets, so only a pair that is not a basemap swap needs it.
+       */
+      pairLabel: z.string().optional(),
       order: z.number().default(0),
       draft: z.boolean().default(false),
     }),

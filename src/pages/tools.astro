@@ -19,7 +19,7 @@
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
-import { Image } from 'astro:assets';
+import CardCover from '../components/CardCover.astro';
 import { getCollection } from 'astro:content';
 import { published } from '../lib/content';
 
@@ -48,14 +48,7 @@ const tools = published(await getCollection('tools'));
 				{tools.map((tool) => (
 					<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
 						{tool.data.cover && (
-							<Image
-								src={tool.data.cover.src}
-								alt={tool.data.cover.alt}
-								widths={[320, 640, 1024]}
-								sizes="(min-width: 640px) 32rem, calc(100vw - 3rem)"
-								loading="lazy"
-								class="w-full border-b border-line object-cover sm:w-64 sm:shrink-0 sm:border-r sm:border-b-0"
-							/>
+							<CardCover src={tool.data.cover.src} alt={tool.data.cover.alt} />
 						)}
 						<div class="p-5">
 							<h2 class="text-xl">
@@ -68,6 +61,18 @@ const tools = published(await getCollection('tools'));
 								)}
 							</h2>
 							<p class="mt-2 text-sm text-muted">{tool.data.blurb}</p>
+							{/* The card is a stretched link, so a second link inside it
+							    has to be lifted above the covering pseudo-element or it
+							    is unclickable. This is the ONLY inbound route to an
+							    unlisted case study — see `caseStudy` in
+							    content.config.ts. */}
+							{tool.data.caseStudy && (
+								<p class="relative z-10 mt-2 text-sm">
+									<a href={`/projects/${tool.data.caseStudy}`}>
+										Read the case study
+									</a>
+								</p>
+							)}
 							{!tool.data.url && (
 								<Todo note={`Live URL for "${tool.data.title}" not confirmed.`} />
 							)}

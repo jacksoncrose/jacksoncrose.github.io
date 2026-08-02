@@ -1,0 +1,87 @@
+---
+/*
+  CardCover — the image column of the sitewide card.
+
+  Extracted 2026-08-01, from Jackson: "many of the cards in projects are
+  cutting off the map/visual." The three card sites (Home tools strip, Home
+  selected projects, the Tools page) and the Projects index each carried
+  their own copy of this <Image>, so the crop bug had to be fixed four
+  times or it would drift. Now it is fixed once.
+
+  WHAT WAS WRONG. The image column is `sm:w-64` inside a `sm:flex` row and
+  had no height of its own, so it stretched to whatever the TEXT column
+  measured and `object-cover` filled that box. A 256-wide box against a
+  285-tall card is 0.90 — portrait — and every landscape map on the page
+  was being sliced down to a portrait strip of itself. The Rooney sheet
+  (1.545) kept 44% of its width. AGENTS.md already recorded the symptom
+  twice, as the White Sulphur Springs aerial "looking wrong" and as the
+  land ownership figure being cut through its own title; `cover.fit` fixed
+  the second case by not cropping figures at all. This fixes the cause.
+
+  WHAT REPLACES IT. The box now takes its aspect from THE IMAGE, clamped to
+  a range, so no cover is ever cropped by more than the clamp allows:
+
+    ratio 0.85 .. 1.50, from cover.src.width / cover.src.height
+
+  Every cover on the site sits inside that range except the White Sulphur
+  Springs aerial (1.778), which loses 16% of its width — it is a
+  photograph, and losing its ends costs nothing. Everything else is now
+  uncropped: the Rooney hillshade at 1.545 is within a rounding error of
+  the ceiling, the stacked school-scenario cover at 0.898 and the
+  Arizona-centred estimator crop at 1.077 both land inside untouched. The
+  clamp exists so one very tall or very wide cover cannot set the height of
+  a whole card.
+
+  WHY THE CLAMP IS 1.50 AND NOT 4:3. 1.50 keeps the Rooney sheets whole.
+  A 1.333 ceiling would crop them 14%, which is the kind of quiet loss this
+  change exists to stop.
+
+  THE WRAPPER IS NOT DECORATION. `aspect-ratio` on a flex item is ignored
+  while the item is being stretched to the row height, which is the default.
+  The image therefore sits in a wrapper that takes the stretch and carries
+  the divider, and the image is centred inside it. Without the wrapper the
+  border between image and text would stop wherever the image stopped, and
+  the card would look unfinished on its longer entries.
+
+  `sizes` — READ THE NOTE IN AGENTS.md BEFORE CHANGING THIS. It has to
+  describe the width the image is scaled to, which is not the width of the
+  box whenever object-cover is cropping horizontally. Worst case on the
+  site is now the WSS aerial: box height 256/1.5 = 171px, scaled width
+  171 x 1.778 = 303px, so 19rem. It was 32rem before this change, when the
+  box could be arbitrarily tall; the aspect ceiling is what makes the
+  smaller value correct, and the two must move together.
+*/
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	/** "contain" for a self-contained figure, "cover" for a picture. */
+	fit?: 'cover' | 'contain';
+	eager?: boolean;
+}
+
+const { src, alt, fit = 'cover', eager = false } = Astro.props;
+
+const BOX_MIN = 0.85;
+const BOX_MAX = 1.5;
+const box = Math.min(BOX_MAX, Math.max(BOX_MIN, src.width / src.height));
+---
+
+<div
+	class="w-full border-b border-line sm:flex sm:w-64 sm:shrink-0 sm:items-center sm:border-r sm:border-b-0"
+>
+	<Image
+		src={src}
+		alt={alt}
+		widths={[320, 640, 1024]}
+		sizes="(min-width: 640px) 19rem, calc(100vw - 3rem)"
+		loading={eager ? 'eager' : 'lazy'}
+		style={`--box: ${box.toFixed(4)}`}
+		class:list={[
+			'w-full sm:aspect-[var(--box)]',
+			fit === 'contain' ? 'object-contain' : 'object-cover',
+		]}
+	/>
+</div>

@@ -1,0 +1,303 @@
+---
+/*
+  MapCompare — two registered maps under one wipe handle.
+
+  Added 2026-08-01, from Jackson: "Can we make the map gallery have cooler
+  visuals? Like a swipe gallery for Rooney Ranch and a swipe tool to compare
+  closure scenarios for schools."
+
+  PROGRESSIVE ENHANCEMENT, the same bargain the lightbox struck. With
+  JavaScript off this renders exactly what the page rendered before: the two
+  maps side by side, both fully visible, each labelled, each linking to its
+  full-size derivative. About 6 lines of script add `is-on`, which is the
+  only thing that turns the pair into an overlay with a draggable handle.
+  Never make the second map reachable only by dragging.
+
+  THE CONTROL IS A REAL <input type="range">, not a div with pointer
+  handlers. That is what buys keyboard support (arrows, Home/End, PageUp
+  and PageDown), touch, and assistive-technology exposure without writing
+  any of it. It is stretched invisibly across the whole image so a drag
+  anywhere works and a click jumps the handle, which is what people expect
+  from a wipe. The visible line and grip are a separate, pointer-inert
+  element so the input keeps every gesture.
+
+  THE TWO IMAGES MUST BE REGISTERED — same extent, same layout, same pixel
+  dimensions. Checked before shipping either pair: the Rooney sheets are all
+  2400x1553, and the two school scenarios differ only inside the hex grid
+  (their titles, legends and basemaps are identical to within 1px of export
+  jitter). An unregistered pair makes the map's own furniture jump as the
+  handle passes, which reads as a rendering bug rather than a comparison.
+
+  LABELS ARE CHIPS ON THE IMAGE, not captions below it, and BOTH STAY
+  VISIBLE at every handle position — top left names what is left of the
+  handle, top right what is right of it. The first version let the clip
+  take the overlay's chip with it, which looked like a rendering fault
+  rather than a comparison; the chips are now outside the clipped element.
+  They overlap whatever the map itself prints in its top corners, which is
+  the trade for keeping them compact and conventional.
+*/
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+export interface CompareSide {
+	image: ImageMetadata;
+	alt: string;
+	/** Short name for this side, e.g. "Hillshade" or "Current access". */
+	label: string;
+	blurb: string;
+	/** Full-size derivative: the no-JS link target and the lightbox source. */
+	fullSrc: string;
+}
+
+interface Props {
+	/** Shared title. Paired sheets carry the SAME title on purpose. */
+	title: string;
+	/** Meta line under the title, already assembled by the caller. */
+	meta: string;
+	a: CompareSide;
+	b: CompareSide;
+	eager?: boolean;
+	headingLevel?: 2 | 3;
+}
+
+const {
+	title,
+	meta,
+	a,
+	b,
+	eager = false,
+	headingLevel = 2,
+} = Astro.props;
+
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
+
+/*
+  A pair always renders at the full content column (45rem), never at the
+  half-column width the thumbnail grid uses: a comparison at 21.5rem is too
+  small to read and gives the handle about 170px of travel.
+
+  THE CANDIDATE LIST STOPS AT 1200, deliberately, which is 1.67x the 720px
+  frame rather than the 2x a DPR-2 screen would take. Six comparison images
+  at 720px is what made this page heavy; adding a 1440 candidate cost
+  another 400 KB at DPR 2 and the difference was not visible on a dense
+  map. Measure before putting it back.
+*/
+const WIDTHS = [480, 800, 1200];
+const SIZES = '(min-width: 48rem) 45rem, calc(100vw - 3rem)';
+---
+
+<figure class="cmp" data-cmp style="--pos: 50%">
+	<div class="cmp-stack">
+		<div class="cmp-pane">
+			<Image
+				src={a.image}
+				alt={a.alt}
+				widths={WIDTHS}
+				sizes={SIZES}
+				loading={eager ? 'eager' : 'lazy'}
+				class="cmp-img"
+			/>
+			<span class="cmp-tag cmp-tag-a">{a.label}</span>
+		</div>
+
+		<div class="cmp-pane cmp-pane-b">
+			<Image
+				src={b.image}
+				alt={b.alt}
+				widths={WIDTHS}
+				sizes={SIZES}
+				loading={eager ? 'eager' : 'lazy'}
+				class="cmp-img"
+			/>
+			<span class="cmp-tag cmp-tag-b">{b.label}</span>
+		</div>
+
+		{/* Order matters: the range comes BEFORE the handle so the focus
+		    style can reach the handle with a sibling selector, and the
+		    handle paints over the (invisible) input without stealing its
+		    pointer events. */}
+		<input
+			class="cmp-range"
+			type="range"
+			min="0"
+			max="100"
+			step="1"
+			value="50"
+			aria-label={`${title}: wipe between ${a.label} and ${b.label}`}
+		/>
+		<span class="cmp-handle" aria-hidden="true"></span>
+	</div>
+
+	<figcaption class="mt-3">
+		<Heading class="text-xl">{title}</Heading>
+		<p class="mt-1 text-sm text-muted">{meta}</p>
+		<p class="cmp-hint mt-1 text-sm text-muted">
+			Drag the handle, or focus it and use the arrow keys, to compare.
+		</p>
+		<div class="mt-3 grid gap-4 sm:grid-cols-2">
+			{[a, b].map((side) => (
+				<div>
+					<p class="text-sm font-semibold">{side.label}</p>
+					<p class="mt-1 text-base">{side.blurb}</p>
+					<p class="mt-1 text-sm">
+						<a
+							href={side.fullSrc}
+							data-lightbox
+							data-alt={side.alt}
+							aria-label={`View larger: ${title}, ${side.label.toLowerCase()}`}
+						>
+							View larger
+						</a>
+					</p>
+				</div>
+			))}
+		</div>
+	</figcaption>
+</figure>
+
+<style>
+	/* ---- baseline: no JavaScript, two maps side by side ---------------- */
+
+	.cmp-stack {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+	}
+
+	@media (min-width: 40rem) {
+		.cmp-stack {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.cmp-pane {
+		position: relative;
+	}
+
+	.cmp-img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--color-line);
+		background: var(--color-white);
+	}
+
+	.cmp-tag {
+		position: absolute;
+		top: 0.5rem;
+		left: 0.5rem;
+		z-index: 1;
+		padding: 0.125rem 0.5rem;
+		background: rgb(28 25 23 / 0.88); /* --color-ink at 88% */
+		color: var(--color-white);
+		font-size: var(--text-xs);
+		line-height: 1.6;
+		letter-spacing: 0.02em;
+	}
+
+	.cmp-tag-b {
+		left: auto;
+		right: 0.5rem;
+	}
+
+	/* Hidden until the script runs, so nothing on screen implies an
+	   interaction that is not wired up. */
+	.cmp-range,
+	.cmp-handle,
+	.cmp-hint {
+		display: none;
+	}
+
+	/* ---- enhanced: one map, one handle --------------------------------- */
+
+	.cmp.is-on .cmp-stack {
+		position: relative;
+		display: block;
+	}
+
+	.cmp.is-on .cmp-pane-b {
+		position: absolute;
+		inset: 0;
+	}
+
+	/* THE CLIP IS ON THE IMAGE, NOT THE PANE. Clipping the pane took the
+	   overlay's label with it: past about 75% the handle cut through the
+	   chip and it read "…schools closed". The pane itself is transparent,
+	   so the base image and its label show through the uncovered part. */
+	.cmp.is-on .cmp-pane-b .cmp-img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		clip-path: inset(0 0 0 var(--pos));
+	}
+
+	.cmp.is-on .cmp-range {
+		display: block;
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		opacity: 0;
+		background: transparent;
+		cursor: col-resize;
+		-webkit-appearance: none;
+		appearance: none;
+		/* Claim horizontal drag (this is a wipe) while leaving vertical
+		   page scroll alone. Matters inside the carousel, which is itself
+		   a horizontal scroller. */
+		touch-action: pan-y;
+	}
+
+	.cmp.is-on .cmp-handle {
+		display: block;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: var(--pos);
+		z-index: 3;
+		width: 2px;
+		margin-left: -1px;
+		background: var(--color-accent);
+		pointer-events: none;
+	}
+
+	.cmp.is-on .cmp-handle::after {
+		content: '';
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 2.25rem;
+		height: 2.25rem;
+		transform: translate(-50%, -50%);
+		border: 2px solid var(--color-accent);
+		border-radius: 9999px;
+		background: rgb(255 255 255 / 0.92);
+	}
+
+	/* The input is invisible, so its focus ring has to be drawn on the
+	   grip instead or keyboard users get no indicator at all (WCAG 2.4.7). */
+	.cmp.is-on .cmp-range:focus-visible ~ .cmp-handle::after {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+
+	.cmp.is-on .cmp-hint {
+		display: block;
+	}
+</style>
+
+<script>
+	/* One listener per comparison. `is-on` is added last so the enhanced
+	   layout never appears before --pos is correct. */
+	document.querySelectorAll<HTMLElement>('[data-cmp]').forEach((root) => {
+		const range = root.querySelector<HTMLInputElement>('.cmp-range');
+		if (!range) return;
+		const sync = () => root.style.setProperty('--pos', `${range.value}%`);
+		range.addEventListener('input', sync);
+		sync();
+		root.classList.add('is-on');
+	});
+</script>

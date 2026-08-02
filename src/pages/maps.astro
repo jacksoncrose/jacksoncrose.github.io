@@ -1,6 +1,6 @@
 ---
 /*
-  Maps — visual gallery grid: image, title, 1-2 sentences, year, tools.
+  Maps — visual gallery: image, title, 1-2 sentences, year, tools.
   No case-study prose (sitemap).
 
   Each image renders through Astro's <Image>, which generates responsive
@@ -23,19 +23,28 @@
   GROUPED SETS added 2026-07-31, from Jackson: "It needs to be clear that
   the poster and ranch division maps are all the same project/client."
 
-  The page is now a vertical stack of blocks rather than one flat grid.
-  A block is either a run of ungrouped entries (rendered exactly as
-  before) or a group: a heading, a note naming the client, a link to the
-  project page, and the group's own sub-grid. `galleryBlocks()` builds the
-  stack; `published()` remains the only sort authority for where blocks
-  land, with `groupOrder` sorting only within a group.
+  The page is a vertical stack of blocks rather than one flat grid. A block
+  is either a run of ungrouped entries or a group: a heading, a note naming
+  the client, a link to the project page, and the group's own items.
+  `galleryBlocks()` builds the stack; `published()` remains the only sort
+  authority for where blocks land, with `groupOrder` sorting only within a
+  group.
 
-  Card markup moved to components/MapCard.astro in the same change, since
-  it is now rendered from two places.
+  COMPARISONS AND A CAROUSEL added 2026-08-01, from Jackson: "Can we make
+  the map gallery have cooler visuals? Like a swipe gallery for Rooney Ranch
+  and a swipe tool to compare closure scenarios for schools." His call was
+  both, not either.
+
+  Two entries sharing a `pair` id now render as ONE wipe comparison
+  (MapCompare), and a group can ask to be a carousel. Everything about
+  choosing the layout moved into GalleryItems, so this page no longer
+  carries two near-identical copies of the card list. The lightbox script
+  below is unchanged and still picks up every `a[data-lightbox]`, including
+  the two "View larger" links a comparison renders.
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
-import MapCard from '../components/MapCard.astro';
+import GalleryItems from '../components/GalleryItems.astro';
 import { getImage } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { published, galleryBlocks } from '../lib/content';
@@ -66,12 +75,9 @@ const blocks = galleryBlocks(gallery);
   them, so it is resolved once here by entry id.
 */
 const eagerIds = new Set(gallery.slice(0, 2).map((entry) => entry.id));
-
-const GRID =
-	'grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2';
 ---
 
-<Base title="Maps" description="Selected maps by Jackson Rose: national land ownership choropleths, custom-hillshade ranch maps, an overnight UAV orthomosaic of the MSU campus, and a biocultural region map spanning two countries.">
+<Base title="Maps" description="Selected maps by Jackson Rose: national land ownership choropleths, custom-hillshade ranch maps, an overnight UAV orthomosaic of the MSU campus, a biocultural region map spanning two countries, and a school-access comparison for rural Montana.">
 	<h1 class="text-4xl">Maps</h1>
 	{/* Intro is Jackson's own wording, verbatim (2026-07-29). Do not rewrite. */}
 	<p class="mt-6 text-lg">
@@ -85,30 +91,16 @@ const GRID =
 		) : (
 			blocks.map((block, blockIndex) =>
 				block.kind === 'run' ? (
-					<ul class={`${blockIndex === 0 ? 'mt-8' : 'mt-16'} ${GRID}`}>
-						{block.entries.map((entry) => (
-							<li>
-								<MapCard
-									image={entry.data.image}
-									alt={entry.data.alt}
-									title={entry.data.title}
-									blurb={entry.data.blurb}
-									year={entry.data.year}
-									tools={entry.data.tools}
-									basemap={entry.data.basemap}
-									fullSrc={fullById.get(entry.id)!.src}
-									eager={eagerIds.has(entry.id)}
-								/>
-							</li>
-						))}
-					</ul>
+					<GalleryItems
+						items={block.items}
+						hasPair={block.hasPair}
+						fullById={fullById}
+						eagerIds={eagerIds}
+						class={blockIndex === 0 ? 'mt-8' : 'mt-16'}
+					/>
 				) : (
 					<section
-						class={
-							blockIndex === 0
-								? 'mt-8 border-t border-line pt-8'
-								: 'mt-16 border-t border-line pt-8'
-						}
+						class="mt-16 border-t border-line pt-8"
 						aria-labelledby={`gallery-group-${block.id}`}
 					>
 						<h2 id={`gallery-group-${block.id}`} class="text-3xl">
@@ -120,24 +112,16 @@ const GRID =
 								<a href={block.meta.href}>Read the project</a>
 							</p>
 						)}
-						<ul class={`mt-8 ${GRID}`}>
-							{block.entries.map((entry) => (
-								<li>
-									<MapCard
-										image={entry.data.image}
-										alt={entry.data.alt}
-										title={entry.data.title}
-										blurb={entry.data.blurb}
-										year={entry.data.year}
-										tools={entry.data.tools}
-										basemap={entry.data.basemap}
-										fullSrc={fullById.get(entry.id)!.src}
-										eager={eagerIds.has(entry.id)}
-										headingLevel={3}
-									/>
-								</li>
-							))}
-						</ul>
+						<GalleryItems
+							items={block.items}
+							hasPair={block.hasPair}
+							carousel={block.meta.carousel}
+							label={`${block.meta.title}: ${block.items.length} sheets`}
+							fullById={fullById}
+							eagerIds={eagerIds}
+							headingLevel={3}
+							class="mt-8"
+						/>
 					</section>
 				),
 			)

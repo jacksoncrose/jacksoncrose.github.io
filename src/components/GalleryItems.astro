@@ -1,0 +1,308 @@
+---
+/*
+  GalleryItems — renders one gallery block's items in the right layout.
+
+  Added 2026-08-01 with comparisons and the carousel. Before this, maps.astro
+  wrote the same <ul> twice, once for ungrouped runs and once inside groups.
+  There are now three layouts to choose between, and the choice depends on
+  what the block CONTAINS, so it belongs in one place rather than duplicated
+  in two branches of a template:
+
+  - CAROUSEL when the group asks for one (`carousel: true` in galleryGroups).
+    One item at a time in a scroll-snapping track. Chosen for Rooney, which
+    is five sheets and was taking most of a screen as thumbnails.
+  - FULL-WIDTH STACK when the block holds a comparison. A wipe at half
+    column width (21.5rem) is too small to read and leaves the handle about
+    170px of travel.
+  - THE TWO-COLUMN GRID otherwise, exactly as the page has always rendered.
+
+  THE CAROUSEL'S BASELINE IS A PLAIN SCROLLER. `overflow-x: auto` with
+  scroll-snap gives touch swipe, trackpad swipe, a real scrollbar, and
+  keyboard arrows with no JavaScript at all. The script adds only the
+  buttons and the "2 of 5" counter, and they stay hidden until it runs so
+  nothing on screen promises an interaction that is not wired up. This is
+  the same bargain as the lightbox and MapCompare.
+
+  The track is focusable and carries a role and a name, which is what the
+  axe rule `scrollable-region-focusable` wants: a region that scrolls must
+  be reachable by keyboard.
+*/
+import MapCard from './MapCard.astro';
+import MapCompare from './MapCompare.astro';
+import type { GalleryItem } from '../lib/content';
+
+/* Structural shape only; the real type comes from the gallery collection. */
+type Entry = {
+	id: string;
+	data: {
+		image: any;
+		alt: string;
+		title: string;
+		blurb: string;
+		year?: number;
+		tools: string[];
+		basemap?: string;
+		pairLabel?: string;
+	};
+};
+
+interface Props {
+	items: GalleryItem<Entry>[];
+	/** Full-size derivative per entry id: lightbox source and no-JS target. */
+	fullById: Map<string, { src: string }>;
+	eagerIds: Set<string>;
+	headingLevel?: 2 | 3;
+	carousel?: boolean;
+	hasPair?: boolean;
+	/** Accessible name for the carousel's scroll region. */
+	label?: string;
+	class?: string;
+}
+
+const {
+	items,
+	fullById,
+	eagerIds,
+	headingLevel = 2,
+	carousel = false,
+	hasPair = false,
+	label = 'Maps',
+	class: className = '',
+} = Astro.props;
+
+const GRID = 'grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2';
+const STACK = 'grid list-none gap-y-12 p-0';
+
+/** Side label: `basemap` already says "Hillshade"/"Imagery" on the Rooney
+    sheets, so only a pair that is not a basemap swap needs `pairLabel`. */
+const sideLabel = (entry: Entry) =>
+	entry.data.pairLabel ?? entry.data.basemap ?? entry.data.title;
+
+/** Meta for a comparison: no basemap, because that is what the two labels
+    already say. */
+const pairMeta = (entry: Entry) =>
+	[entry.data.year?.toString(), entry.data.tools.join(', ')]
+		.filter(Boolean)
+		.join(' · ');
+---
+
+{
+	carousel ? (
+		<div class={`car ${className}`} data-car>
+			<div class="car-track" role="group" tabindex="0" aria-label={label}>
+				{items.map((item) => (
+					<div class="car-slide">
+						{item.kind === 'pair' ? (
+							<MapCompare
+								title={item.a.data.title}
+								meta={pairMeta(item.a)}
+								a={{
+									image: item.a.data.image,
+									alt: item.a.data.alt,
+									label: sideLabel(item.a),
+									blurb: item.a.data.blurb,
+									fullSrc: fullById.get(item.a.id)!.src,
+								}}
+								b={{
+									image: item.b.data.image,
+									alt: item.b.data.alt,
+									label: sideLabel(item.b),
+									blurb: item.b.data.blurb,
+									fullSrc: fullById.get(item.b.id)!.src,
+								}}
+								eager={eagerIds.has(item.a.id)}
+								headingLevel={headingLevel}
+							/>
+						) : (
+							<MapCard
+								image={item.entry.data.image}
+								alt={item.entry.data.alt}
+								title={item.entry.data.title}
+								blurb={item.entry.data.blurb}
+								year={item.entry.data.year}
+								tools={item.entry.data.tools}
+								basemap={item.entry.data.basemap}
+								fullSrc={fullById.get(item.entry.id)!.src}
+								eager={eagerIds.has(item.entry.id)}
+								headingLevel={headingLevel}
+							/>
+						)}
+					</div>
+				))}
+			</div>
+			<p class="car-nav mt-4 flex items-center gap-4 text-sm">
+				<button type="button" class="car-btn" data-car-prev>
+					Previous
+				</button>
+				<span class="text-muted" data-car-status aria-live="polite"></span>
+				<button type="button" class="car-btn" data-car-next>
+					Next
+				</button>
+			</p>
+		</div>
+	) : (
+		<ul class={`${hasPair ? STACK : GRID} ${className}`}>
+			{items.map((item) => (
+				<li>
+					{item.kind === 'pair' ? (
+						<MapCompare
+							title={item.a.data.title}
+							meta={pairMeta(item.a)}
+							a={{
+								image: item.a.data.image,
+								alt: item.a.data.alt,
+								label: sideLabel(item.a),
+								blurb: item.a.data.blurb,
+								fullSrc: fullById.get(item.a.id)!.src,
+							}}
+							b={{
+								image: item.b.data.image,
+								alt: item.b.data.alt,
+								label: sideLabel(item.b),
+								blurb: item.b.data.blurb,
+								fullSrc: fullById.get(item.b.id)!.src,
+							}}
+							eager={eagerIds.has(item.a.id)}
+							headingLevel={headingLevel}
+						/>
+					) : (
+						<MapCard
+							image={item.entry.data.image}
+							alt={item.entry.data.alt}
+							title={item.entry.data.title}
+							blurb={item.entry.data.blurb}
+							year={item.entry.data.year}
+							tools={item.entry.data.tools}
+							basemap={item.entry.data.basemap}
+							fullSrc={fullById.get(item.entry.id)!.src}
+							eager={eagerIds.has(item.entry.id)}
+							headingLevel={headingLevel}
+						/>
+					)}
+				</li>
+			))}
+		</ul>
+	)
+}
+
+<style>
+	.car-track {
+		display: flex;
+		gap: 2rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		/* The scrollbar is the no-JS affordance on pointer devices; do not
+		   hide it. */
+		padding-bottom: 0.5rem;
+	}
+
+	.car-slide {
+		flex: 0 0 100%;
+		scroll-snap-align: start;
+	}
+
+	/*
+	  A slide is the full 45rem column, and the track is as tall as its
+	  tallest slide, so one portrait sheet sets the height of every slide.
+	  The Rooney poster is 0.772 and rendered 720x933 here — nearly twice
+	  the height of a comparison — leaving a screen of white under the two
+	  map slides. Capping the height of a plain card's image inside a
+	  carousel evens the slides out. Comparisons are excluded: their images
+	  are sized by the wipe frame, not by their own box.
+	*/
+	.car-slide :global(figure:not(.cmp) img) {
+		max-height: 30rem;
+		width: auto;
+		margin-inline: auto;
+	}
+
+	.car-nav {
+		display: none;
+	}
+
+	.car.is-on .car-nav {
+		display: flex;
+	}
+
+	.car-btn {
+		border: 1px solid var(--color-line);
+		background: var(--color-white);
+		padding: 0.25rem 0.75rem;
+		color: var(--color-accent);
+		cursor: pointer;
+	}
+
+	.car-btn:hover:not(:disabled) {
+		border-color: var(--color-accent);
+		color: var(--color-accent-deep);
+	}
+
+	.car-btn:disabled {
+		color: var(--color-muted);
+		cursor: default;
+		opacity: 0.55;
+	}
+</style>
+
+<script>
+	const smooth = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+		? 'auto'
+		: 'smooth';
+
+	document.querySelectorAll<HTMLElement>('[data-car]').forEach((root) => {
+		const track = root.querySelector<HTMLElement>('.car-track');
+		const status = root.querySelector<HTMLElement>('[data-car-status]');
+		const prev = root.querySelector<HTMLButtonElement>('[data-car-prev]');
+		const next = root.querySelector<HTMLButtonElement>('[data-car-next]');
+		if (!track || !status || !prev || !next) return;
+
+		const slides = Array.from(track.children) as HTMLElement[];
+		if (slides.length < 2) return;
+
+		/* Offsets are measured against the first slide rather than against
+		   the track, so this does not care what the offset parent is. */
+		const left = (i: number) => slides[i].offsetLeft - slides[0].offsetLeft;
+
+		const current = () => {
+			let best = 0;
+			let bestDistance = Infinity;
+			slides.forEach((_, i) => {
+				const d = Math.abs(left(i) - track.scrollLeft);
+				if (d < bestDistance) {
+					bestDistance = d;
+					best = i;
+				}
+			});
+			return best;
+		};
+
+		const sync = () => {
+			const i = current();
+			status.textContent = `${i + 1} of ${slides.length}`;
+			prev.disabled = i === 0;
+			next.disabled = i === slides.length - 1;
+		};
+
+		const go = (step: number) => {
+			const i = Math.min(slides.length - 1, Math.max(0, current() + step));
+			track.scrollTo({ left: left(i), behavior: smooth });
+		};
+
+		prev.addEventListener('click', () => go(-1));
+		next.addEventListener('click', () => go(1));
+
+		/* `scrollend` fires once the snap has settled, which is what makes
+		   the counter right after a keyboard scroll of a mandatory-snap
+		   container — a debounce alone reads the position mid-snap. The
+		   timeout stays as the fallback where scrollend is unsupported. */
+		let settle: number;
+		track.addEventListener('scroll', () => {
+			clearTimeout(settle);
+			settle = window.setTimeout(sync, 140);
+		});
+		track.addEventListener('scrollend', sync);
+
+		root.classList.add('is-on');
+		sync();
+	});
+</script>

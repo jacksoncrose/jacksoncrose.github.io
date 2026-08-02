@@ -27,6 +27,21 @@ export function published<T extends HasDraft & { data: { order: number; year?: n
     );
 }
 
+/**
+ * Entries that belong on the Projects INDEX.
+ *
+ * Added 2026-08-01. Separate from `published()` because the two questions
+ * are different: `published` asks whether an entry may render at all, and
+ * this asks whether it takes a card on the index. Montana Hall answers yes
+ * to the first and no to the second — its page still builds, and its card
+ * lives on Tools instead. See `listed` in content.config.ts.
+ */
+export function listed<T extends { data: { listed: boolean } }>(
+  entries: T[],
+): T[] {
+  return entries.filter((entry) => entry.data.listed);
+}
+
 /* ---------------------------------------------------------------------
    Gallery groups
    ---------------------------------------------------------------------
@@ -48,41 +63,153 @@ export type GalleryGroupMeta = {
   note: string;
   /** Optional link to the project page carrying the full write-up. */
   href?: string;
+  /**
+   * Render the group's items one at a time in a swipeable, scroll-snapping
+   * track instead of as a grid. Added 2026-08-01 for the Rooney set, which
+   * is five sheets and was taking half a screen of thumbnails.
+   *
+   * The track is a plain overflow-x scroller, so touch swipe and keyboard
+   * arrows work with JavaScript off; the buttons and the counter are the
+   * only enhanced parts.
+   */
+  carousel?: boolean;
 };
 
 export const galleryGroups: Record<string, GalleryGroupMeta> = {
+  'rural-school-access': {
+    title: 'Montana rural school access',
+    note: "Distance to the nearest school across Montana, in hexagons of about 16 square miles, for the MSU Center for Research on Rural Education. The pair sets current access against a bounding case in which all 129 of the state's small rural schools close at once. No such closure has been proposed; the scenario is there to measure what those schools cover.",
+    /* No `href`: this project is a card-only entry on the Projects index
+       (hasPage: false), so there is no page to send a reader to. Do not
+       point this at /projects as a consolation link. */
+  },
+  'campus-at-night': {
+    title: 'Campus at Night',
+    note: "One overnight survey of the MSU campus, rebuilt through three photogrammetry engines. Drone2Map produced the cleaner mosaic but never solved the south block; Metashape covered both flown blocks, reaching 149 of the 236 hectares flown. No ground control was placed, so neither result is the reference for the other.",
+    href: '/projects/msu-campus-at-night',
+  },
   'rooney-ranch-atlas': {
     title: 'Rooney Angus Ranch Atlas',
     note: 'Division maps and a ranch-wide poster for Rooney Angus, in central Montana. Each division was drawn on two basemaps from one dataset, so the same tenure, fence, and pasture information reads either against terrain or against aerial imagery.',
     href: '/projects/rooney-ranch-atlas',
+    carousel: true,
   },
 };
 
-type GalleryLike = { data: { group?: string; groupOrder: number } };
+type GalleryLike = {
+  id: string;
+  data: { group?: string; groupOrder: number; pair?: string };
+};
+
+/*
+  Blocks and items
+  ----------------
+
+  The Maps page is a vertical stack of BLOCKS: runs of ungrouped entries,
+  and grouped sets. Block order follows the order entries arrive in, so
+  `published()` stays the single sort authority; `groupOrder` only sorts
+  within a group.
+
+  Inside a block are ITEMS, added 2026-08-01. An item is one card, or a
+  PAIR of entries that render as a single wipe comparison. Pairing at this
+  layer rather than in the template is what lets the "exactly two, same
+  block" rule be enforced in one place and fail the build when it is
+  broken.
+
+  LAYOUT RULE THAT FALLS OUT OF THIS, and it is deliberate: a block whose
+  items are all singles renders as the two-column grid it always did. A
+  block containing a pair renders as a full-width vertical stack instead,
+  because a comparison at half column width is too small to read and the
+  handle too short to drag. Templates read `hasPair` rather than deciding
+  this for themselves.
+*/
+
+export type GalleryItem<T> =
+  | { kind: 'single'; entry: T }
+  | { kind: 'pair'; id: string; a: T; b: T };
+
+export type GalleryBlock<T> =
+  | { kind: 'run'; items: GalleryItem<T>[]; hasPair: boolean }
+  | {
+      kind: 'group';
+      id: string;
+      meta: GalleryGroupMeta;
+      items: GalleryItem<T>[];
+      hasPair: boolean;
+    };
 
 /**
- * The Maps page as a vertical stack of blocks: runs of ungrouped entries,
- * and grouped sets. Block order follows the order entries arrive in, so
- * `published()` stays the single sort authority; `groupOrder` only sorts
- * within a group.
+ * Collapse paired entries into pair items, preserving order.
+ *
+ * The pair takes the position of its FIRST member, so a pair sorts where
+ * its base image sorted. `groupOrder` has already run, so `a` is the base
+ * image and `b` is the overlay the handle reveals.
  */
-export type GalleryBlock<T> =
-  | { kind: 'run'; entries: T[] }
-  | { kind: 'group'; id: string; meta: GalleryGroupMeta; entries: T[] };
+function collapsePairs<T extends GalleryLike>(
+  entries: T[],
+  where: string,
+): { items: GalleryItem<T>[]; hasPair: boolean } {
+  const members = new Map<string, T[]>();
+  for (const entry of entries) {
+    const id = entry.data.pair;
+    if (!id) continue;
+    const list = members.get(id);
+    if (list) list.push(entry);
+    else members.set(id, [entry]);
+  }
+
+  for (const [id, list] of members) {
+    if (list.length !== 2) {
+      /* Fail loudly at build time. A pair with one member would render as
+         a comparison of a map against itself, which looks like it works.
+         A pair split across two groups lands here too, because each block
+         is collapsed separately and each side sees a count of one. */
+      throw new Error(
+        `Gallery pair "${id}" has ${list.length} member(s) in ${where} ` +
+          `(${list.map((e) => e.id).join(', ') || 'none'}). A pair needs ` +
+          `exactly two entries, and both must sit in the same block — same ` +
+          `\`group\`, or both ungrouped.`,
+      );
+    }
+  }
+
+  const used = new Set<string>();
+  const items: GalleryItem<T>[] = [];
+  let hasPair = false;
+
+  for (const entry of entries) {
+    const id = entry.data.pair;
+    if (!id) {
+      items.push({ kind: 'single', entry });
+      continue;
+    }
+    if (used.has(id)) continue;
+    used.add(id);
+    const [a, b] = members.get(id)!;
+    items.push({ kind: 'pair', id, a, b });
+    hasPair = true;
+  }
+
+  return { items, hasPair };
+}
 
 export function galleryBlocks<T extends GalleryLike>(
   entries: T[],
 ): GalleryBlock<T>[] {
-  const blocks: GalleryBlock<T>[] = [];
-  const groups = new Map<string, Extract<GalleryBlock<T>, { kind: 'group' }>>();
+  type Draft =
+    | { kind: 'run'; entries: T[] }
+    | { kind: 'group'; id: string; meta: GalleryGroupMeta; entries: T[] };
+
+  const drafts: Draft[] = [];
+  const groups = new Map<string, Extract<Draft, { kind: 'group' }>>();
 
   for (const entry of entries) {
     const id = entry.data.group;
 
     if (!id) {
-      const last = blocks.at(-1);
+      const last = drafts.at(-1);
       if (last?.kind === 'run') last.entries.push(entry);
-      else blocks.push({ kind: 'run', entries: [entry] });
+      else drafts.push({ kind: 'run', entries: [entry] });
       continue;
     }
 
@@ -100,18 +227,29 @@ export function galleryBlocks<T extends GalleryLike>(
       }
       block = { kind: 'group', id, meta, entries: [] };
       groups.set(id, block);
-      blocks.push(block);
+      drafts.push(block);
     }
     block.entries.push(entry);
   }
 
-  for (const block of blocks) {
-    if (block.kind === 'group') {
-      block.entries.sort((a, b) => a.data.groupOrder - b.data.groupOrder);
+  return drafts.map((draft) => {
+    if (draft.kind === 'group') {
+      draft.entries.sort((a, b) => a.data.groupOrder - b.data.groupOrder);
+      const { items, hasPair } = collapsePairs(
+        draft.entries,
+        `group "${draft.id}"`,
+      );
+      return {
+        kind: 'group',
+        id: draft.id,
+        meta: draft.meta,
+        items,
+        hasPair,
+      };
     }
-  }
-
-  return blocks;
+    const { items, hasPair } = collapsePairs(draft.entries, 'the ungrouped run');
+    return { kind: 'run', items, hasPair };
+  });
 }
 
 export type ClientFields = {
