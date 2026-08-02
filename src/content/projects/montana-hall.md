@@ -11,6 +11,12 @@ role: "Personal side project"
 tools: ["Python (laspy, NumPy)", "TypeScript", "Three.js", "Playwright"]
 clientPermission: "not-applicable"
 hasPage: true
+# UNLISTED 2026-08-01, his call: "Tools (MT Hall and FFD) are showing up
+# in projects. That's redundant." The card came off the Projects index;
+# THIS PAGE STILL BUILDS at /projects/montana-hall and is reached from the
+# Tools card, which carries caseStudy: "montana-hall". Do not delete that
+# field without relisting this entry, or the page is orphaned.
+listed: false
 cover:
   src: "../../assets/images/montana-hall-north-elevation.png"
   alt: "Rendered 3D model of Montana Hall viewed from the north: symmetric red-brick facade with an arched central entrance, three cross-gables, hipped slate roof, and central spire, flanked by stylized low-poly trees."
