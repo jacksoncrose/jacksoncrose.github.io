@@ -1,0 +1,232 @@
+---
+# REWRITTEN 2026-08-01 from Jackson's own portfolio handoff. THE SOURCE OF
+# TRUTH IS C:\Users\jacks\Projects\NightLighting\portfolio\00_summary.md,
+# his instruction: "Do not restate numbers from memory, re-derive
+# statistics, or fill gaps by inference. If a figure isn't in that file,
+# ask me for it." Every figure below is in that file. Nothing outside
+# portfolio\ is current; map_mockups\ and map_out\ are superseded.
+#
+# CORRECTED THE 236 HECTARE CLAIM. The 2026-07-27 version of this entry
+# said the survey was "processed to a 236 ha orthomosaic", in the summary,
+# the body and the gallery blurb. **236 HECTARES WERE FLOWN. 149 IS THE
+# MOST ANY ENGINE RECONSTRUCTED.** Never say the whole flown area was
+# mapped. This was his handling note 2 and the live site was breaking it.
+#
+# FRAME COUNT: 1,366 COLLECTED, confirmed by him 2026-08-01 and printed on
+# the section sheet's own stat bar. The old entry said 1,369, which matches
+# nothing. Metashape's denominator in his summary is 1,370 and is quoted as
+# written; he confirmed 1,366 as the collection figure.
+#
+# THREE MORE THINGS THAT ARE EASY TO GET WRONG, his list:
+#  - The aircraft is a Vision Aerial Switchblade. NOT a hexacopter, and do
+#    not state a rotor count.
+#  - NO GROUND CONTROL WAS PLACED. Never claim one engine's output is more
+#    accurate than another's. The comparison shows how they differ, not
+#    which is right.
+#  - Drone2Map produced the cleaner mosaic; Metashape was the only engine
+#    that covered both flight blocks. THAT is why there are two sheets.
+#
+# The 2023 delivery to Facilities was the ArcGIS Pro cartographic map (in
+# the gallery). The three-engine comparison is a separate pass over the
+# same frames — the copy is written so nothing implies Facilities
+# commissioned the benchmark.
+#
+# ORDER -1 puts this first in tier 3, ahead of Rooney. Tier stays 3 by
+# recommendation and his agreement: AGENTS.md Positioning says resist
+# letting image quality drive hierarchy, and tier 2 on this site means
+# spatial method applied to a policy or fiscal question.
+#
+# OPEN WITH HIM: whether the role line should widen beyond "Mission lead,
+# pilot, and cartographer" now that the entry covers the three-engine
+# processing and analysis, and whether to add yearEnd for the rebuild (its
+# date is not in the summary — Drone2Map 2026.1.1 implies 2026, but that is
+# inference, so nothing was added).
+title: "Campus at Night"
+summary: "Overnight UAV survey of the MSU campus, rebuilt through three photogrammetry engines. 1,366 exposure-locked frames over 236 hectares flown; 149 hectares is the most any engine reconstructed, and the two that came closest disagree by 2.6 times in shadow."
+year: 2023
+tier: 3
+role: "Mission lead, pilot, and cartographer"
+tools: ["UAV", "Agisoft Metashape", "Esri Drone2Map", "OpenDroneMap", "ArcGIS Pro"]
+client: "MSU Facilities"
+clientPermission: "granted"
+hasPage: true
+cover:
+  # Crop of the section sheet's main panel, 2210x1879 at ratio 1.176, which
+  # sits inside CardCover's 0.85-1.50 clamp and so renders uncropped. His
+  # note: crop these sheets, never scale the portrait document down.
+  src: "../../assets/images/campus-at-night-section.jpg"
+  alt: "Night orthomosaic of the Montana State University core: a street grid picked out by white-green lamp pools along walkways and parking lots, a dark oval quad at centre, and amber sodium-vapor lighting across the block at lower right."
+  caption: "The campus core at 2.43 cm ground sample, from Drone2Map."
+order: -1
+draft: false
+---
+
+import SheetFigure from '../../components/SheetFigure.astro';
+import sectionSheet from '../../assets/images/campus-at-night-sheet-section.jpg';
+import surveySheet from '../../assets/images/campus-at-night-sheet-survey.jpg';
+
+## Problem
+
+MSU Facilities has been converting campus exterior lighting from high
+pressure sodium to LED since 2011, with goals around energy consumption,
+fixture reliability, and pedestrian safety after dark. What they lacked was
+a campus-wide picture of what that lighting actually produces on the
+ground.
+
+Night imagery is a hard case for the method that would produce that
+picture. Feature detectors need texture, and at ISO 12800 most of the
+ground sits at the sensor's noise floor. The lit paths carry features. The
+lawns between them carry almost none.
+
+## Approach
+
+In September 2023 I flew a Vision Aerial Switchblade over the MSU campus
+between 1:14 and 4:58 a.m., collecting 1,366 frames across 236 hectares at
+roughly 123 metres above ground. The Sony a6000 ran with the exposure
+locked at 1/60 second, ISO 12800, f/3.2, so every frame is directly
+comparable to every other frame. No engine applied colour balancing or
+scene-adaptive normalisation at any stage. Brightness on the finished
+sheets is a measurement rather than a rendering decision.
+
+Two things about the acquisition constrain everything downstream. The
+flight ran as nine long north-south legs with no cross-hatch, which leaves
+along-track drift with nothing to tie it against, and no ground control was
+placed.
+
+Facilities received a cartographic map of the campus lighting footprint,
+composed in ArcGIS Pro. The comparison below is a separate pass over the
+same frames: I rebuilt the dataset in Agisoft Metashape 1.8.4, Esri
+Drone2Map 2026.1.1, and OpenDroneMap 3.6.0, comparing conventional
+orthomosaics against conventional orthomosaics.
+
+## What was delivered
+
+Calibration is where the engines separate. Metashape aligned 1,309 of 1,370
+frames, 95.5 per cent, running 60,000 keypoints at full resolution with
+unlimited tiepoints. OpenDroneMap reached 92.8 per cent by keeping frames
+with as few as 22 observations. Drone2Map topped out at 924 of 1,366, about
+68 per cent, across four attempts at different settings. The roughly 440
+frames it drops are the feature-starved dark ones, and no combination of
+settings I tried recovered them.
+
+Coverage followed from that. Metashape reconstructed 149 hectares across
+both flown blocks. Drone2Map reconstructed 129 and never solved the south
+block. OpenDroneMap produced one full-site mosaic that was unusable, and the
+version that was usable had to be cropped to 71 hectares to fit in memory.
+
+The first test was a flat unlit roof, 48.6 metres across, sampled through
+the same code path in every product. Nothing on that surface emits light,
+so anything above zero is the engine's own behaviour in shadow.
+
+| Product | mean | median | P95 |
+|---|---|---|---|
+| Drone2Map | 3.44 | 1.71 | 5.29 |
+| Metashape 2023 | 7.74 | 4.41 | 15.56 |
+| OpenDroneMap, bounded rebuild | 1.92 | 1.18 | 3.29 |
+| OpenDroneMap, first full-site build | 9.40 | 1.23 | 57.95 |
+
+The second test was the whole overlap. Metashape and Drone2Map share 113.5
+hectares. I resampled both into a common frame at 50 centimetres and
+measured 4,540,751 paired samples, binning by Drone2Map's value so both
+products are read on the same pixels rather than on their own.
+
+| Ground, binned by Drone2Map | samples | Drone2Map | Metashape | ratio |
+|---|---|---|---|---|
+| dark, below 10 | 2,306,126 | 1.67 | 4.33 | 2.60× |
+| 10 to 60 | 1,288,910 | 29.00 | 69.67 | 2.40× |
+| lit, above 60 | 939,968 | 103.00 | 141.67 | 1.38× |
+| bright, above 120 | 360,694 | 160.67 | 183.33 | 1.14× |
+
+The ratio falls as the ground gets brighter. The engines agree to within 14
+per cent where light actually falls and separate to 2.6 times in shadow.
+That is a pedestal, and the single-roof result turns out to hold across 113
+hectares rather than one patch.
+
+### The colour decision
+
+Metashape's shadows carry a green cast. The obvious fix is a white balance,
+and it is not available here. Measured on 4.7 million dark-ground pixels at
+full resolution, the blue channel reads exactly zero in 84 per cent of
+them. A balance applies a per-channel gain, and gain multiplies, so zero
+stays zero. Neutralising those shadows would mean adding blue the sensor
+never recorded.
+
+What I used instead is a global chroma scale, moving each pixel toward its
+own luminance by a fixed factor. Because luminance is the measurement, and
+every channel moves toward the value being measured, luminance comes out
+unchanged. The largest deviation across the frame is 0.667 of a digital
+number, which is 8-bit rounding rather than the operation. Colour is
+presentation on these sheets. Luminance is not.
+
+### Two sheets
+
+The engine that produced the cleanest mosaic is not the engine that covered
+the site, so one sheet could not carry both claims honestly.
+
+<SheetFigure
+  src={sectionSheet}
+  alt="Portrait map sheet titled Campus at Night. A stat bar reads 1,366 frames, 3 h 43 m airborne, 236 ha flown, 2.43 cm ground sample, 3 engines compared, no ground control. Below it a large night orthomosaic of the campus core, two brighter insets down the right side, and a strip of three small dark panels along the bottom comparing the engines on one roof."
+  caption="Section sheet: 592 by 502 metres of the core, from Drone2Map at 2.43 cm."
+  linkLabel="Open the full section sheet"
+/>
+
+The section sheet shows 592 by 502 metres of the core from Drone2Map, with
+the lamp-string and sodium-district insets and the three-engine roof
+comparison.
+
+<SheetFigure
+  src={surveySheet}
+  alt="Portrait map sheet titled Campus at Night. A stat bar reads 95.5 per cent frames aligned, 149 ha reconstructed, 236 ha flown, 35.5 ha Metashape only, 2.6 times brighter in shadow, no ground control. Below it the full reconstruction on black: a large rectangular block of lit walkways at upper left, a second block at lower right containing a stadium bowl, empty ground between them, and a brightness histogram down the right side."
+  caption="Complete-survey sheet: all 149 reconstructed hectares, from Metashape at 3.21 cm."
+  linkLabel="Open the full complete-survey sheet"
+/>
+
+The complete-survey sheet shows all 149 hectares from Metashape, with a
+brightness distribution measured across all 1.45 billion reconstructed
+pixels, the south block that no other engine produced, and the campus-scale
+comparison above. Half of that reconstruction is darker than luminance 14
+while the mean sits at 49, which is what a mostly dark site with a few very
+bright places looks like as a statistic. Each sheet declares its own source,
+its own transforms, and the absence of ground control.
+
+## Outcome
+
+Facilities has a campus-wide view of what the conversion produces on the
+ground: coverage, gaps, and spill, at a resolution where individual lamp
+pools are legible.
+
+With no ground control at 2 a.m., neither product is the reference. The
+comparison identifies which failure mode each engine has. It does not
+establish which one is right.
+
+Three failures are worth recording because they cost the most time.
+OpenDroneMap would not texture the full 280 hectare site above roughly
+400,000 faces in 48 GB, and I lost four runs to out-of-memory kills before
+working out that mesh size was not the lever I thought it was.
+Reconstruction area was: bounding the run to 71 hectares let it texture
+600,000 faces in thirteen minutes, six times the mesh density of the build
+that had already succeeded. That fixed flat ground and did nothing for
+trees, which still tear, because a 2.5D mesh cannot represent them at all.
+Passing `--build-overviews` killed an otherwise complete run with exit code
+2, from a missing space in a GDAL command string in
+`opendm/orthophoto.py`, so the orthophoto gets written and the run then
+dies on the step after it. And Drone2Map's seamline blending, with colour
+balancing enabled, produced visibly worse output than leaving both switched
+off: seamline polygons showed as hard facets with parking stall lines
+running straight across brightness jumps. On imagery this close to the
+noise floor, scene-adaptive blending had nothing reliable to adapt to.
+
+Every difficulty above traces back to acquisition rather than processing.
+No parameter in any of the three engines addresses drift down a 1.6
+kilometre leg when there are no cross-strips to tie it against. What I would
+change is the flight: cross-hatch it, or fly it with camera tilt, or place
+ground control. The exposure is the other one. A single locked setting had
+to cover ground where 22 per cent of the reconstruction sits below luminance
+3 while 16.6 per cent of the brightest area runs above 240 out of 255. A
+bracketed pass, or a slower shutter on a second circuit, would have bought
+back both ends.
+
+Gamma 0.60 is applied identically to both sheets and to every panel on them.
+It is monotonic, so it never reorders two points, and every figure quoted
+here is raw luminance read before that curve. Both sheets are WGS 84 UTM
+12N.

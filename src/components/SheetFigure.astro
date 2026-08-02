@@ -1,0 +1,54 @@
+---
+/*
+  SheetFigure — a full map sheet as a body figure, with a route to the
+  full-resolution version.
+
+  Added 2026-08-01 for Campus at Night, whose two deliverables are tall
+  portrait DOCUMENTS rather than pictures: a header, a stat bar, the
+  orthomosaic, insets, legends, and a footer of flight and transform
+  parameters. Jackson's handling note was that these "shrink to nothing in
+  feeds and thumbnails", and that they should be cropped rather than scaled
+  down. The crops are what the cards and the gallery use. This component is
+  the other half of that: the project page is the one place with room for
+  the whole sheet, so it shows it whole.
+
+  Even at the 45rem column a 1657x2400 sheet renders about 8px type in its
+  footer, so the caption carries a plain link to the full derivative built
+  at native width. It is a real <a> to a real image — the same
+  no-JavaScript baseline the Maps lightbox falls back to, without the
+  lightbox, because this page has no dialog and does not need one.
+
+  `getImage` is called here rather than in the MDX because MDX has no
+  top-level await.
+*/
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	src: ImageMetadata;
+	alt: string;
+	/** Plain lead sentence naming the sheet and its source engine. */
+	caption: string;
+	/** Distinguishes this sheet's link from the other's for screen readers. */
+	linkLabel: string;
+}
+
+const { src, alt, caption, linkLabel } = Astro.props;
+
+const full = await getImage({ src, width: src.width });
+---
+
+<figure class="my-8">
+	<Image
+		src={src}
+		alt={alt}
+		widths={[768, 1200, 1657]}
+		sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
+		loading="lazy"
+		class="w-full border border-line bg-white"
+	/>
+	<figcaption class="mt-3 text-sm text-muted">
+		{caption}{' '}
+		<a href={full.src} aria-label={linkLabel}>Open the full sheet</a>.
+	</figcaption>
+</figure>

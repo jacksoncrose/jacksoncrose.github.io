@@ -106,4 +106,50 @@
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
   }
+
+  /*
+    Tables. Added 2026-08-01 for the Campus at Night engine comparison, the
+    first table on the site. Tailwind's preflight strips every default, so
+    a markdown table in a case-study body renders as unspaced text without
+    this.
+
+    Deliberately restrained: hairlines only, no zebra striping, no fills.
+    The one thing that is not decoration is `tabular-nums` — these tables
+    exist to be read DOWN a column of figures, and proportional digits make
+    unequal-width numerals that do not line up.
+  */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums;
+  }
+
+  caption {
+    margin-bottom: 0.5rem;
+    color: var(--color-muted);
+    font-size: var(--text-sm);
+    text-align: left;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.4rem 0.75rem 0.4rem 0;
+    text-align: left;
+    vertical-align: baseline;
+  }
+
+  th {
+    color: var(--color-muted);
+    font-weight: 600;
+  }
+
+  /* Figures read right-aligned; the first column is a label and does not. */
+  td:not(:first-child),
+  th:not(:first-child) {
+    text-align: right;
+    padding-right: 0;
+    padding-left: 0.75rem;
+  }
 }

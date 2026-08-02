@@ -22,6 +22,6 @@ year: 2026
 tools: ["ArcGIS Pro"]
 image: "../../assets/images/rooney-democrat-hillshade.png"
 alt: "Portrait-format division map of Democrat on a grayscale hillshade: crimson ranch roads and dashed fence lines crossing the Democrat North, Middle, and South parcels inside a cased orange ranch boundary, with creeks labeled in blue."
-order: 2
+order: 4
 draft: true
 ---
