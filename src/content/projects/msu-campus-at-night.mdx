@@ -45,6 +45,15 @@
 #    him rather than inferred, and he confirmed. This is the FIRST entry on
 #    the site to use yearEnd; the year range now renders through
 #    yearLabel() so the card and the page agree.
+# 2026-08-03: SHEETS REVISED (v18 / fa2) AT HIS REQUEST and the copy here
+# given the same pass. What changed: north-up marks by both scale bars
+# (north-up confirmed by him); the survey sheet gained the section extent
+# as a locator, three place labels (BRICK BREEDEN FIELDHOUSE is his
+# correction of my "Bobcat Stadium" guess), and the reworked wording. HIS
+# INSTRUCTION ON REGISTER: no "sensor's noise floor" — "Nobody knows what
+# the sensor's noise floor is." Plain description instead. The de-AI pass
+# removed the aphoristic constructions ("X is the measurement", "That is a
+# pedestal, not noise") while leaving every figure exactly as sourced.
 title: "Campus at Night"
 summary: "Overnight UAV survey of the MSU campus, rebuilt through three photogrammetry engines. 1,366 exposure-locked frames over 236 hectares flown; 149 hectares is the most any engine reconstructed, and the two that came closest disagree by 2.6 times in shadow."
 year: 2023
@@ -63,18 +72,6 @@ cover:
   alt: "Night orthomosaic of the Montana State University core: a street grid picked out by white-green lamp pools along walkways and parking lots, a dark oval quad at centre, and amber sodium-vapor lighting across the block at lower right."
   caption: "The campus core at 2.43 cm ground sample, from Drone2Map."
 order: -1
-# Every value restated from the body copy below; see the stats schema note.
-# 236 flown and 149 reconstructed stay SEPARATE, with labels that keep them
-# apart — never imply the whole flown area was mapped.
-stats:
-  - value: "1,366"
-    label: "frames, one overnight flight"
-  - value: "236 ha"
-    label: "flown"
-  - value: "149 ha"
-    label: "reconstructed, the most of any engine"
-  - value: "3"
-    label: "photogrammetry engines compared"
 draft: false
 ---
 
@@ -91,9 +88,10 @@ a campus-wide picture of what that lighting actually produces on the
 ground.
 
 Night imagery is a hard case for the method that would produce that
-picture. Feature detectors need texture, and at ISO 12800 most of the
-ground sits at the sensor's noise floor. The lit paths carry features. The
-lawns between them carry almost none.
+picture. Photogrammetry engines work by matching texture between frames,
+and in imagery this dark most of the ground barely registers: the lit
+paths carry detail the engines can match, while the lawns between them
+carry almost none.
 
 ## Approach
 
@@ -102,8 +100,8 @@ between 1:14 and 4:58 a.m., collecting 1,366 frames across 236 hectares at
 roughly 123 metres above ground. The Sony a6000 ran with the exposure
 locked at 1/60 second, ISO 12800, f/3.2, so every frame is directly
 comparable to every other frame. No engine applied colour balancing or
-scene-adaptive normalisation at any stage. Brightness on the finished
-sheets is a measurement rather than a rendering decision.
+scene-adaptive normalisation at any stage, which is what lets brightness
+on the finished sheets be read as a measurement.
 
 Two things about the acquisition constrain everything downstream. The
 flight ran as nine long north-south legs with no cross-hatch, which leaves
@@ -154,10 +152,10 @@ products are read on the same pixels rather than on their own.
 | lit, above 60 | 939,968 | 103.00 | 141.67 | 1.38× |
 | bright, above 120 | 360,694 | 160.67 | 183.33 | 1.14× |
 
-The ratio falls as the ground gets brighter. The engines agree to within 14
-per cent where light actually falls and separate to 2.6 times in shadow.
-That is a pedestal, and the single-roof result turns out to hold across 113
-hectares rather than one patch.
+The ratio falls steadily as the ground gets brighter. The engines agree to
+within 14 per cent where light actually falls and separate to 2.6 times in
+shadow, which is the signature of a pedestal rather than noise, and the
+single-roof result holds across 113 hectares rather than one patch.
 
 ### The colour decision
 
@@ -172,8 +170,7 @@ What I used instead is a global chroma scale, moving each pixel toward its
 own luminance by a fixed factor. Because luminance is the measurement, and
 every channel moves toward the value being measured, luminance comes out
 unchanged. The largest deviation across the frame is 0.667 of a digital
-number, which is 8-bit rounding rather than the operation. Colour is
-presentation on these sheets. Luminance is not.
+number, which is 8-bit rounding rather than the operation.
 
 ### Two sheets
 
@@ -193,7 +190,7 @@ comparison.
 
 <SheetFigure
   src={surveySheet}
-  alt="Portrait map sheet titled Campus at Night. A stat bar reads 95.5 per cent frames aligned, 149 ha reconstructed, 236 ha flown, 35.5 ha Metashape only, 2.6 times brighter in shadow, no ground control. Below it the full reconstruction on black: a large rectangular block of lit walkways at upper left, a second block at lower right containing a stadium bowl, empty ground between them, and a brightness histogram down the right side."
+  alt="Portrait map sheet titled Campus at Night. A stat bar reads 95.5 per cent frames aligned, 149 ha reconstructed, 236 ha flown, 35.5 ha Metashape only, 2.6 times brighter in shadow, no ground control. Below it the full reconstruction on black: a large rectangular block of lit walkways at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, empty ground between them, and a brightness histogram down the right side. Labels name Romney Quad, Brick Breeden Fieldhouse, and S 11th Ave, and an outlined rectangle marks the extent of the companion section sheet."
   caption="Complete-survey sheet: all 149 reconstructed hectares, from Metashape at 3.21 cm."
   linkLabel="Open the full complete-survey sheet"
 />
@@ -213,8 +210,8 @@ ground: coverage, gaps, and spill, at a resolution where individual lamp
 pools are legible.
 
 With no ground control at 2 a.m., neither product is the reference. The
-comparison identifies which failure mode each engine has. It does not
-establish which one is right.
+comparison identifies which failure mode each engine has, not which one is
+right.
 
 Three failures are worth recording because they cost the most time.
 OpenDroneMap would not texture the full 280 hectare site above roughly

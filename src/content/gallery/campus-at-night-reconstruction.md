@@ -3,6 +3,12 @@
 # (source bbox 74,608-2300,2862 of 3160x3784). Same crop-not-scale rule as
 # its companion; the whole sheet is on the project page.
 #
+# 2026-08-03: RECUT from the revised fa2 sheet at the SAME bbox. The fa2
+# map panel carries three place labels (kept — they read as part of the
+# map) and the section-sheet locator rectangle (HIDDEN for this crop, one
+# CSS line in a variant render: a rectangle tagged "section sheet" would
+# dangle without the sheet around it). Reversing that is one re-render.
+#
 # THE BLACK GROUND BETWEEN THE TWO BLOCKS IS DESCRIBED, NOT EXPLAINED.
 # 00_summary.md says 236 ha were flown in two blocks and Metashape
 # reconstructed 149 across both. It does not say whether the gap is unflown
@@ -13,9 +19,9 @@ blurb: "Everything Metashape reconstructed, out of 236 hectares flown. It was th
 year: 2023
 tools: ["UAV", "Agisoft Metashape"]
 image: "../../assets/images/campus-at-night-reconstruction.jpg"
-alt: "Irregular night orthomosaic of the MSU campus on black: a large rectangular block of lit walkways and parking lots at upper left, a second block at lower right containing a stadium bowl, and empty black ground between them."
+alt: "Irregular night orthomosaic of the MSU campus on black: a large rectangular block of lit walkways and parking lots at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, and empty black ground between them. Labels name Romney Quad, Brick Breeden Fieldhouse, and S 11th Ave."
 group: "campus-at-night"
-groupOrder: 2
+groupOrder: 3
 order: 3
 draft: false
 ---

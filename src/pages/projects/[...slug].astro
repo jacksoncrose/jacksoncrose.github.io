@@ -15,7 +15,6 @@ import { getCollection, render } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Todo from '../../components/Todo.astro';
-import StatBand from '../../components/StatBand.astro';
 import { published, clientLabel, yearLabel } from '../../lib/content';
 import { site } from '../../site';
 
@@ -111,12 +110,6 @@ const projectLd = {
 		<p class="mt-6 text-lg">{project.data.summary}</p>
 
 		{
-			/* Key figures, restated from the body for the skimming reader.
-			   See StatBand and the schema comment for the rules. */
-			project.data.stats && <StatBand stats={project.data.stats} />
-		}
-
-		{
 			project.data.links.length > 0 && (
 				<ul class="mt-4 space-y-1 text-sm">
 					{project.data.links.map((l) => (
@@ -134,16 +127,12 @@ const projectLd = {
 			   would have shipped the full committed derivative to every visitor. */
 			project.data.cover && (
 				<figure class="mt-8">
-					{/* view-transition-name pairs with the card that led here
-					    (CardCover's transitionName) so the thumbnail morphs
-					    into this cover in supporting browsers. */}
 					<Image
 						src={project.data.cover.src}
 						alt={project.data.cover.alt}
 						widths={[768, 1200, 1600]}
 						sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
 						class="w-full border border-line bg-white"
-						style={`view-transition-name: cover-${project.id}`}
 					/>
 					{/* Caption and credit (2026-07-30). A cover that is someone
 					    else's photograph has to be able to carry attribution
@@ -177,7 +166,7 @@ const projectLd = {
 		  delivered, outcome — enforced by review, not by the schema, since
 		  Markdown bodies are free-form.
 		*/}
-		<div class="case-body mt-8 space-y-4 text-base">
+		<div class="mt-8 space-y-4 text-base">
 			<Content />
 		</div>
 
@@ -185,31 +174,76 @@ const projectLd = {
 			<a href="/projects">All projects</a>
 		</p>
 	</article>
+
+	{/*
+	  Sheet lightbox (2026-08-03). SheetFigure's image is a real <a> to the
+	  full derivative; this dialog upgrades that click into an in-page
+	  enlargement, same progressive-enhancement bargain as the Maps page.
+	  It differs from the Maps lightbox in one way that matters for the
+	  Campus at Night sheets: those are 2400px portrait DOCUMENTS, and
+	  object-contain inside the viewport would render their footer type
+	  unreadably small — the opposite of what opening them is for. So the
+	  dialog SCROLLS instead: the image stays at its natural size and the
+	  dialog pans over it, which is the zoom. The close button is sticky so
+	  it stays reachable while scrolled; Esc and backdrop click also close.
+	  Pages without a data-lightbox link ship the markup unused and the
+	  script finds nothing to wire — a few hundred bytes, no behaviour.
+	*/}
+	<dialog
+		id="sheet-lightbox"
+		aria-label="Enlarged figure"
+		class="m-auto max-h-[92vh] max-w-[94vw] overflow-auto bg-transparent p-0 backdrop:bg-ink/85"
+	>
+		<button
+			id="sheet-lightbox-close"
+			type="button"
+			aria-label="Close enlarged figure"
+			class="sticky top-2 float-right mr-2 flex h-10 w-10 items-center justify-center bg-white text-2xl leading-none text-ink"
+		>
+			×
+		</button>
+		<img
+			id="sheet-lightbox-img"
+			src=""
+			alt=""
+			class="max-w-none border border-line bg-white"
+		/>
+	</dialog>
+
+	<script>
+		const dialog = document.getElementById(
+			'sheet-lightbox',
+		) as HTMLDialogElement;
+		const img = document.getElementById(
+			'sheet-lightbox-img',
+		) as HTMLImageElement;
+		const closeBtn = document.getElementById('sheet-lightbox-close')!;
+
+		document.querySelectorAll<HTMLAnchorElement>('a[data-lightbox]').forEach(
+			(link) => {
+				link.addEventListener('click', (event) => {
+					event.preventDefault();
+					img.src = link.href;
+					img.alt = link.dataset.alt ?? '';
+					dialog.showModal();
+					dialog.scrollTop = 0;
+				});
+			},
+		);
+
+		closeBtn.addEventListener('click', () => dialog.close());
+
+		/* Click on the backdrop (the dialog element itself, outside the
+		   image and button) closes. Esc is handled natively. */
+		dialog.addEventListener('click', (event) => {
+			if (event.target === dialog) dialog.close();
+		});
+
+		/* Drop the src on close so a slow-loading image never flashes
+		   stale content on the next open. */
+		dialog.addEventListener('close', () => {
+			img.src = '';
+			img.alt = '';
+		});
+	</script>
 </Base>
-
-<style>
-	/*
-	  Kicker treatment for the case-study section heads (2026-08-03,
-	  Jackson's call). The body h2s — Problem, Approach, What was
-	  delivered, Outcome (Challenge on the MCSC page) — carried no
-	  font-size (preflight resets headings to inherit), so they rendered
-	  as small bold serif run-ins. This makes the register deliberate:
-	  sans, uppercase, letterspaced, in the accent — the one notch of
-	  typographic color on a site that otherwise reserves the accent for
-	  links. Contrast: accent on paper is 4.75:1, which passes AA even at
-	  this size.
-
-	  :global() because the h2s come out of rendered Markdown, which a
-	  scoped selector cannot reach. Body h3s (the embedded comparison's
-	  heading) are unaffected.
-	*/
-	.case-body :global(h2) {
-		margin-top: 2.5rem;
-		font-family: var(--font-sans);
-		font-size: var(--text-sm);
-		font-weight: 600;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--color-accent);
-	}
-</style>

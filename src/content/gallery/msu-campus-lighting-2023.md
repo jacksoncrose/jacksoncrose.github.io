@@ -22,7 +22,7 @@ tools: ["UAV", "Agisoft Metashape", "ArcGIS Pro"]
 image: "../../assets/images/msu-campus-lighting-2023.png"
 alt: "Night orthomosaic of the Montana State University campus on a dark street basemap, walkways and parking lots traced by white-green lamp pools, with amber sodium-vapor lighting around the housing loops at upper left."
 group: "campus-at-night"
-groupOrder: 3
+groupOrder: 5
 order: 3
 draft: false
 ---

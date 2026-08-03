@@ -12,11 +12,16 @@
   the other half of that: the project page is the one place with room for
   the whole sheet, so it shows it whole.
 
-  Even at the 45rem column a 1657x2400 sheet renders about 8px type in its
-  footer, so the caption carries a plain link to the full derivative built
-  at native width. It is a real <a> to a real image — the same
-  no-JavaScript baseline the Maps lightbox falls back to, without the
-  lightbox, because this page has no dialog and does not need one.
+  2026-08-03: the sheet itself is now a real <a> to the full derivative,
+  carrying `data-lightbox` so the project page's dialog (in
+  pages/projects/[...slug].astro) can upgrade the click into an in-page
+  enlargement — the Maps-page bargain: the baseline is a plain link that
+  works with no JavaScript, and the script only intercepts it. Asked for by
+  Jackson as part of the Campus at Night update. Even at the 45rem column a
+  1657x2400 sheet renders about 8px type in its footer, so readers need a
+  way into the sheet at full size without leaving the page. The caption
+  keeps a plain link to the same derivative as the labelled, obvious route;
+  the anchor around the image carries the screen-reader label instead.
 
   `getImage` is called here rather than in the MDX because MDX has no
   top-level await.
@@ -39,16 +44,18 @@ const full = await getImage({ src, width: src.width });
 ---
 
 <figure class="my-8">
-	<Image
-		src={src}
-		alt={alt}
-		widths={[768, 1200, 1657]}
-		sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
-		loading="lazy"
-		class="w-full border border-line bg-white"
-	/>
+	<a href={full.src} data-lightbox data-alt={alt} aria-label={linkLabel}>
+		<Image
+			src={src}
+			alt={alt}
+			widths={[768, 1200, 1657]}
+			sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
+			loading="lazy"
+			class="w-full border border-line bg-white"
+		/>
+	</a>
 	<figcaption class="mt-3 text-sm text-muted">
 		{caption}{' '}
-		<a href={full.src} aria-label={linkLabel}>Open the full sheet</a>.
+		<a href={full.src}>Open the full sheet</a>.
 	</figcaption>
 </figure>
