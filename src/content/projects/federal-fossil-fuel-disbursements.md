@@ -38,6 +38,14 @@ cover:
   # value (#E7E1D3) and was untouched. If this d3 figure is ever
   # regenerated, keep the white ground.
   fit: "contain"
+# Every value restated from the body copy below; see the stats schema note.
+stats:
+  - value: "14"
+    label: "states, onshore and offshore"
+  - value: "~$2B"
+    label: "in average yearly disbursements"
+  - value: "FY16–20"
+    label: "with a decade of context"
 draft: false
 ---
 

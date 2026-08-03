@@ -153,3 +153,26 @@
     padding-left: 0.75rem;
   }
 }
+
+/*
+  Cross-document view transitions (2026-08-03, visual pass, Jackson's
+  approval). Pure CSS: both pages opt in via this at-rule and supporting
+  browsers (Chromium, Safari) crossfade between pages; card cover images
+  additionally MORPH into the case-study cover they lead to, via matching
+  `view-transition-name`s set where the images are rendered (CardCover's
+  transitionName prop, and the cover figure in projects/[...slug].astro).
+
+  This is NOT JavaScript and adds zero bytes of script. Firefox and older
+  browsers ignore the at-rule entirely and navigate with a hard cut,
+  exactly as before — the same progressive-enhancement bargain as the
+  lightbox and the wipe. prefers-reduced-motion turns the whole thing off.
+*/
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}

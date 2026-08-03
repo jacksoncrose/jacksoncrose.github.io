@@ -126,6 +126,17 @@ const selected = selectedIds
  *
  * The school map at 1.294 and the campus crop at 1.176 lose a little
  * height each, which costs nothing on either.
+ *
+ * ENLARGED 2026-08-03 (visual pass): the row is now 2 + 1 — the school
+ * and Foglands thumbnails at 4:3 in a two-column grid (~22rem each,
+ * up from ~14rem), and the campus crop as a full-width 12:5 band under
+ * them. The band slot went to campus deliberately: it is the one pick
+ * with NO map furniture (a panel crop, no title or legend), so a wide
+ * cinematic cut cannot slice anything — the same test that rejected
+ * square thumbnails here, which cut the school map's title on both ends.
+ * At the wider 4:3 slots the school title now fits whole and Foglands
+ * still centres; re-rendered at true size 2026-08-03 to check both.
+ * The picks, their order, and the three-kinds rule are unchanged.
  */
 const mapsTeaserIds = [
 	'rural-school-access-current',
@@ -248,6 +259,9 @@ const mapsTeaser = mapsTeaserIds
 										src={project.data.cover.src}
 										alt={project.data.cover.alt}
 										fit={project.data.cover.fit}
+										transitionName={
+											project.data.hasPage ? `cover-${project.id}` : undefined
+										}
 									/>
 								)}
 								<div class="p-5">
@@ -345,16 +359,20 @@ const mapsTeaser = mapsTeaserIds
 				<a
 					href="/maps"
 					aria-label={`Map gallery — ${gallery.length} maps`}
-					class="mt-6 grid grid-cols-3 gap-4"
+					class="mt-6 grid grid-cols-2 gap-4"
 				>
-					{mapsTeaser.map((entry) => (
+					{mapsTeaser.map((entry, i) => (
 						<Image
 							src={entry.data.image}
 							alt={entry.data.alt}
-							widths={[240, 480, 720]}
-							sizes="(min-width: 48rem) 20rem, 33vw"
+							widths={i === 2 ? [480, 800, 1200] : [240, 480, 720]}
+							sizes={i === 2 ? '(min-width: 48rem) 45rem, calc(100vw - 3rem)' : '(min-width: 48rem) 22rem, 50vw'}
 							loading="lazy"
-							class="aspect-[4/3] w-full border border-line bg-white object-cover"
+							class={
+								i === 2
+									? 'col-span-2 aspect-[12/5] w-full border border-line bg-white object-cover'
+									: 'aspect-[4/3] w-full border border-line bg-white object-cover'
+							}
 						/>
 					))}
 				</a>

@@ -15,6 +15,7 @@ import { getCollection, render } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Todo from '../../components/Todo.astro';
+import StatBand from '../../components/StatBand.astro';
 import { published, clientLabel, yearLabel } from '../../lib/content';
 import { site } from '../../site';
 
@@ -110,6 +111,12 @@ const projectLd = {
 		<p class="mt-6 text-lg">{project.data.summary}</p>
 
 		{
+			/* Key figures, restated from the body for the skimming reader.
+			   See StatBand and the schema comment for the rules. */
+			project.data.stats && <StatBand stats={project.data.stats} />
+		}
+
+		{
 			project.data.links.length > 0 && (
 				<ul class="mt-4 space-y-1 text-sm">
 					{project.data.links.map((l) => (
@@ -127,12 +134,16 @@ const projectLd = {
 			   would have shipped the full committed derivative to every visitor. */
 			project.data.cover && (
 				<figure class="mt-8">
+					{/* view-transition-name pairs with the card that led here
+					    (CardCover's transitionName) so the thumbnail morphs
+					    into this cover in supporting browsers. */}
 					<Image
 						src={project.data.cover.src}
 						alt={project.data.cover.alt}
 						widths={[768, 1200, 1600]}
 						sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
 						class="w-full border border-line bg-white"
+						style={`view-transition-name: cover-${project.id}`}
 					/>
 					{/* Caption and credit (2026-07-30). A cover that is someone
 					    else's photograph has to be able to carry attribution
@@ -166,7 +177,7 @@ const projectLd = {
 		  delivered, outcome — enforced by review, not by the schema, since
 		  Markdown bodies are free-form.
 		*/}
-		<div class="mt-8 space-y-4 text-base">
+		<div class="case-body mt-8 space-y-4 text-base">
 			<Content />
 		</div>
 
@@ -175,3 +186,30 @@ const projectLd = {
 		</p>
 	</article>
 </Base>
+
+<style>
+	/*
+	  Kicker treatment for the case-study section heads (2026-08-03,
+	  Jackson's call). The body h2s — Problem, Approach, What was
+	  delivered, Outcome (Challenge on the MCSC page) — carried no
+	  font-size (preflight resets headings to inherit), so they rendered
+	  as small bold serif run-ins. This makes the register deliberate:
+	  sans, uppercase, letterspaced, in the accent — the one notch of
+	  typographic color on a site that otherwise reserves the accent for
+	  links. Contrast: accent on paper is 4.75:1, which passes AA even at
+	  this size.
+
+	  :global() because the h2s come out of rendered Markdown, which a
+	  scoped selector cannot reach. Body h3s (the embedded comparison's
+	  heading) are unaffected.
+	*/
+	.case-body :global(h2) {
+		margin-top: 2.5rem;
+		font-family: var(--font-sans);
+		font-size: var(--text-sm);
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-accent);
+	}
+</style>

@@ -25,6 +25,14 @@ cover:
   # cover at natural aspect, not cropped.
   fit: "contain"
 order: 1
+# Every value restated from the body copy below; see the stats schema note.
+stats:
+  - value: "2.3B"
+    label: "acres classified"
+  - value: "3,144"
+    label: "counties, 50 states and DC"
+  - value: "12"
+    label: "ownership categories"
 draft: false
 ---
 

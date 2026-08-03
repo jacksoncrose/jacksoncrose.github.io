@@ -60,25 +60,69 @@ interface Props {
 	/** "contain" for a self-contained figure, "cover" for a picture. */
 	fit?: 'cover' | 'contain';
 	eager?: boolean;
+	/**
+	 * Column width variant. Added 2026-08-03, Jackson's call, relaxing the
+	 * one-card-shape rule to one SHAPE in three SIZES: the Projects index
+	 * lets tier 1 run wider and tier 3 tighter, so hierarchy is carried by
+	 * presentation as well as by the headings — the same move as leading
+	 * tier 3 with Campus at Night via `order`. Every other card site keeps
+	 * the default "md", which is exactly the previous rendering.
+	 *
+	 * `sizes` MOVES WITH THE WIDTH (see the note above): scaled width =
+	 * (column / 1.5 clamp) x 1.778 worst-case aspect, so 24rem for the
+	 * 20rem column, 19rem for 16rem, 16rem for the 13rem column.
+	 */
+	size?: 'sm' | 'md' | 'lg';
+	/**
+	 * View-transition name linking this cover to the same image on the
+	 * page the card leads to (2026-08-03). Pass `cover-<project.id>` from
+	 * card sites whose target page renders the cover with the same name;
+	 * the browser then morphs card thumbnail into page cover instead of
+	 * hard-cutting. Must be unique per page — never give two cards on one
+	 * page the same name. Purely additive: browsers without
+	 * cross-document view transitions ignore it.
+	 */
+	transitionName?: string;
 }
 
-const { src, alt, fit = 'cover', eager = false } = Astro.props;
+const {
+	src,
+	alt,
+	fit = 'cover',
+	eager = false,
+	size = 'md',
+	transitionName,
+} = Astro.props;
 
 const BOX_MIN = 0.85;
 const BOX_MAX = 1.5;
 const box = Math.min(BOX_MAX, Math.max(BOX_MIN, src.width / src.height));
+
+const COLUMN = {
+	sm: 'sm:w-52',
+	md: 'sm:w-64',
+	lg: 'sm:w-80',
+}[size];
+const SIZES = {
+	sm: '(min-width: 640px) 16rem, calc(100vw - 3rem)',
+	md: '(min-width: 640px) 19rem, calc(100vw - 3rem)',
+	lg: '(min-width: 640px) 24rem, calc(100vw - 3rem)',
+}[size];
 ---
 
 <div
-	class="w-full border-b border-line sm:flex sm:w-64 sm:shrink-0 sm:items-center sm:border-r sm:border-b-0"
+	class:list={[
+		'w-full border-b border-line sm:flex sm:shrink-0 sm:items-center sm:border-r sm:border-b-0',
+		COLUMN,
+	]}
 >
 	<Image
 		src={src}
 		alt={alt}
 		widths={[320, 640, 1024]}
-		sizes="(min-width: 640px) 19rem, calc(100vw - 3rem)"
+		sizes={SIZES}
 		loading={eager ? 'eager' : 'lazy'}
-		style={`--box: ${box.toFixed(4)}`}
+		style={`--box: ${box.toFixed(4)}${transitionName ? `; view-transition-name: ${transitionName}` : ''}`}
 		class:list={[
 			'w-full sm:aspect-[var(--box)]',
 			fit === 'contain' ? 'object-contain' : 'object-cover',

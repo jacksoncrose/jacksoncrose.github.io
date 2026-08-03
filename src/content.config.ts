@@ -113,6 +113,30 @@ const projects = defineCollection({
         .optional(),
       /** Manual ordering within a tier (lower first). */
       order: z.number().default(0),
+      /*
+        Key figures for the case-study page, rendered by StatBand as a
+        band of large numerals under the summary. Added 2026-08-03 for the
+        skimming reader the brief names: the pages buried their most
+        quotable numbers in paragraph three.
+
+        EVERY VALUE MUST ALREADY APPEAR IN THE ENTRY'S OWN BODY COPY. The
+        band restates the page; it is not a place to introduce a figure,
+        and the no-revenue-figures rule for the estimator applies here
+        exactly as it does to prose. Three or four entries; more reads as
+        a dashboard, which this site is not.
+      */
+      stats: z
+        .array(
+          z.object({
+            /** The numeral, kept short: "1,366", "2.3B", "1:17k–1:53k". */
+            value: z.string().max(12),
+            /** Lowercase label under it, e.g. "frames, one overnight flight". */
+            label: z.string().max(48),
+          }),
+        )
+        .min(2)
+        .max(4)
+        .optional(),
       /** Drafts never render anywhere. */
       draft: z.boolean().default(false),
     }),

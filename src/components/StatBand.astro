@@ -1,0 +1,65 @@
+---
+/*
+  StatBand — a case study's key figures as a row of large numerals.
+
+  Added 2026-08-03. The audience skims: agency program managers and PIs
+  deciding whether to read at all. Every page already carried its most
+  quotable numbers, but buried in paragraph three of the body. This band
+  restates two to four of them under the summary, where a skimmer actually
+  looks. The schema (content.config.ts) enforces the rule that matters:
+  every value must already appear in the entry's own body copy — the band
+  is a restatement, never a source.
+
+  DESIGN: hairline rules above and below, serif numerals, small
+  letterspaced labels, muted. `tabular-nums` for the same reason the table
+  styles use it — these are figures, and proportional digits ruin their
+  alignment. No color, no boxes, no icons: the numerals carry the weight,
+  which is the difference between an editorial figure row and a dashboard.
+
+  Zero JavaScript, and a <dl> so the value–label pairing survives a screen
+  reader: each numeral is a <dt>'s definition, not a floating big number.
+  The spec wants dt before dd inside each group, so the label comes first
+  in the DOM and column-reverse puts the numeral on top visually — the
+  axe audit checks dl structure, so do not "fix" the order in the markup.
+*/
+interface Props {
+	stats: { value: string; label: string }[];
+}
+
+const { stats } = Astro.props;
+---
+
+<dl class="stat-band mt-8 flex flex-wrap gap-x-6 gap-y-5 border-y border-line py-5">
+	{
+		/* justify-end on each stat, because the column is REVERSED:
+		   flex-end is the visual top, and without it a stat whose label
+		   wraps to two lines drops its numeral below its neighbours'. */
+		stats.map((stat) => (
+			<div class="stat flex flex-col-reverse justify-end">
+				<dt class="mt-1 text-xs tracking-wide text-muted">{stat.label}</dt>
+				<dd class="font-serif text-3xl leading-tight text-ink">{stat.value}</dd>
+			</div>
+		))
+	}
+</dl>
+
+<style>
+	.stat-band {
+		font-variant-numeric: tabular-nums;
+	}
+
+	/* Remove the browser's default dd indent; the flex column handles
+	   layout. */
+	.stat dd {
+		margin: 0;
+	}
+
+	/* Equal flexible columns so four stats share one row at the 45rem
+	   content column (4 x ~8.5rem + gaps fits inside 720px) and two share
+	   a row on a phone. Labels wrap inside their column instead of
+	   pushing the row apart. */
+	.stat {
+		flex: 1 1 8.5rem;
+		min-width: 0;
+	}
+</style>

@@ -15,8 +15,22 @@ hasPage: true
 cover:
   src: "../../assets/images/rooney-north-hillshade.png"
   alt: "Division map of Rooney North on a grayscale hillshade: a cased orange boundary enclosing white owned parcels and hatched public lease, crimson ranch roads threading between labeled pastures, with aerial-imagery inset panels for the headquarters and subdivided fields."
+# Every value restated from the body copy below; see the stats schema note.
+stats:
+  - value: "4"
+    label: "division maps, one symbol system"
+  - value: "1:17k–1:53k"
+    label: "a threefold spread in scale"
+  - value: "10 m"
+    label: "DEM behind the custom hillshade"
 draft: false
 ---
+
+import CompareFigure from '../../components/CompareFigure.astro';
+import SheetFigure from '../../components/SheetFigure.astro';
+import foglandsHillshade from '../../assets/images/rooney-foglands-hillshade.png';
+import foglandsImagery from '../../assets/images/rooney-foglands-imagery.jpg';
+import poster from '../../assets/images/rooney-ranches-poster.jpg';
 
 ## Problem
 
@@ -47,6 +61,26 @@ ground from private and public lease, and a consistent point taxonomy for
 water and range infrastructure. A crew member who learns to read one sheet
 can read all of them.
 
+{/* Labels, blurbs, and alt text reuse the cleared gallery entries for this
+    pair verbatim — no new claims. The pair registers: both 2400x1553. */}
+
+<CompareFigure
+	title="Foglands"
+	meta="One division on its two basemaps · 1:29,000"
+	a={{
+		image: foglandsHillshade,
+		alt: 'Division map of Foglands on a grayscale hillshade: white and hatched parcels inside a cased orange boundary, crimson ranch roads following incised drainages, and pasture names such as Deer Gulch and Bachelor Gulch set along the ridges they describe.',
+		label: 'Hillshade',
+		blurb: 'Foglands at 1:29,000, where the pasture names follow the ground — Deer Gulch, Rocky Hollow, Bachelor Gulch, Horse Creek. Hatched private lease sits inside the ranch boundary.',
+	}}
+	b={{
+		image: foglandsImagery,
+		alt: 'Division map of Foglands over aerial imagery: dark conifer stands filling the gulches against open tan rangeland and cultivated fields, with the cased orange ranch boundary, white ranch roads, and the same pasture labels as the hillshade version.',
+		label: 'Imagery',
+		blurb: 'The same division over aerial imagery, where timber, meadow, and cultivated ground separate out — the distinction the hillshade cannot carry.',
+	}}
+/>
+
 Where scale broke down, aerial imagery inset panels with leader lines give
 the headquarters complexes and the tightly subdivided fields on Rooney
 North the detail they need without compressing the main map. The maps also
@@ -67,6 +101,15 @@ could choose what read best at wall scale; and an interactive Google Earth
 environment built from the same dataset and transferred to the ranch's
 ownership, giving the team a way to explore their own data without GIS
 software or a license.
+
+{/* Caption wording from the cleared gallery entry for the poster. */}
+
+<SheetFigure
+	src={poster}
+	alt="Wall-scale poster of the four Rooney Angus divisions outlined in orange over satellite imagery of central Montana, pasture boundaries and ranch roads within each, and a headquarters star on Rooney South."
+	caption="The wall-scale poster at 1:29,000: all four divisions in regional context on satellite imagery, produced in alternate label treatments so the ranch could choose what read best."
+	linkLabel="Open the full Rooney Angus Ranches poster"
+/>
 
 Foundational digitizing and GIS construction were carried out by GCF
 staff. I directed that work and produced all final cartographic and

@@ -57,6 +57,15 @@ interface Props {
 	/** Accessible name for the carousel's scroll region. */
 	label?: string;
 	class?: string;
+	/**
+	 * First card spans both grid columns (2026-08-03, Jackson's call).
+	 * Exists for the lead run on Maps: three ungrouped entries in a
+	 * two-column grid stranded the third card alone in its row, and the
+	 * fix doubles as a full-width moment for "All federal land" at
+	 * order 0. Grid blocks only — a carousel or a pair stack has no
+	 * columns to span.
+	 */
+	featureFirst?: boolean;
 }
 
 const {
@@ -68,6 +77,7 @@ const {
 	hasPair = false,
 	label = 'Maps',
 	class: className = '',
+	featureFirst = false,
 } = Astro.props;
 
 const GRID = 'grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2';
@@ -142,8 +152,8 @@ const pairMeta = (entry: Entry) =>
 		</div>
 	) : (
 		<ul class={`${hasPair ? STACK : GRID} ${className}`}>
-			{items.map((item) => (
-				<li>
+			{items.map((item, index) => (
+				<li class={featureFirst && !hasPair && index === 0 ? 'sm:col-span-2' : ''}>
 					{item.kind === 'pair' ? (
 						<MapCompare
 							title={item.a.data.title}
@@ -177,6 +187,7 @@ const pairMeta = (entry: Entry) =>
 							fullSrc={fullById.get(item.entry.id)!.src}
 							eager={eagerIds.has(item.entry.id)}
 							headingLevel={headingLevel}
+							wide={featureFirst && !hasPair && index === 0}
 						/>
 					)}
 				</li>

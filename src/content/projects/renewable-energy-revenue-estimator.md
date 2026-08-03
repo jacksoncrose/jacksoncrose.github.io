@@ -41,6 +41,17 @@ links:
   - label: "Open the estimator"
     url: "https://az-re-revenue-full-draft.netlify.app/"
 hasPage: true
+# Every value restated from the body copy below; see the stats schema note.
+# NO revenue figures here, same as everywhere else on this entry.
+stats:
+  - value: "15"
+    label: "counties, one standardized layer"
+  - value: "6"
+    label: "technologies covered"
+  - value: "672"
+    label: "validation scenarios, matched to the cent"
+  - value: "25 yr"
+    label: "revenue stream, by taxing authority"
 draft: false
 ---
 

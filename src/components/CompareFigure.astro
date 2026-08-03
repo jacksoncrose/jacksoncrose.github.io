@@ -1,0 +1,61 @@
+---
+/*
+  CompareFigure — MapCompare embedded in a case-study body.
+
+  Added 2026-08-03 for the Rooney page, which described one symbol system
+  across two basemaps in prose while the site's wipe comparison of exactly
+  that sat one nav item away on Maps. A case study is the one place a
+  reader is already invested; showing the comparison where the text makes
+  the claim is the strongest move the site has.
+
+  This exists because MDX has no top-level await: MapCompare wants each
+  side's `fullSrc` (the native-width derivative that is the no-JS link
+  target), and building that URL takes `getImage`. Same reason SheetFigure
+  computes its full link here rather than in the MDX.
+
+  THE TWO IMAGES MUST BE REGISTERED — same extent, same layout, same pixel
+  dimensions. That rule is MapCompare's, restated here because a body
+  embed bypasses the gallery's pair mechanism that usually enforces the
+  discipline. Check any new pair pixel-wise before embedding it.
+
+  ONE DIFFERENCE FROM THE MAPS PAGE: the "View larger" links inside
+  MapCompare carry data-lightbox, and project pages have no lightbox
+  dialog. The links degrade to what they already are underneath — real
+  <a>s to the full-size derivative — so a click opens the image directly.
+  That is the lightbox's own no-JS baseline, acceptable here on purpose.
+  If a second page ever wants the dialog, move the lightbox out of
+  maps.astro rather than duplicating it.
+*/
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import MapCompare from './MapCompare.astro';
+
+interface Side {
+	image: ImageMetadata;
+	alt: string;
+	label: string;
+	blurb: string;
+}
+
+interface Props {
+	title: string;
+	meta: string;
+	a: Side;
+	b: Side;
+}
+
+const { title, meta, a, b } = Astro.props;
+
+const fullA = await getImage({ src: a.image, width: a.image.width });
+const fullB = await getImage({ src: b.image, width: b.image.width });
+---
+
+<div class="my-8">
+	<MapCompare
+		title={title}
+		meta={meta}
+		a={{ ...a, fullSrc: fullA.src }}
+		b={{ ...b, fullSrc: fullB.src }}
+		headingLevel={3}
+	/>
+</div>

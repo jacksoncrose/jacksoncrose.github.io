@@ -96,6 +96,7 @@ const eagerIds = new Set(gallery.slice(0, 2).map((entry) => entry.id));
 						hasPair={block.hasPair}
 						fullById={fullById}
 						eagerIds={eagerIds}
+						featureFirst={blockIndex === 0}
 						class={blockIndex === 0 ? 'mt-8' : 'mt-16'}
 					/>
 				) : (

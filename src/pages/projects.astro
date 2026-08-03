@@ -66,6 +66,15 @@ const tiers = [
 		tiers.map(({ tier, heading }) => {
 			const inTier = projects.filter((p) => p.data.tier === tier);
 			if (inTier.length === 0) return null;
+			/*
+			  Tier weight (2026-08-03, Jackson's call): tier 1 renders on the
+			  wide CardCover column with roomier padding and a larger title,
+			  tier 3 on the tight column, tier 2 unchanged. Hierarchy was
+			  carried by the headings alone; now presentation carries it too.
+			  The card SHAPE is identical in all three — image left, one
+			  column — which is what the relaxed one-card-shape rule permits.
+			*/
+			const coverSize = tier === 1 ? 'lg' : tier === 3 ? 'sm' : 'md';
 			return (
 				<section class="mt-12 border-t border-line pt-8">
 					<h2 class="text-3xl">{heading}</h2>
@@ -82,10 +91,14 @@ const tiers = [
 											src={project.data.cover.src}
 											alt={project.data.cover.alt}
 											fit={project.data.cover.fit}
+											size={coverSize}
+											transitionName={
+												project.data.hasPage ? `cover-${project.id}` : undefined
+											}
 										/>
 									)}
-									<div class="p-5">
-										<h3 class="text-xl">
+									<div class={tier === 1 ? 'p-6' : tier === 3 ? 'p-4' : 'p-5'}>
+										<h3 class={tier === 1 ? 'text-2xl' : 'text-xl'}>
 											{target ? (
 												<a href={target.href} class="after:absolute after:inset-0">
 													{project.data.title}

@@ -21,6 +21,14 @@ cover:
   src: "../../assets/images/montana-hall-north-elevation.png"
   alt: "Rendered 3D model of Montana Hall viewed from the north: symmetric red-brick facade with an arched central entrance, three cross-gables, hipped slate roof, and central spire, flanked by stylized low-poly trees."
 order: 5
+# Every value restated from the body copy below; see the stats schema note.
+stats:
+  - value: "2.05M"
+    label: "points in the source scan"
+  - value: "36,661"
+    label: "triangles, every one procedural"
+  - value: "~600 KB"
+    label: "one self-contained HTML file"
 draft: false
 ---
 
