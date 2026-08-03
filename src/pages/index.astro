@@ -5,14 +5,24 @@
     above the fold — name, roles (one compressed line), identity sentence,
                      portrait photo (added 2026-07-29, Jackson's request),
                      contact — NO hero visual since 2026-07-30
-    below         — Tools strip (cards), selected projects (cards),
+    below         — Selected projects (cards), Tools strip (cards),
                     Maps teaser row
+
+  SECTION ORDER CHANGED 2026-08-02, his call: "on the home page, let's
+  start with projects up top and then tools, then maps." It finishes a
+  decision already half-made — the NAV moved to Projects-first on
+  2026-07-30 "because the case studies are the spine of the site", and the
+  body of Home kept Tools on top until now. Home's order is deliberately
+  NOT the nav order (nav is Projects, Maps, Tools, About); Home is a
+  narrative and puts the proof first, the live things you can click
+  second, and the gallery last.
 
   HERO REMOVED 2026-07-30 — Jackson's pick ("B — no hero") from four
   rendered options (keep estimator w/ better capture / no hero /
   federal-land choropleth / Rooney map banner) after he said he didn't
   love the estimator screenshot. The contour background and portrait
-  carry the fold now; visual proof of work starts at the Tools cards.
+  carry the fold now; visual proof of work starts at the Selected
+  projects cards.
   This supersedes the 2026-07-28 "hero is the estimator interface"
   decision. If a hero ever returns, it is his call — the runner-up was
   a tighter estimator capture (rows 7–10 images).
@@ -31,7 +41,7 @@ import Todo from '../components/Todo.astro';
 import { Image } from 'astro:assets';
 import CardCover from '../components/CardCover.astro';
 import { getCollection } from 'astro:content';
-import { published, clientLabel, cardTarget } from '../lib/content';
+import { published, clientLabel, cardTarget, yearLabel } from '../lib/content';
 import { site } from '../site';
 import portraitImage from '../assets/images/jackson-rose-portrait.jpg';
 
@@ -66,15 +76,61 @@ const selected = selectedIds
 /**
  * Maps teaser — three thumbnails instead of a bare count (Jackson,
  * 2026-07-29). Picked for range across the three kinds of map work:
- * the national land-ownership choropleth, the overnight campus
- * orthomosaic, and a custom-hillshade ranch map. Swap ids to change
- * the picks; entries must exist in the gallery collection and not be
- * drafts, or the slot silently drops.
+ * a policy analysis, a client cartography job, and a UAS orthomosaic.
+ * Swap ids to change the picks; entries must exist in the gallery
+ * collection and not be drafts, or the slot silently drops.
+ *
+ * REFRESHED 2026-08-02, his call. The old set was
+ * federal-land-share-2024, msu-campus-lighting-2023 and
+ * rooney-north-hillshade, and two things were wrong with it.
+ *
+ * ONE: `federal-land-share-2024.png` WAS RENDERING TWICE ON HOME. It is
+ * also the National Land Ownership cover, and that project is in
+ * `selectedIds` above, so the same image appeared as a project card and
+ * again in this row. **Check this before adding any id here** — the
+ * Selected projects covers are currently the estimator map, the White
+ * Sulphur Springs aerial, and federal land share.
+ *
+ * TWO: the set predated the school-access and Campus at Night work, so
+ * the row advertised none of what a visitor now finds on that page.
+ *
+ * The three kinds are preserved, not abandoned: the school hex grid is
+ * the policy analysis, Rooney stays as the client cartography, and the
+ * Campus at Night section crop replaces the older campus map as the UAS
+ * orthomosaic. **Campus at Night still reaches Home ONLY through this
+ * row** — it is deliberately absent from Selected projects because UAS
+ * is secondary and does not lead (AGENTS.md). Keeping it here and out of
+ * there is the whole point; do not promote it.
+ *
+ * Order matches the gallery, so the row previews the page in the order a
+ * reader meets those blocks: schools (order 1), Rooney (2), campus (3).
+ *
+ * CROPS, and this is why the Rooney slot is FOGLANDS rather than Rooney
+ * North. The row is `aspect-[4/3] object-cover`, so a 1.545 sheet loses
+ * 14% of its width. On the North sheet that cut lands on the title AND on
+ * the legend block, so the thumbnail read "ROONEY NORT" with a legend
+ * sliced mid-word at the other edge. **Foglands centres its title**, so
+ * the same 14% falls on empty terrain and the outer edge of a legend, and
+ * nothing reads as broken.
+ *
+ * Settled 2026-08-02 by rendering all six candidates at the true
+ * thumbnail size (229px, shown at 2x) rather than reasoning about them.
+ * The rejected alternatives, so they are not retried: shifting
+ * `object-position` to crop from the right restores the North title but
+ * slices the legend instead and makes this one thumbnail behave
+ * differently from its neighbours; cropping from the left is worse;
+ * the imagery version of North clips identically. **This SUPERSEDES the
+ * 2026-07-31 call to leave the clipped North title alone** — that was
+ * about the gallery, and he reversed it for this row on seeing it at
+ * size.
+ *
+ * The school map at 1.294 and the campus crop at 1.176 lose a little
+ * height each, which costs nothing on either.
  */
 const mapsTeaserIds = [
-	'federal-land-share-2024',
-	'msu-campus-lighting-2023',
-	'rooney-north-hillshade',
+	'rural-school-access-current',
+	'rooney-foglands-hillshade',
+	'campus-at-night-section',
 ];
 const mapsTeaser = mapsTeaserIds
 	.map((id) => gallery.find((g) => g.id === id))
@@ -142,6 +198,84 @@ const mapsTeaser = mapsTeaserIds
 	</section>
 
 	{/*
+	  ---------- selected projects ----------
+	  Card treatment settled with Jackson 2026-07-30 (rendered mockups, his
+	  pick, Home only). Each entry is a bordered card; when a page exists the
+	  whole card is clickable via a stretched link. The meta line is year +
+	  client only — the role line stays on the Projects index, where there is
+	  room for it (the MCSC role is a full sentence). Client names still pass
+	  through clientLabel(), the single naming gate.
+
+	  Small card image (AGENTS.md visual-hierarchy decision 2026-07-25):
+	  tier-1 cards carry policy visuals so the page's image count favors the
+	  primary work.
+
+	  Image column widened 13rem → 16rem on 2026-07-30. The image has no
+	  fixed aspect and stretches to card height, so at 13rem a landscape
+	  photograph was being cropped to roughly 208×260 — a portrait slice of
+	  a horizontal picture, which is what made the White Sulphur Springs
+	  aerial look wrong here. At 16rem the crop lands near square and the
+	  photograph survives it. If a future card's text runs much longer,
+	  check this crop again rather than assuming it still holds.
+	*/}
+	<section class="mt-16 border-t border-line pt-8">
+		<h2 class="text-3xl">Selected projects</h2>
+		{
+			selected.length < selectedIds.length && (
+				<Todo note="Selected-projects slots still pending: the renewable energy revenue estimator card (entry not yet created) and the MCSC community benefits agreement page (draft, body written with Jackson)." />
+			)
+		}
+		{
+			selected.length > 0 && (
+				<ul class="mt-6 grid gap-5">
+					{selected.map((project) => {
+						const client = clientLabel(project.data);
+						const target = cardTarget(project.data, project.id);
+						const meta = [
+							yearLabel(project.data),
+							client,
+							/* Tells the reader the click leaves the site. Without it
+							   an external card title looks identical to one that
+							   opens a case study here. */
+							target?.external ? 'Live tool' : null,
+						]
+							.filter(Boolean)
+							.join(' · ');
+						return (
+							<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
+								{project.data.cover && (
+									<CardCover
+										src={project.data.cover.src}
+										alt={project.data.cover.alt}
+										fit={project.data.cover.fit}
+									/>
+								)}
+								<div class="p-5">
+									<h3 class="text-xl">
+										{target ? (
+											<a
+												href={target.href}
+												class="after:absolute after:inset-0"
+											>
+												{project.data.title}
+											</a>
+										) : (
+											project.data.title
+										)}
+									</h3>
+									{meta && <p class="mt-1 text-sm text-muted">{meta}</p>}
+									<p class="mt-2 text-base">{project.data.summary}</p>
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			)
+		}
+		<p class="mt-4 text-sm"><a href="/projects">All projects</a></p>
+	</section>
+
+	{/*
 	  ---------- tools strip ----------
 	  Cards + links settled with Jackson 2026-07-30 (rendered mockups, his
 	  pick): tools render as linked cards with cover screenshots (the tools
@@ -199,84 +333,6 @@ const mapsTeaser = mapsTeaserIds
 			)
 		}
 		<p class="mt-4 text-sm"><a href="/tools">All tools</a></p>
-	</section>
-
-	{/*
-	  ---------- selected projects ----------
-	  Card treatment settled with Jackson 2026-07-30 (rendered mockups, his
-	  pick, Home only). Each entry is a bordered card; when a page exists the
-	  whole card is clickable via a stretched link. The meta line is year +
-	  client only — the role line stays on the Projects index, where there is
-	  room for it (the MCSC role is a full sentence). Client names still pass
-	  through clientLabel(), the single naming gate.
-
-	  Small card image (AGENTS.md visual-hierarchy decision 2026-07-25):
-	  tier-1 cards carry policy visuals so the page's image count favors the
-	  primary work.
-
-	  Image column widened 13rem → 16rem on 2026-07-30. The image has no
-	  fixed aspect and stretches to card height, so at 13rem a landscape
-	  photograph was being cropped to roughly 208×260 — a portrait slice of
-	  a horizontal picture, which is what made the White Sulphur Springs
-	  aerial look wrong here. At 16rem the crop lands near square and the
-	  photograph survives it. If a future card's text runs much longer,
-	  check this crop again rather than assuming it still holds.
-	*/}
-	<section class="mt-16 border-t border-line pt-8">
-		<h2 class="text-3xl">Selected projects</h2>
-		{
-			selected.length < selectedIds.length && (
-				<Todo note="Selected-projects slots still pending: the renewable energy revenue estimator card (entry not yet created) and the MCSC community benefits agreement page (draft, body written with Jackson)." />
-			)
-		}
-		{
-			selected.length > 0 && (
-				<ul class="mt-6 grid gap-5">
-					{selected.map((project) => {
-						const client = clientLabel(project.data);
-						const target = cardTarget(project.data, project.id);
-						const meta = [
-							project.data.year?.toString(),
-							client,
-							/* Tells the reader the click leaves the site. Without it
-							   an external card title looks identical to one that
-							   opens a case study here. */
-							target?.external ? 'Live tool' : null,
-						]
-							.filter(Boolean)
-							.join(' · ');
-						return (
-							<li class="relative border border-line bg-white transition-colors focus-within:border-accent hover:border-accent sm:flex">
-								{project.data.cover && (
-									<CardCover
-										src={project.data.cover.src}
-										alt={project.data.cover.alt}
-										fit={project.data.cover.fit}
-									/>
-								)}
-								<div class="p-5">
-									<h3 class="text-xl">
-										{target ? (
-											<a
-												href={target.href}
-												class="after:absolute after:inset-0"
-											>
-												{project.data.title}
-											</a>
-										) : (
-											project.data.title
-										)}
-									</h3>
-									{meta && <p class="mt-1 text-sm text-muted">{meta}</p>}
-									<p class="mt-2 text-base">{project.data.summary}</p>
-								</div>
-							</li>
-						);
-					})}
-				</ul>
-			)
-		}
-		<p class="mt-4 text-sm"><a href="/projects">All projects</a></p>
 	</section>
 
 	{/* ---------- maps teaser ---------- */}
