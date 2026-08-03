@@ -20,7 +20,7 @@ import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
 import CardCover from '../components/CardCover.astro';
 import { getCollection } from 'astro:content';
-import { published, listed, clientLabel, cardTarget } from '../lib/content';
+import { published, listed, clientLabel, cardTarget, yearLabel } from '../lib/content';
 
 /*
   `listed()` is what keeps tool-backed personal work off this index.
@@ -96,7 +96,7 @@ const tiers = [
 										</h3>
 										<p class="mt-1 text-sm text-muted">
 											{[
-												project.data.year?.toString(),
+												yearLabel(project.data),
 												project.data.role,
 												client,
 												target?.external ? 'Live tool' : null,

@@ -15,7 +15,7 @@ import { getCollection, render } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Todo from '../../components/Todo.astro';
-import { published, clientLabel } from '../../lib/content';
+import { published, clientLabel, yearLabel } from '../../lib/content';
 import { site } from '../../site';
 
 export async function getStaticPaths() {
@@ -32,11 +32,9 @@ const { project } = Astro.props;
 const { Content } = await render(project);
 
 const client = clientLabel(project.data);
-const years = [project.data.year, project.data.yearEnd]
+const meta = [yearLabel(project.data), project.data.role, client]
 	.filter(Boolean)
-	.join('–');
-
-const meta = [years, project.data.role, client].filter(Boolean).join(' · ');
+	.join(' · ');
 
 /*
   Per-page share image (2026-07-30). A project with a cover previews as

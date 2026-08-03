@@ -252,6 +252,21 @@ export function galleryBlocks<T extends GalleryLike>(
   });
 }
 
+/**
+ * The year a card or page should print: "2023–2026" when an entry spans
+ * years, "2023" when it does not, null when the year is unconfirmed.
+ *
+ * Added 2026-08-02 with Campus at Night's `yearEnd`. It is the FIRST entry
+ * to use that field, and until now only the detail-page template rendered
+ * it — the Projects index and the Home cards printed `year` alone, so the
+ * same entry would have read "2023" on its card and "2023–2026" on its
+ * page. Three call sites, one implementation, so they cannot drift.
+ */
+export function yearLabel(data: { year?: number; yearEnd?: number }): string | null {
+  if (!data.year) return null;
+  return data.yearEnd ? `${data.year}–${data.yearEnd}` : String(data.year);
+}
+
 export type ClientFields = {
   client?: string;
   clientPermission: 'granted' | 'pending' | 'anonymize' | 'not-applicable';
