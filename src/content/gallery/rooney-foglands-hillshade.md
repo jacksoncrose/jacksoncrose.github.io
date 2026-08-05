@@ -1,10 +1,12 @@
 ---
+# 2026-08-05 de-AI pass: blurb reworded (em dash out, "names follow the
+# ground" out). KEEP IN SYNC with the copy in rooney-ranch-atlas.mdx.
 # Added 2026-07-31 from _staging/rooney-extras/Foglands HS.png, copied to
 # the _staging root as rooney-foglands-hillshade.png so the pipeline owns
 # it. Chosen for the paired group because the terrain IS the story here:
 # the pasture names follow the drainages.
 title: "Foglands"
-blurb: "Foglands at 1:29,000, where the pasture names follow the ground — Deer Gulch, Rocky Hollow, Bachelor Gulch, Horse Creek. Hatched private lease sits inside the ranch boundary."
+blurb: "Foglands at 1:29,000. The pastures are named for the terrain: Deer Gulch, Rocky Hollow, Bachelor Gulch, Horse Creek. Hatched private lease sits inside the ranch boundary."
 year: 2026
 tools: ["ArcGIS Pro"]
 image: "../../assets/images/rooney-foglands-hillshade.png"

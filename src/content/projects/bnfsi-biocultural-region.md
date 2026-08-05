@@ -1,4 +1,8 @@
 ---
+# 2026-08-05 de-AI pass: "Design choices reinforced..." topic sentence
+# cut; "built that picture twice over" flattened to the two deliverables
+# (his call: don't say it twice). "Contracted independently" stays — it is
+# the settled substitute for the LLC name.
 # Condensed from Jackson's write-up, supplied 2026-07-28 for the site,
 # and UPDATED same day from his revised summary: timeline now runs to
 # 2024, with a second phase (custom raster-function relief; geodatabase
@@ -35,9 +39,9 @@ initiative at Montana State University working to restore intertribal food
 sovereignty across the Northwestern Plains and Northern Rockies. The
 initiative needed a way to show the region it serves as a biocultural
 homeland rather than a set of administrative jurisdictions, and no single
-dataset describes a biocultural region. Contracted independently, I built
-that picture twice over: as an interactive public web map, and as a
-large-format static map published on the BNFSI website.
+dataset describes a biocultural region. Contracted
+independently, I built an interactive public web map and a large-format
+static map published on the BNFSI website.
 
 ## Approach
 
@@ -57,7 +61,7 @@ conventions, so reconciling reserves, reservations, trust lands, and
 tribal and band names into unified layers required substantial cleanup and
 a merged authority table.
 
-Design choices reinforced the initiative's framing. The published web map
+The published web map
 omits state, provincial, and federal boundaries so the region reads as a
 network of relationships rather than a set of borders. Symbology was drawn
 from cultural imagery, including a hand-scanned medicine wheel vectorized

@@ -1,4 +1,10 @@
 ---
+# 2026-08-05 SITEWIDE DE-AI PASS (flag-first, his picks): the surviving
+# "pedestal" and bare "noise floor" wording removed per the register rule;
+# the OpenDroneMap passage rewritten AT HIS DIRECTION to drop the
+# lost-runs-to-OOM account while keeping the memory constraint ("they
+# don't need to know I lost runs to memory"). "Full-site build" referent
+# arithmetic-checked: 600k/71ha vs 400k/280ha = 5.9x. Figures unchanged.
 # REWRITTEN 2026-08-01 from Jackson's own portfolio handoff. THE SOURCE OF
 # TRUTH IS C:\Users\jacks\Projects\NightLighting\portfolio\00_summary.md,
 # his instruction: "Do not restate numbers from memory, re-derive
@@ -152,10 +158,10 @@ products are read on the same pixels rather than on their own.
 | lit, above 60 | 939,968 | 103.00 | 141.67 | 1.38× |
 | bright, above 120 | 360,694 | 160.67 | 183.33 | 1.14× |
 
-The ratio falls steadily as the ground gets brighter. The engines agree to
-within 14 per cent where light actually falls and separate to 2.6 times in
-shadow, which is the signature of a pedestal rather than noise, and the
-single-roof result holds across 113 hectares rather than one patch.
+The ratio falls steadily as the ground gets brighter. Where light actually
+falls, the engines agree to within 14 per cent; in shadow they separate to
+2.6 times. That matches the roof result, measured here across 113 hectares
+instead of one building.
 
 ### The colour decision
 
@@ -214,12 +220,10 @@ comparison identifies which failure mode each engine has, not which one is
 right.
 
 Three failures are worth recording because they cost the most time.
-OpenDroneMap would not texture the full 280 hectare site above roughly
-400,000 faces in 48 GB, and I lost four runs to out-of-memory kills before
-working out that mesh size was not the lever I thought it was.
-Reconstruction area was: bounding the run to 71 hectares let it texture
-600,000 faces in thirteen minutes, six times the mesh density of the build
-that had already succeeded. That fixed flat ground and did nothing for
+OpenDroneMap ran into memory limits at this scale: in 48 GB it would not
+texture the full 280 hectare site above roughly 400,000 faces. Restricting
+the reconstruction to 71 hectares let it texture 600,000 faces in thirteen
+minutes, six times the mesh density of the full-site build. That fixed flat ground and did nothing for
 trees, which still tear, because a 2.5D mesh cannot represent them at all.
 Passing `--build-overviews` killed an otherwise complete run with exit code
 2, from a missing space in a GDAL command string in
@@ -227,8 +231,9 @@ Passing `--build-overviews` killed an otherwise complete run with exit code
 dies on the step after it. And Drone2Map's seamline blending, with colour
 balancing enabled, produced visibly worse output than leaving both switched
 off: seamline polygons showed as hard facets with parking stall lines
-running straight across brightness jumps. On imagery this close to the
-noise floor, scene-adaptive blending had nothing reliable to adapt to.
+running straight across brightness jumps. Both work by reading the
+imagery around each seam and adjusting to it, and frames this dark give
+them almost nothing to read.
 
 Every difficulty above traces back to acquisition rather than processing.
 No parameter in any of the three engines addresses drift down a 1.6

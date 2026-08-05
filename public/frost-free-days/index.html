@@ -978,11 +978,6 @@ function statewide() {
     only). Colors show the median frost-free season, 1991&ndash;2025.
     ${nb} stations just across the state line support the contours and can appear
     in nearest-station results, but are not drawn on the map.</p>
-    <p class="note"><b>Read this before planting by it:</b> statistics belong to the
-    station, not to your field. Montana freeze timing swings hard with elevation and
-    cold-air drainage; a valley floor can run weeks behind a bench a mile away.
-    Compare your site's elevation with the station's and lean toward the cautious
-    (9-in-10) dates for anything hard to replace.</p>
     <div class="foot">Frost-free period = span between the last spring freeze and the
     first fall freeze at the chosen threshold (daily minimum). Computed from
     GHCN-Daily observations via RCC-ACIS; probability levels are empirical
@@ -1119,7 +1114,7 @@ function showNearest(latlng) {
     <h2>Nearest stations</h2>
     <div class="meta">to ${latlng.lat.toFixed(3)}, ${latlng.lng.toFixed(3)} (${threshold}&deg;F)</div>
     ${rows}
-    <p class="note"><b>Distance is not similarity.</b> A station a few miles away but a
+    <p class="note"><b>A nearby station can still be a poor match.</b> A station a few miles away but a
     few hundred feet lower can run a much longer season than your site; cold air
     drains downhill and pools on valley floors on calm clear nights. Match elevation
     and setting, not just distance.</p>`;

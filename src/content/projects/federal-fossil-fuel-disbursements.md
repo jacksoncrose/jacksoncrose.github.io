@@ -1,4 +1,5 @@
 ---
+# 2026-08-05 de-AI pass: "questions with real consequences" tightened.
 # Facts verified against the published report PDF (June 2021):
 # https://headwaterseconomics.org/wp-content/uploads/HE_Federal_Fossil_Fuel_Disbursements_Report.pdf
 # The PDF's byline for Jackson uses an abandoned LLC name ("SunRose
@@ -56,7 +57,7 @@ fossil fuel leasing and production on federal lands and waters —
 disbursements that averaged roughly $2 billion a year over the preceding
 decade. That money matters most in the states that receive the most of it,
 and how it arrives, how much it swings year to year, and what state budgets
-do with it are questions with real consequences for the communities involved.
+do with it all carry consequences for the communities involved.
 
 ## Approach
 

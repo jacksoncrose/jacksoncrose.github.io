@@ -1,4 +1,9 @@
 ---
+# 2026-08-05 de-AI pass, his picks: the two-sentence closer ("...would
+# defend hardest...") DELETED — the footprint story already appears in
+# Approach with the numbers; page now ends on the world-space reuse note.
+# Problem's mesh/decimate/occlusion sentences reworded for a general
+# audience at his direction.
 # Condensed from Jackson's own case-study write-up, supplied 2026-07-29
 # (full write-up in _staging/montana-hall-extras/). Tier 3, personal side
 # project, his call same day. Scan-derivative publication cleared by
@@ -37,11 +42,12 @@ draft: false
 Montana Hall is the 1896 landmark at the center of the MSU campus, and
 this started as a question I wanted to answer for myself: what does it
 take to turn a laser scan into a building model you can actually edit?
-The default route is to mesh the point cloud and decimate it, which
-produces something photorealistic and almost useless. Scan meshes are
-heavy, they carry every occlusion and scanner artifact as permanent
-geometry, and if you later learn the cornice height is wrong there is
-nothing to change; the number is baked into a million triangles.
+The usual route is to have software wrap the scanned points in a surface
+automatically, which produces a model that is photorealistic but nearly
+impossible to edit. Models built that way are heavy, they preserve every
+blind spot and scanner error as permanent geometry, and if you later learn
+the cornice height is wrong there is nothing to change; the number is
+baked into a million triangles.
 
 ## Approach
 
@@ -84,7 +90,4 @@ The scan-to-dimensions pipeline is building-agnostic: point the crop at a
 different structure and it produces elevations and wall-plane
 measurements the same way. The first 256 lines of the model code are a
 reusable, building-neutral kit, and fixed coordinate conventions mean a
-second building would land in the same world space as the first. The
-part of this project I would defend hardest is not the rendering. It is
-that a plausible footprint survived in the model until an instrument
-measured it.
+second building would land in the same world space as the first.

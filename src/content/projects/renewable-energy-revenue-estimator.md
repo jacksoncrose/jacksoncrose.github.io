@@ -1,4 +1,6 @@
 ---
+# 2026-08-05 de-AI pass: "Two caveats up front." is Jackson's own wording;
+# spatial/fiscal halves line is the plainer option he picked.
 # Card-only entry created 2026-07-29; promoted to a full case study
 # 2026-07-31 after Jackson supplied the methods report
 # (Methods_Report_Master.docx, revised July 2026, prepared under
@@ -76,8 +78,7 @@ Governor's Office of Resiliency.
 
 ## Approach
 
-The work had a spatial half and a fiscal half, and the point was to make
-them answer to each other.
+The work had a spatial half and a fiscal half, built to check each other.
 
 On the spatial side, every taxing jurisdiction in Arizona was standardized
 into one consistent statewide layer: counties and school districts from
@@ -103,7 +104,7 @@ depreciated cost, with straight-line depreciation over the useful life the
 Department adopts for each technology and a floor at ten percent. Nuclear
 is valued under a different statute and is handled separately.
 
-Two things get disclosed rather than smoothed over. The twenty percent
+Two caveats up front. The twenty percent
 valuation treatment is scheduled to sunset at the end of 2040; the model
 assumes it is extended, as it has been before, and says so, because if it
 lapses as written the assessed values in later years would be roughly five

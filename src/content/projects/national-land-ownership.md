@@ -1,4 +1,6 @@
 ---
+# 2026-08-05 de-AI pass: staged Q&A opener replaced with Jackson's own
+# stem ("County land ownership regimes influence..."), ending his pick.
 # Condensed from Jackson's own portfolio write-up, supplied 2026-07-27
 # (full text in project knowledge: eps-land-ownership/). Tier 2 per Jackson.
 # CLIENT NAMING GRANTED by Jackson 2026-07-27 ("Just name HW. It's fine."),
@@ -38,9 +40,9 @@ draft: false
 
 ## Problem
 
-Who owns the land in your county? The answer matters for everything from
-school funding to wildfire planning, but no single dataset answers it
-cleanly. I built the land ownership layer behind Headwaters Economics'
+County land ownership regimes influence everything from school funding to
+wildfire planning, but the answer to who owns what is spread across
+datasets that overlap and conflict. I built the land ownership layer behind Headwaters Economics'
 Economic Profile System (EPS), a free reporting tool used by thousands of
 communities, planners, and researchers across the country.
 
