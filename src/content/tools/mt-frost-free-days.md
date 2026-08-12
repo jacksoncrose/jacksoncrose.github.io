@@ -22,16 +22,40 @@ url: "https://jacksoncrose.github.io/frost-free-days/"
 # is self-contained in public/frost-free-days/, so a cloud session can serve
 # it locally and drive it; no browser round trip to Jackson is needed.
 #
-# The capture hides the two floating .legend control boxes and the Leaflet
-# control container, and is cropped to the data bounding box. It carries NO
-# basemap tiles (the container cannot reach the tile server) — the Season
-# surface covers them anyway. Same filename as before, so `npm run images`
-# re-ingests it. Stays PNG per the maps-and-screenshots rule; checked for
-# banding, mean abs diff 0.32/255, because the surface is classed rather
-# than a smooth gradient. 91 KB -> 331 KB.
+# COVER REPLACED AGAIN 2026-08-05, his call in the card-covers pass that
+# also redid the land-ownership explorer cover: the flat capture left white
+# corners where the state outline met the card frame. This one is the
+# Season surface at its native transparency over Esri World Hillshade
+# (z9 tiles fetched through Jackson's browser — the container cannot
+# reach tile servers — mosaicked in-page, contrast-stretched gain 2.6),
+# surrounding land ghosted, the dashed state boundary kept, framed with
+# terrain margin on all sides so nothing in the card box is blank.
+# COMPOSITED, not a raw capture, but it closely matches the app's Terrain
+# base, which became the DEFAULT the same day, so the card previews what
+# the app opens to. A first bake from a coarse offline relief (~2 km/px)
+# was rejected by Jackson the same day and replaced with this one.
+# Capture recipe otherwise per 2026-07-31 (Season on, legends and control
+# container hidden — plus any floating button left inside #map, which is
+# what the old crop step cut out); Web Mercator bounds queried from the
+# live map object registered the relief.
+#
+# FORMAT SWITCHED PNG → JPEG, measured per the Rooney rule: the draped
+# relief is continuous tone, so palette PNG ballooned to 2.67 MB while
+# JPEG at the pipeline's q82 is 603 KB at 3.77/255 with no visible
+# difference at delivered card size. _staging original is a q95 JPEG.
+# The stale mt-frost-free-days-app.png (repo derivative and _staging
+# original) was moved to _to_delete/ at the repo root for Jackson to
+# empty — cloud sessions cannot delete files on his disk.
+#
+# THE HOSTED APP WAS EDITED IN PLACE AGAIN 2026-08-05: Terrain is now the
+# default base layer (baseTerrain at init, baseName default, hash treats
+# "terrain" as the unwritten default and records b=light instead).
+# MIRRORED 2026-08-06 into MontanaFFD/code/build_webapp.py together with
+# the de-AI edits; rebuild verified byte-equivalent. The mirror rule
+# still applies to any future in-place edit.
 cover:
-  src: "../../assets/images/mt-frost-free-days-app.png"
-  alt: "Montana shaded by median frost-free season length: pale through the southwestern mountains where the season is shortest, deepening across the eastern plains, with several hundred climate stations plotted as small circles."
+  src: "../../assets/images/mt-frost-free-days-app.jpg"
+  alt: "Montana's median frost-free season draped over shaded-relief terrain: pale blues through the southwestern mountains where the season is shortest, deepening across the eastern plains, with several hundred stations as small circles and the surrounding states ghosted."
 order: 4
 draft: false
 ---

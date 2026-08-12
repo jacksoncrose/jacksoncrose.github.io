@@ -885,8 +885,11 @@ const baseTerrain = L.tileLayer(
   "https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}", {
   attribution: "Esri, USGS, NOAA", maxZoom: 15, crossOrigin: "anonymous",
 });
-baseLight.addTo(map);
-let baseName = "light";
+// Terrain is the default base since 2026-08-05 (Jackson's call, made when the
+// portfolio card gained a relief-draped cover): the card now previews what the
+// app opens to. "Light" stays one click away in the layers control.
+baseTerrain.addTo(map);
+let baseName = "terrain";
 map.on("baselayerchange", (e) => { baseName = e.layer === baseTerrain ? "terrain" : "light"; writeHash(); });
 L.control.layers({ "Light": baseLight, "Terrain": baseTerrain }, null,
                  { position: "bottomright" }).addTo(map);
@@ -1328,7 +1331,7 @@ function writeHash() {
   p.set("t", threshold);
   if (contourLevel !== "off") p.set("c", contourLevel);
   if (surfChoice !== "off") p.set("s", surfChoice);
-  if (baseName !== "light") p.set("b", baseName);
+  if (baseName !== "terrain") p.set("b", baseName);
   if (selected != null) p.set("u", selected);
   p.set("ll", c.lat.toFixed(3) + "," + c.lng.toFixed(3));
   p.set("z", String(Math.round(map.getZoom() * 4) / 4));
@@ -1353,7 +1356,7 @@ function applyHash() {
     const b = document.querySelector(`#sseg button[data-s="${s}"]`);
     if (b) b.click();
   }
-  if (p.get("b") === "terrain") { map.removeLayer(baseLight); baseTerrain.addTo(map); }
+  if (p.get("b") === "light") { map.removeLayer(baseTerrain); baseLight.addTo(map); }
   const ll = (p.get("ll") || "").split(",").map(Number);
   const hasView = ll.length === 2 && ll.every(isFinite) && isFinite(Number(p.get("z")));
   if (hasView) map.setView(ll, Number(p.get("z")));
