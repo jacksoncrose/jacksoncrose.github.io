@@ -1,4 +1,6 @@
 ---
+# 2026-08-13, his call: groupOrder 2 -> 3, half of the reorder recorded
+# on the reconstruction entry.
 # 2026-08-13 audit flag 13, his call, TWICE: he chose the full plain-words
 # rendering of the sheet's class names — "sodium-class" as the warm orange
 # type, "cool" as white and blue-white — so that reading is HIS and must
@@ -26,7 +28,7 @@ tools: ["UAV", "Esri Drone2Map"]
 image: "../../assets/images/campus-at-night-sodium-district.jpg"
 alt: "Aerial night close-up of a curved parking loop lit amber by high-pressure sodium lamps: cars in angled stalls along the curve, cracked pavement reading clearly in the warm light, and a dark lawn at lower left."
 group: "campus-at-night"
-groupOrder: 2
+groupOrder: 3
 order: 3
 draft: false
 ---

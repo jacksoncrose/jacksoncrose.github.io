@@ -1,4 +1,9 @@
 ---
+# 2026-08-13, his call: RETITLED from "The map Facilities received" —
+# his words: people don't know what Facilities is or means. The title now
+# names the artifact and the blurb says who received it in plain words
+# ("MSU's facilities department"). groupOrder stays 5; the delivered map
+# closes the block.
 # Facts from Jackson, 2026-07-27 (Campus at Night project write-up).
 #
 # BLURB CORRECTED 2026-08-01. It said "processed to a 236-hectare
@@ -15,8 +20,8 @@
 #
 # GROUPED 2026-08-01 so the three read as one survey rather than as three
 # night maps that happen to sit near each other.
-title: "The map Facilities received"
-blurb: "The 2023 deliverable: a cartographic map of the campus lighting footprint on a street basemap, drawn from the overnight survey at a resolution where individual lamp pools are legible."
+title: "The 2023 campus lighting map"
+blurb: "Delivered to MSU's facilities department in 2023: the overnight survey drawn as a cartographic map on a street basemap, at a resolution where individual lamp pools are legible."
 year: 2023
 tools: ["UAV", "Agisoft Metashape", "ArcGIS Pro"]
 image: "../../assets/images/msu-campus-lighting-2023.png"

@@ -1,4 +1,8 @@
 ---
+# 2026-08-13, his call: groupOrder 3 -> 2. The two engine documents now
+# lead the block side by side, the two 900x900 insets follow as an
+# aligned row, the 2023 delivered map closes. Fixes the staggered rows
+# and the mid-block orphan he flagged.
 # Added 2026-08-01. Crop of the main panel of 02_complete_survey@2x.png
 # (source bbox 74,608-2300,2862 of 3160x3784). Same crop-not-scale rule as
 # its companion; the whole sheet is on the project page.
@@ -21,7 +25,7 @@ tools: ["UAV", "Agisoft Metashape"]
 image: "../../assets/images/campus-at-night-reconstruction.jpg"
 alt: "Irregular night orthomosaic of the MSU campus on black: a large rectangular block of lit walkways and parking lots at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, and empty black ground between them. Labels name Romney Quad, Brick Breeden Fieldhouse, and S 11th Ave."
 group: "campus-at-night"
-groupOrder: 3
+groupOrder: 2
 order: 3
 draft: false
 ---
