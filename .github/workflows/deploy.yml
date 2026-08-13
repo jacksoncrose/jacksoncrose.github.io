@@ -23,6 +23,17 @@ permissions:
   pages: write
   id-token: write
 
+# Only one Pages deployment runs at a time. On 2026-08-13 two pushes a
+# minute apart produced two overlapping runs, both green, and the site kept
+# serving the older build for 43 minutes until a manual run republished it.
+# The cause was never established, but this is the guard GitHub's own Pages
+# workflow ships with for that shape of failure. cancel-in-progress stays
+# false so a queued run finishes rather than being dropped: the last push to
+# master has to be the one that ends up published.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
