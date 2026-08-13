@@ -17,6 +17,15 @@
 # describing those printed stat bars. Fix on the sheets, not by
 # reverting the page. Also flag 12 + its Approach twin: "acquisition"
 # is now "how the survey was flown" in BOTH places.
+# 2026-08-13 (later session): the cover caption was flag 15's missed
+# second instance ("at 2.43 cm ground sample"); now the flag-15 register,
+# "Each pixel covers 2.43 cm of ground." The SheetFigure alt text still
+# says "2.43 cm ground sample" ON PURPOSE — it transcribes the sheet's
+# printed stat bar and changes only when the sheet does. Same session:
+# "50 centimetres" (body, Approach) was flag 22's missed instance —
+# "metres" was swept, the "centimetres" substring was not. Now American.
+# Sheets re-rendered to v19/fa3 the same day (flags 23 + 24), so the
+# printed-text mismatch this comment block warned about is CLOSED.
 # 2026-08-05 SITEWIDE DE-AI PASS (flag-first, his picks): the surviving
 # "pedestal" and bare "noise floor" wording removed per the register rule;
 # the OpenDroneMap passage rewritten AT HIS DIRECTION to drop the
@@ -94,7 +103,7 @@ cover:
   # note: crop these sheets, never scale the portrait document down.
   src: "../../assets/images/campus-at-night-section.jpg"
   alt: "Night orthomosaic of the Montana State University core: a street grid picked out by white-green lamp pools along walkways and parking lots, a dark oval quad at center, and amber sodium-vapor lighting across the block at lower right."
-  caption: "The campus core at 2.43 cm ground sample, from Drone2Map."
+  caption: "The campus core, from Drone2Map. Each pixel covers 2.43 cm of ground."
 order: -1
 draft: false
 ---
@@ -164,7 +173,7 @@ so anything above zero is the engine's own behavior in shadow.
 | OpenDroneMap, first full-site build | 9.40 | 1.23 | 57.95 |
 
 The second test was the whole overlap. Metashape and Drone2Map share 113.5
-hectares. I resampled both into a common frame at 50 centimetres and
+hectares. I resampled both into a common frame at 50 centimeters and
 measured 4,540,751 paired samples, binning by Drone2Map's value so both
 products are read on the same pixels rather than on their own.
 
