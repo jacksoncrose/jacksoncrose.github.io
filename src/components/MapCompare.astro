@@ -28,13 +28,32 @@
   jitter). An unregistered pair makes the map's own furniture jump as the
   handle passes, which reads as a rendering bug rather than a comparison.
 
-  LABELS ARE CHIPS ON THE IMAGE, not captions below it, and BOTH STAY
-  VISIBLE at every handle position — top left names what is left of the
-  handle, top right what is right of it. The first version let the clip
-  take the overlay's chip with it, which looked like a rendering fault
-  rather than a comparison; the chips are now outside the clipped element.
-  They overlap whatever the map itself prints in its top corners, which is
-  the trade for keeping them compact and conventional.
+  LABELS SIT ABOVE THE IMAGE, in a strip of their own, and BOTH STAY
+  VISIBLE at every handle position — the left one names what is left of
+  the handle, the right one what is right of it.
+
+  THEY WERE CHIPS ON THE IMAGE until 2026-08-13, in the top corners, which
+  is the conventional place and was accepted as a trade. Rendered at
+  delivered size against the actual sheets, the trade was worse than it
+  read on paper: the chips clipped the printed title at both ends of the
+  school map and the right edge of "ROONEY NORTH". These sheets carry
+  furniture in all four corners, so the one-property fix (moving them to
+  the bottom) only swapped a clipped title for a covered north arrow,
+  scale bar, projection line and client logo. Both variants were rendered
+  and Jackson picked this one. Above the frame is the only placement that
+  leaves every map whole.
+
+  THE DARK PLATE CAME OFF with the move. It existed to hold contrast
+  against imagery and has nothing to do on paper.
+
+  `--strip` IS ONE VARIABLE BECAUSE THREE RULES DEPEND ON IT: the pane's
+  top padding, the handle's top, and the top of the invisible range input.
+  Change it in one place, or the handle and the drag surface run up into
+  the label strip.
+
+  THE CLIP IS STILL ON THE IMAGE RATHER THAN THE PANE, and that reasoning
+  is unchanged: the first version let the clip take the overlay's label
+  with it, which read as a rendering fault rather than a comparison.
 */
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -158,6 +177,10 @@ const SIZES = '(min-width: 48rem) 45rem, calc(100vw - 3rem)';
 <style>
 	/* ---- baseline: no JavaScript, two maps side by side ---------------- */
 
+	.cmp {
+		--strip: 1.75rem;
+	}
+
 	.cmp-stack {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -172,6 +195,7 @@ const SIZES = '(min-width: 48rem) 45rem, calc(100vw - 3rem)';
 
 	.cmp-pane {
 		position: relative;
+		padding-top: var(--strip);
 	}
 
 	.cmp-img {
@@ -184,20 +208,19 @@ const SIZES = '(min-width: 48rem) 45rem, calc(100vw - 3rem)';
 
 	.cmp-tag {
 		position: absolute;
-		top: 0.5rem;
-		left: 0.5rem;
+		top: 0;
+		left: 0;
 		z-index: 1;
-		padding: 0.125rem 0.5rem;
-		background: rgb(28 25 23 / 0.88); /* --color-ink at 88% */
-		color: var(--color-white);
+		color: var(--color-ink);
 		font-size: var(--text-xs);
+		font-weight: 600;
 		line-height: 1.6;
 		letter-spacing: 0.02em;
 	}
 
 	.cmp-tag-b {
 		left: auto;
-		right: 0.5rem;
+		right: 0;
 	}
 
 	/* Hidden until the script runs, so nothing on screen implies an
@@ -234,10 +257,11 @@ const SIZES = '(min-width: 48rem) 45rem, calc(100vw - 3rem)';
 	.cmp.is-on .cmp-range {
 		display: block;
 		position: absolute;
-		inset: 0;
+		top: var(--strip);
+		right: 0;
+		bottom: 0;
+		left: 0;
 		z-index: 2;
-		width: 100%;
-		height: 100%;
 		margin: 0;
 		padding: 0;
 		opacity: 0;
@@ -254,7 +278,7 @@ const SIZES = '(min-width: 48rem) 45rem, calc(100vw - 3rem)';
 	.cmp.is-on .cmp-handle {
 		display: block;
 		position: absolute;
-		top: 0;
+		top: var(--strip);
 		bottom: 0;
 		left: var(--pos);
 		z-index: 3;
