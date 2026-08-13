@@ -50,7 +50,10 @@
   a subaward, so a single figure misleads in both directions.
 */
 import Base from '../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import { site } from '../site';
+import headshot from '../assets/images/jackson-rose-headshot.jpg';
+import yellowstone from '../assets/images/jackson-rose-yellowstone.jpg';
 ---
 
 <Base
@@ -62,6 +65,24 @@ import { site } from '../site';
 
 	<section class="mt-10">
 		<h2 class="text-3xl">Bio</h2>
+		{/* 2026-08-13: studio headshot added beside Bio, his pick of two
+		    rendered placements. Credit "MSU photo by Colter Peterson" comes
+		    from the file's own embedded Artist/dc:creator fields
+		    (CP20230227_Jackson Rose-002.JPG, (c)2023 Montana State
+		    University). Distinct on purpose from Home's casual outdoor
+		    portrait — the two pages carry different registers. */}
+		<figure class="mt-4 sm:float-right sm:ml-6 sm:mb-2 sm:w-52">
+			<Image
+				src={headshot}
+				alt="Studio portrait of Jackson Rose smiling in a dark gray sweater against a gray backdrop."
+				widths={[320, 640]}
+				sizes="(min-width: 640px) 13rem, calc(100vw - 3rem)"
+				class="w-full"
+			/>
+			<figcaption class="mt-2 text-sm text-muted">
+				MSU photo by Colter Peterson.
+			</figcaption>
+		</figure>
 		<p class="mt-4">
 			Jackson Rose is Assistant Director and Operations Manager of the
 			Montana State University Geospatial Core Facility, which provides
@@ -123,6 +144,23 @@ import { site } from '../site';
 			U.S. Department of Energy / U.S. Energy Association webinar on
 			community benefits plans (2023).
 		</p>
+		{/* 2026-08-13, his calls: river photo placement A (closes Background,
+		    breaking the page's longest text run); NO caption and NO credit
+		    line — offered both, he declined both. The file's own metadata
+		    dates it 11 Nov 2025 on the Yellowstone in Paradise Valley; that
+		    stays out of the rendered page at his choice. Alt text stays.
+		    Original in OneDrive\Pictures\Portfolio (IMG_6248.HEIC);
+		    _staging source is the HEIC converted to JPEG with EXIF (incl.
+		    GPS) dropped, derivative verified zero EXIF entries. */}
+		<figure class="mt-6">
+			<Image
+				src={yellowstone}
+				alt="Jackson Rose at the oars of a drift boat on a calm river in late fall, smiling, with bare cottonwoods and a gray sky behind him."
+				widths={[480, 800, 1200]}
+				sizes="(min-width: 640px) 45rem, calc(100vw - 3rem)"
+				class="w-full"
+			/>
+		</figure>
 	</section>
 
 	{/*
