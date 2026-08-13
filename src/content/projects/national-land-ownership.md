@@ -1,4 +1,11 @@
 ---
+# 2026-08-13 audit flag 19a, his call: "a prioritization and differencing
+# scheme that resolves those overlaps defensibly" rewritten in plain words.
+# "Defensibly" came out with it — the three sentences that follow (Fee as
+# authoritative, Proclamation and NCED added only where they do not
+# intersect, Designation excluded after QC) demonstrate it rather than
+# asserting it. He SKIPPED 19b, so the "dissolved / intersected / three
+# equal-area projections" sentence stays exactly as written.
 # 2026-08-05 de-AI pass: staged Q&A opener replaced with Jackson's own
 # stem ("County land ownership regimes influence..."), ending his pick.
 # Condensed from Jackson's own portfolio write-up, supplied 2026-07-27
@@ -56,8 +63,8 @@ millions of acres.
 
 ## Approach
 
-The core of the project was a prioritization and differencing scheme that
-resolves those overlaps defensibly. PAD-US Fee parcels were treated as
+The core of the project was a set of priority rules for deciding which
+source wins where parcels overlap, and then erasing the duplicates. PAD-US Fee parcels were treated as
 authoritative; military and tribal lands from the Proclamation layer and
 conservation easements from NCED were added only where they did not
 intersect Fee parcels. Designation parcels were excluded entirely after QC

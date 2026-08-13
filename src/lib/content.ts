@@ -85,7 +85,7 @@ export const galleryGroups: Record<string, GalleryGroupMeta> = {
   },
   'campus-at-night': {
     title: 'Campus at Night',
-    note: "One overnight survey of the MSU campus, rebuilt through three photogrammetry engines. Drone2Map produced the cleaner mosaic but never solved the south block; Metashape covered both flown blocks, reaching 149 of the 236 hectares flown. No ground control was placed, so neither result is the reference for the other.",
+    note: "One overnight survey of the MSU campus, rebuilt through three photogrammetry engines. Drone2Map produced the cleaner mosaic but never solved the south block; Metashape covered both flown blocks, reaching 149 of the 236 hectares flown. No surveyed markers were placed on the ground, so neither result is the reference for the other.",
     href: '/projects/msu-campus-at-night',
   },
   'rooney-ranch-atlas': {

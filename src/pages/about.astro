@@ -186,8 +186,13 @@ import { site } from '../site';
 		<p class="mt-4">
 			{/* Explicit {' '} — the line break before the link was being
 			    collapsed, rendering "is on theCV page". Found 2026-07-30. */}
-			A selected CV — appointments, education, certifications,
-			publications, presentations, and service — is on the{' '}
+			{/* 2026-08-13, flags 5 + his catch: this read "A selected CV —
+			    appointments, ... — is on the CV page", which said "CV" three
+			    times counting the h2 above it. Rewritten so the list leads and
+			    "CV" is said once. "Selected" comes off here; the /cv page's own
+			    first line says "Selected CV, updated <month>". */}
+			Appointments, education, certifications, publications,
+			presentations, and service are on the{' '}
 			<a href="/cv">CV page</a>.
 		</p>
 	</section>

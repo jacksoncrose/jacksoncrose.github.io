@@ -12,8 +12,17 @@
 # Nation's Future" (2025-02) endnote 30. CRS R46537 checked: no citation.
 # Links kept to the report PDF only (Jackson approved prose-only
 # citations).
+#
+# 2026-08-13 writing-profile audit, flag 4, his call: "roughly $2 billion a
+# year" came OUT OF THE SUMMARY, not out of the body. It appeared in both,
+# four lines apart on the page, and the body's version is the one that also
+# carries "over the preceding decade" — the only place the page says that
+# average is a decade average. Cutting the summary's copy removes the
+# repetition and the summary's two em dashes at the same time. THE BODY
+# SENTENCE IS UNCHANGED, which also keeps the ~$2B stat a restatement of
+# body copy per the stats rule.
 title: "Federal fossil fuel disbursements to states"
-summary: "How 14 states receive, spend, and depend on federal fossil fuel revenue — roughly $2 billion a year — using ONRR and state budget data from FY2016 to 2020. Co-authored report for Headwaters Economics, June 2021."
+summary: "How 14 states receive, spend, and depend on federal fossil fuel revenue, using ONRR and state budget data from FY2016 to 2020. Co-authored report for Headwaters Economics, June 2021."
 year: 2021
 tier: 2
 role: "Co-author, with Kristin Smith and Mark Haggerty of Headwaters Economics"

@@ -1,4 +1,9 @@
 ---
+# 2026-08-13 audit flag 20, his call: "resolved as a residual against
+# published totals" -> "backed out from published totals". Same operation.
+# The rest of the Approach paragraph (mill rates, net assessed value, the
+# A.R.S. cite, straight-line depreciation) is the audience's own working
+# vocabulary and was deliberately left.
 # 2026-08-05 de-AI pass: "Two caveats up front." is Jackson's own wording;
 # spatial/fiscal halves line is the plainer option he picked.
 # Card-only entry created 2026-07-29; promoted to a full case study
@@ -96,8 +101,7 @@ levy tables were combined into a single levy dataset and converted to mill
 rates against net assessed value. School levies took the most work, since
 they are the largest local component: per-district secondary levies were
 built up and reconciled to state totals for all fifteen counties, joint
-technical education district levies were resolved as a residual against
-published totals, and one district's entry was corrected where it had been
+technical education district levies were backed out from published totals, and one district's entry was corrected where it had been
 carrying only its high-school component. Equipment valuation follows
 A.R.S. § 42-14155, which sets full cash value at twenty percent of
 depreciated cost, with straight-line depreciation over the useful life the

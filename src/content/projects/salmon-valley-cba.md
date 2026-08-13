@@ -1,4 +1,13 @@
 ---
+# 2026-08-13 writing-profile audit, flag 25, his call: the three tells
+# fixed now so the file is ready if it is ever republished. (1) "that
+# combination is the whole problem in miniature" -> plain statement.
+# (2) "That is a real outcome, and it is worth stating plainly rather
+# than dressing up" DELETED — self-narrating meta-sentence plus a hollow
+# intensifier; the paragraph opens on the substance now. (3) the closing
+# aphorism "given that it will still be there when the mine is not" cut.
+# STILL draft: true, still renders nowhere, and the withdrawal decision
+# below is UNCHANGED. No figure, date, name or attribution moved.
 # ============================================================
 # WITHDRAWN FROM THE SITE 2026-07-31 — Jackson's call, his words:
 # "I actually don't want Salmon Valley on the projects because it
@@ -136,10 +145,10 @@ The cobalt deposit at the center of this project sits directly adjacent
 to that site. When it started up in October 2022 it was the only active
 cobalt mine in the United States, in a market where cobalt supply had
 become a battery and defense-supply-chain question rather than a purely
-commercial one. For a county of this size, that combination is the whole
-problem in miniature: a critical mineral the country wants, a mine next
-door to the last one's unfinished cleanup, and a community that would
-live with whichever way it went.
+commercial one. A county of this size had to weigh all of it at once: a
+critical mineral the country wants, a mine next door to the last one's
+unfinished cleanup, and a community that would live with whichever way it
+went.
 
 ## Approach
 
@@ -155,8 +164,7 @@ to make commitments enforceable and durable, and the specific
 initiatives a community with this economy and this history would want
 inside it. Cobalt's role in battery and defense supply chains made the
 project unusual, but the question underneath it was the ordinary one:
-what does a small place need in writing before a mine starts, given that
-it will still be there when the mine is not.
+what does a small place need in writing before a mine starts.
 
 ## Outcome
 
@@ -164,9 +172,8 @@ No agreement was reached. The mine started up that October, and five
 months later, in March 2023, the developer suspended final construction
 and cited cobalt prices. The occasion for an agreement went with it.
 
-That is a real outcome, and it is worth stating plainly rather than
-dressing up. What the community holds is not a signed contract but the
-preparation for one: a clear view of what it would ask for, why, and
-through what mechanisms. Mines in this position do restart, and the
+What the community holds is not a signed contract but the preparation for
+one: a clear view of what it would ask for, why, and through what
+mechanisms. Mines in this position do restart, and the
 value of the groundwork is that the conversation would not begin from
 zero if this one does.

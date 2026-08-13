@@ -1,4 +1,8 @@
 ---
+# 2026-08-13 audit flag 15, his call: "at 2.43 cm ground sample" says
+# what the number means instead of naming the measure. The 240-char cap
+# paid for it out of "that produced the" and "no colour balancing was
+# applied". FIGURES UNMOVED.
 # Added 2026-08-01 from Jackson's portfolio handoff. Crop of the main panel
 # of 01_section_sheet@2x.png (source bbox 78,602-2288,2481 of 3160x4576),
 # NOT a scaled-down sheet: his handling note is that these portrait
@@ -15,11 +19,11 @@
 # a lossless reference, WORSE than mozjpeg quality 82 at 489 KB and
 # 2.27/255 — this is continuous-tone night imagery, not a figure.
 title: "The core, from Drone2Map"
-blurb: "A 592 by 502 metre section of the campus core at 2.43 cm ground sample, from the engine that produced the cleanest mosaic. Exposure was locked and no colour balancing was applied, so differences in brightness are differences on the ground."
+blurb: "A 592 by 502 meter section of the campus core, from the engine with the cleanest mosaic. Each pixel covers 2.43 cm of ground. Exposure was locked and nothing was color-balanced, so brightness differences are differences on the ground."
 year: 2023
 tools: ["UAV", "Esri Drone2Map"]
 image: "../../assets/images/campus-at-night-section.jpg"
-alt: "Night orthomosaic of the Montana State University core: a street grid picked out by white-green lamp pools along walkways and parking lots, a dark oval quad at centre, and amber sodium-vapor lighting across the block at lower right."
+alt: "Night orthomosaic of the Montana State University core: a street grid picked out by white-green lamp pools along walkways and parking lots, a dark oval quad at center, and amber sodium-vapor lighting across the block at lower right."
 group: "campus-at-night"
 groupOrder: 1
 order: 3

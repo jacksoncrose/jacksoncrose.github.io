@@ -1,4 +1,8 @@
 ---
+# 2026-08-13 audit flag 18, his call: the bare "MACSS database" acronym
+# out of the blurb. MACSS IS STILL THE DATA SOURCE, NOT THE CLIENT — the
+# client is the MSU Center for Research on Rural Education. The map legend
+# still prints "MACSS School", which is the image and does not change.
 # Added 2026-08-01. Delivered scenario map from the Montana rural school
 # access analysis (02_GCF / "Project - Rural MT Schools", March 2025),
 # supplied by Jackson at full resolution. Client naming granted; see the
@@ -18,7 +22,7 @@
 # figures conservative for Montana. Say so; do not let a reader assume
 # drive time.
 title: "Distance to the nearest school"
-blurb: "Straight-line distance from each cell to the nearest school, with the 129 small rural schools of the MACSS database marked apart from all other schools. Cells are about 16 square miles."
+blurb: "Straight-line distance from each cell to the nearest school, with the 129 small rural schools on the county superintendents' association list marked apart from all other schools. Cells are about 16 square miles."
 year: 2025
 tools: ["ArcGIS Pro"]
 image: "../../assets/images/rural-school-access-current.png"
