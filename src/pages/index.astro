@@ -2,12 +2,14 @@
 /*
   Home. Structure (settled sitemap in AGENTS.md, amended 2026-07-30):
 
+    masthead      — a SHORT full-bleed strip of his Mont Blanc panorama,
+                    fading into the paper (2026-08-13, his pick; see the
+                    comment on the element)
     above the fold — name, roles (one compressed line), identity sentence,
                      portrait photo (added 2026-07-29, Jackson's request),
-                     contact — NO hero visual since 2026-07-30
-    below         — a FULL-BLEED BANNER (added 2026-08-13, his call; see
-                    the block above it), then Selected projects (cards),
-                    Tools strip (cards), Maps teaser row
+                     contact
+    below         — Selected projects (cards), Tools strip (cards), Maps
+                    teaser row
 
   SECTION ORDER CHANGED 2026-08-02, his call: "on the home page, let's
   start with projects up top and then tools, then maps." It finishes a
@@ -46,6 +48,7 @@ import { published, clientLabel, cardTarget, yearLabel } from '../lib/content';
 import { site } from '../site';
 import portraitImage from '../assets/images/jackson-rose-portrait.jpg';
 import alpsPanorama from '../assets/images/mont-blanc-massif-panorama.jpg';
+import alpsStrip from '../assets/images/mont-blanc-skyline-strip.jpg';
 
 /* Full-size target for the banner's click. Same pattern as SheetFigure:
    getImage runs here because the markup below cannot await. */
@@ -162,6 +165,39 @@ const mapsTeaser = mapsTeaserIds
 	*/}
 
 	{/* ---------- above the fold ---------- */}
+	{/*
+	  THE MASTHEAD — the Mont Blanc panorama, third form in one day and the
+	  one that stuck (2026-08-13). The trail, so none of it is retried:
+	  full-bleed at natural ratio shipped first (his call, made with the
+	  "Home has no hero" conflict named) and he then judged it "massive,
+	  disrupts the flow" at 698px tall; four smaller treatments were built
+	  and rendered at the 1440 fold (wide strip in the flow / hard-edged
+	  masthead / in-column figure / move to Maps), he leaned masthead and
+	  asked for creative options; three more were built (this fade, his
+	  skyline TRACED into a hairline with summit dots — held as a motif, see
+	  AGENTS.md — and a ghosted background, rejected as muddy). He picked
+	  this: the same short strip, but the bottom edge dissolves into the
+	  paper instead of cutting hard, so the peaks emerge from the page
+	  rather than sitting in a blue box.
+
+	  The at-rest image is a PHOTOGRAPH (a skyline crop of the dehazed base
+	  frame, no labels — his fifteen-summit annotation is unreadable below
+	  ~1280px wide, measured); THE CLICK IS THE MAP: a plain <a> to the
+	  full-size annotated derivative, zero JS. mont-blanc-massif-panorama
+	  (the annotated map) stays in the repo as that click target. Anchor and
+	  elevation provenance for the map itself is in AGENTS.md's banner
+	  block; elevations are his app's values verbatim plus the sourced
+	  Bionnassay figure.
+
+	  The mask-image fade is inline style because Tailwind arbitrary values
+	  choke on the commas. -mt-12 tucks the strip against the header by
+	  cancelling main's py-12. The w-screen breakout still depends on
+	  overflow-x: clip on <html> in global.css.
+	*/}
+	<a href={alpsFull.src} aria-label="Open the full annotated panorama" class="relative left-1/2 -mt-12 mb-8 block w-screen -translate-x-1/2">
+		<Image src={alpsStrip} alt="Skyline strip of the Mont Blanc massif: snow and glacier along jagged summits under a clear sky." widths={[960, 1440, 2400]} sizes="100vw" loading="eager" class="block h-48 w-full object-cover sm:h-60" style="-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)" />
+	</a>
+
 	<section>
 		<div class="sm:flex sm:items-start sm:justify-between sm:gap-10">
 			<div>
@@ -214,59 +250,6 @@ const mapsTeaser = mapsTeaserIds
 
 	</section>
 
-	{/*
-	  ---------- full-bleed banner ----------
-	  Added 2026-08-13, his call, and a DELIBERATE PARTIAL REVERSAL of "Home
-	  has no hero" (settled 2026-07-30, his pick "B — no hero" from four
-	  rendered options). He was shown that conflict before choosing. What
-	  survives of the old decision: the page still OPENS on his name, roles,
-	  identity sentence and portrait. The banner sits below all of that, so
-	  the first thing a reader meets is still him, not a picture.
-
-	  WHY IT BREAKS THE COLUMN, which is the whole point. This is his own
-	  annotated panorama, fifteen summits labelled with elevations. Measured
-	  at Home's 720px content column the label text lands around 7px and is
-	  unreadable, so in the column the cartography that makes it his work
-	  would render as a smear. Full-bleed puts it at viewport width, where
-	  the labels read from roughly 1280px up. All three widths were rendered
-	  at 1:1 and shown to him before he chose.
-
-	  REBUILT 2026-08-13 (same day, second pass): the app export was replaced
-	  with a designed overlay on the raw frame — his pick "B" of two rendered
-	  treatments at the delivered width. Horizontal Inter labels (instanced
-	  from the site's own @fontsource-variable package), elevations beneath
-	  in muted, hairline leaders broken where they cross a lower label, a
-	  small accent ring on each summit. All fifteen anchor positions were
-	  transferred from his app export by image registration and verified
-	  summit-by-summit against zoomed crops; elevations are verbatim from
-	  the export except Aiguille de Bionnassay, whose value the export cuts
-	  off at the frame edge — 13,294 ft comes from its published 4,052 m
-	  (Wikipedia and chamonix.com agree), converted by the same
-	  x3.28084-and-round rule the app's other values demonstrably use, at
-	  his direction ("look it up"). Full provenance and the rebuild recipe
-	  are in AGENTS.md.
-
-	  NO JAVASCRIPT. The click is a plain <a> to the full-size derivative —
-	  the same baseline the Maps lightbox degrades to. Home stays at zero JS
-	  bytes and must: /maps is the only page on the site carrying inline
-	  script, and that is a recorded property worth keeping.
-
-	  THE BREAKOUT depends on `overflow-x: clip` on <html> in global.css.
-	  Without it, w-screen inside a centred container gives a horizontal
-	  scrollbar on any viewport that has a vertical one.
-	*/}
-	<div class="relative left-1/2 mt-16 w-screen -translate-x-1/2">
-		<a href={alpsFull.src} aria-label="Open the full-size panorama">
-			<Image
-				src={alpsPanorama}
-				alt="Wide panorama of the Mont Blanc massif under a clear summer sky, its glaciated skyline labeled with fifteen summit names and elevations in feet, from Pointe des Hirondelles Sud at 11,568 to Mont Blanc at 15,764. Thin leader lines drop from each label to its peak, and below the range a deep forested valley meets a rocky foreground ridge holding a small tarn and a walking path."
-				widths={[960, 1440, 1920, 2400]}
-				sizes="100vw"
-				loading="lazy"
-				class="block w-full"
-			/>
-		</a>
-	</div>
 
 	{/*
 	  ---------- selected projects ----------
