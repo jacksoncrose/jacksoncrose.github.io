@@ -5,8 +5,9 @@
     above the fold — name, roles (one compressed line), identity sentence,
                      portrait photo (added 2026-07-29, Jackson's request),
                      contact — NO hero visual since 2026-07-30
-    below         — Selected projects (cards), Tools strip (cards),
-                    Maps teaser row
+    below         — a FULL-BLEED BANNER (added 2026-08-13, his call; see
+                    the block above it), then Selected projects (cards),
+                    Tools strip (cards), Maps teaser row
 
   SECTION ORDER CHANGED 2026-08-02, his call: "on the home page, let's
   start with projects up top and then tools, then maps." It finishes a
@@ -38,12 +39,17 @@
 */
 import Base from '../layouts/Base.astro';
 import Todo from '../components/Todo.astro';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import CardCover from '../components/CardCover.astro';
 import { getCollection } from 'astro:content';
 import { published, clientLabel, cardTarget, yearLabel } from '../lib/content';
 import { site } from '../site';
 import portraitImage from '../assets/images/jackson-rose-portrait.jpg';
+import alpsPanorama from '../assets/images/mont-blanc-massif-panorama.jpg';
+
+/* Full-size target for the banner's click. Same pattern as SheetFigure:
+   getImage runs here because the markup below cannot await. */
+const alpsFull = await getImage({ src: alpsPanorama, width: alpsPanorama.width });
 
 const projects = published(await getCollection('projects'));
 const tools = published(await getCollection('tools'));
@@ -207,6 +213,60 @@ const mapsTeaser = mapsTeaserIds
 		</div>
 
 	</section>
+
+	{/*
+	  ---------- full-bleed banner ----------
+	  Added 2026-08-13, his call, and a DELIBERATE PARTIAL REVERSAL of "Home
+	  has no hero" (settled 2026-07-30, his pick "B — no hero" from four
+	  rendered options). He was shown that conflict before choosing. What
+	  survives of the old decision: the page still OPENS on his name, roles,
+	  identity sentence and portrait. The banner sits below all of that, so
+	  the first thing a reader meets is still him, not a picture.
+
+	  WHY IT BREAKS THE COLUMN, which is the whole point. This is his own
+	  annotated panorama, fifteen summits labelled with elevations. Measured
+	  at Home's 720px content column the label text lands around 7px and is
+	  unreadable, so in the column the cartography that makes it his work
+	  would render as a smear. Full-bleed puts it at viewport width, where
+	  the labels read from roughly 1280px up. All three widths were rendered
+	  at 1:1 and shown to him before he chose.
+
+	  REBUILT 2026-08-13 (same day, second pass): the app export was replaced
+	  with a designed overlay on the raw frame — his pick "B" of two rendered
+	  treatments at the delivered width. Horizontal Inter labels (instanced
+	  from the site's own @fontsource-variable package), elevations beneath
+	  in muted, hairline leaders broken where they cross a lower label, a
+	  small accent ring on each summit. All fifteen anchor positions were
+	  transferred from his app export by image registration and verified
+	  summit-by-summit against zoomed crops; elevations are verbatim from
+	  the export except Aiguille de Bionnassay, whose value the export cuts
+	  off at the frame edge — 13,294 ft comes from its published 4,052 m
+	  (Wikipedia and chamonix.com agree), converted by the same
+	  x3.28084-and-round rule the app's other values demonstrably use, at
+	  his direction ("look it up"). Full provenance and the rebuild recipe
+	  are in AGENTS.md.
+
+	  NO JAVASCRIPT. The click is a plain <a> to the full-size derivative —
+	  the same baseline the Maps lightbox degrades to. Home stays at zero JS
+	  bytes and must: /maps is the only page on the site carrying inline
+	  script, and that is a recorded property worth keeping.
+
+	  THE BREAKOUT depends on `overflow-x: clip` on <html> in global.css.
+	  Without it, w-screen inside a centred container gives a horizontal
+	  scrollbar on any viewport that has a vertical one.
+	*/}
+	<div class="relative left-1/2 mt-16 w-screen -translate-x-1/2">
+		<a href={alpsFull.src} aria-label="Open the full-size panorama">
+			<Image
+				src={alpsPanorama}
+				alt="Wide panorama of the Mont Blanc massif under a clear summer sky, its glaciated skyline labeled with fifteen summit names and elevations in feet, from Pointe des Hirondelles Sud at 11,568 to Mont Blanc at 15,764. Thin leader lines drop from each label to its peak, and below the range a deep forested valley meets a rocky foreground ridge holding a small tarn and a walking path."
+				widths={[960, 1440, 1920, 2400]}
+				sizes="100vw"
+				loading="lazy"
+				class="block w-full"
+			/>
+		</a>
+	</div>
 
 	{/*
 	  ---------- selected projects ----------

@@ -176,3 +176,12 @@
     navigation: none;
   }
 }
+
+/* The Home banner breaks out of the centred column with `w-screen`. Without
+   this, any viewport carrying a vertical scrollbar gets a horizontal one too,
+   because 100vw counts the scrollbar and the container does not. `clip` rather
+   than `hidden` so it does not create a scroll container and break
+   `position: sticky` anywhere on the site. Added 2026-08-13. */
+html {
+	overflow-x: clip;
+}
