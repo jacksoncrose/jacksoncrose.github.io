@@ -109,6 +109,20 @@ const projects = defineCollection({
             contain floats in a white band and looks broken.
           */
           fit: z.enum(['cover', 'contain']).default('cover'),
+          /*
+            Let the card CROP this cover to its full height instead of
+            letterboxing it (added 2026-08-13, from Jackson: "I don't like
+            the gaps on top and bottom of some of the cards"). The aspect
+            box centres a cover in a taller card, which leaves paper above
+            and below it — invisible when the cover's ground is white,
+            obvious when it is not (the estimator's beige, a photograph).
+            fill: true absolutely fills the wrapper with object-cover, so
+            the crop depth follows the card's own height. ONLY for imagery
+            that survives arbitrary cropping: photographs and clean panel
+            crops. Never for figures or map sheets with furniture — that
+            is the slicing bug CardCover exists to prevent.
+          */
+          fill: z.boolean().default(false),
         })
         .optional(),
       /** Manual ordering within a tier (lower first). */

@@ -59,6 +59,15 @@ interface Props {
 	alt: string;
 	/** "contain" for a self-contained figure, "cover" for a picture. */
 	fit?: 'cover' | 'contain';
+	/**
+	 * Fill the card's full height, cropping as deep as the card is tall
+	 * (2026-08-13, his call on the letterbox gaps). Only for photographs
+	 * and clean panel crops — see the schema note. Overrides the aspect
+	 * box; `sizes` widens to the fill worst case (card ~360px tall, WSS at
+	 * 1.778 → ~640px display width → 40rem), which is the pre-clamp
+	 * arithmetic returning for exactly the covers that can afford it.
+	 */
+	fill?: boolean;
 	eager?: boolean;
 	/**
 	 * Column width variant. Added 2026-08-03, Jackson's call, relaxing the
@@ -89,6 +98,7 @@ const {
 	src,
 	alt,
 	fit = 'cover',
+	fill = false,
 	eager = false,
 	size = 'md',
 	transitionName,
@@ -120,12 +130,14 @@ const SIZES = {
 		src={src}
 		alt={alt}
 		widths={[320, 640, 1024]}
-		sizes={SIZES}
+		sizes={fill ? '(min-width: 640px) 40rem, calc(100vw - 3rem)' : SIZES}
 		loading={eager ? 'eager' : 'lazy'}
 		style={`--box: ${box.toFixed(4)}${transitionName ? `; view-transition-name: ${transitionName}` : ''}`}
 		class:list={[
-			'w-full sm:aspect-[var(--box)]',
-			fit === 'contain' ? 'object-contain' : 'object-cover',
+			fill
+				? 'h-full w-full object-cover'
+				: 'w-full sm:aspect-[var(--box)]',
+			!fill && fit === 'contain' ? 'object-contain' : 'object-cover',
 		]}
 	/>
 </div>

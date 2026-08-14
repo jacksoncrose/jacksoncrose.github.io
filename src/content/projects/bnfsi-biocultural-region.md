@@ -29,6 +29,10 @@ hasPage: true
 cover:
   src: "../../assets/images/bnfsi-biocultural-region.jpg"
   alt: "Large-format map titled Buffalo Nations Biocultural Region of the Northern Plains and Rockies on a satellite-imagery base: bison symbols mark Buffalo Treaty signatories, feather symbols mark named Indigenous Advisory Council members, lodge symbols mark tribal colleges and universities, and an inset locates the region within North America."
+  # fill was tried 2026-08-13 (the letterbox-gap pass) and REVERTED the
+  # same day: this cover is the complete static map, not bare satellite —
+  # a full-height crop slices its printed title mid-word. The card keeps a
+  # small letterbox instead; a detail-crop cover would be a new decision.
 draft: false
 ---
 

@@ -39,6 +39,13 @@ order: 0
 # credit on Rooney. Ask him before adding it.
 tools: ["ArcGIS Pro", "Excel", "JavaScript", "Leaflet"]
 cover:
+  # RE-CROPPED TALLER 2026-08-13 (2800x2600 -> 2210x2600 of the painted
+  # _staging source, ratio 1.077 -> 0.85, Arizona whole with ~50px margins
+  # all around), from Jackson: "I don't like the gaps on top and bottom of
+  # some of the cards." At CardCover's 0.85 clamp floor the box now nearly
+  # matches the tall cards, shrinking the letterbox from ~46px a side to
+  # ~15. NOT fill: true — Arizona is 0.84, so a full-height crop in a
+  # 0.78 card box would clip the state's width. This cover stays whole.
   src: "../../assets/images/az-renewable-energy-estimator-map.png"
   # Alt text unchanged from the card-only entry: it describes the actual
   # image, written by someone looking at it. Do not swap it for a generic
@@ -50,15 +57,14 @@ links:
 hasPage: true
 # Every value restated from the body copy below; see the stats schema note.
 # NO revenue figures here, same as everywhere else on this entry.
-stats:
-  - value: "15"
-    label: "counties, one standardized layer"
-  - value: "6"
-    label: "technologies covered"
-  - value: "672"
-    label: "validation scenarios, matched to the cent"
-  - value: "25 yr"
-    label: "revenue stream, by taxing authority"
+# STAT BAND REMOVED 2026-08-13, his call, in two steps: first "15
+# counties is lame to highlight", then, shown replacement candidates,
+# "remove the 672 validation scenarios as well. In fact, maybe this tool
+# doesn't need a stat band." With 672 out, the remainder (6 / 25 yr) was
+# thinner than no band. The OTHER FOUR entries keep their bands. To
+# restore, re-add a `stats:` block; the values that were here, all still
+# restated in the body: 672 validation scenarios matched to the cent /
+# 6 technologies / 25 yr revenue stream / 15 counties.
 draft: false
 ---
 
