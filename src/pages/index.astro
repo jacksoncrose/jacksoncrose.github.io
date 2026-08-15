@@ -380,10 +380,14 @@ const mapsTeaser = mapsTeaserIds
 								<p class="mt-1 text-sm text-muted">{tool.data.blurb}</p>
 								{/* Lifted above the card's stretched link, same as on the
 								    Tools page. */}
+								{/* 2026-08-15: "Read the case study" -> "Read the project", his
+								    call in the site-wide sweep — Maps already says "Read the
+								    project", and this was the only place the site said "case
+								    study" to a reader. */}
 								{tool.data.caseStudy && (
 									<p class="relative z-10 mt-2 text-sm">
 										<a href={`/projects/${tool.data.caseStudy}`}>
-											Read the case study
+											Read the project
 										</a>
 									</p>
 								)}

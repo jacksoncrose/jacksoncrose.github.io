@@ -1,4 +1,17 @@
 ---
+# 2026-08-15 LENGTH CUT, his call ("do 1"): 1,218 -> 960 words (of
+# which 101 are the two tables, which stay). What came
+# out, all of it restated on the sheets or in the two tables that stay:
+# the settings jargon in the alignment paragraph (60,000 keypoints,
+# unlimited tiepoints); the narration after the binned table (ratio falls,
+# 14%/2.6x, matches the roof); the color decision folded from two
+# paragraphs to three sentences (84%, 4.7 M, 0.667 all kept); the two
+# prose paragraphs restating what each sheet shows (captions carry it;
+# the 1.45 billion / darker-than-14 / mean-49 figures are printed on the
+# survey sheet); the closing gamma-0.60 / WGS 84 UTM 12N paragraph (both
+# sheets print it). NOTHING ELSE MOVED: every sourced sentence (149/236,
+# no ground control -> not accuracy, Facilities did not commission the
+# benchmark, aircraft, frame count) is intact.
 # 2026-08-15 gallery-to-sheets alignment, his "do them all": "luminance"
 # -> "brightness" in all five body instances, matching the v20/fa4 sheets
 # ("raw brightness, 0-255"; "darker than 14"; "leaves every brightness
@@ -183,12 +196,12 @@ orthomosaics against conventional orthomosaics.
 
 ## What was delivered
 
-Metashape aligned 1,309 of 1,370 frames, 95.5 percent, running 60,000
-keypoints at full resolution with unlimited tiepoints. OpenDroneMap reached 92.8 percent by keeping frames
-with as few as 22 observations. Drone2Map topped out at 924 of 1,366, about
-68 percent, across four attempts at different settings. The roughly 440
-frames it drops are the feature-starved dark ones, and no combination of
-settings I tried recovered them.
+Metashape aligned 1,309 of 1,370 frames, 95.5 percent. OpenDroneMap
+reached 92.8 percent by keeping frames with as few as 22 observations.
+Drone2Map topped out at 924 of 1,366, about 68 percent, across four
+attempts at different settings; the roughly 440 frames it drops are the
+dark ones with almost nothing to match, and no setting I tried recovered
+them.
 
 Metashape reconstructed 149 hectares across
 both flown blocks. Drone2Map reconstructed 129 and never solved the south
@@ -218,25 +231,14 @@ products are read on the same pixels rather than on their own.
 | lit, above 60 | 939,968 | 103.00 | 141.67 | 1.38× |
 | bright, above 120 | 360,694 | 160.67 | 183.33 | 1.14× |
 
-The ratio falls steadily as the ground gets brighter. Where light
-falls, the three programs agree to within 14 percent; in shadow they separate to
-2.6 times. That matches the roof result, measured here across 113 hectares
-instead of one building.
-
 ### The color decision
 
-Metashape's shadows carry a green cast. The obvious fix is a white balance,
-and it is not available here. Measured on 4.7 million dark-ground pixels at
-full resolution, the blue channel reads exactly zero in 84 percent of
-them. A balance applies a per-channel gain, and gain multiplies, so zero
-stays zero. Neutralising those shadows would mean adding blue the sensor
-never recorded.
-
-What I used instead is a global chroma scale, moving each pixel toward its
-own brightness by a fixed factor. Because brightness is the measurement, and
-every channel moves toward the value being measured, brightness comes out
-unchanged. The largest deviation across the frame is 0.667 of a digital
-number, which is 8-bit rounding rather than the operation.
+Metashape's shadows carry a green cast, and a white balance was not an
+option: in 84 percent of 4.7 million dark-ground pixels the blue channel
+reads exactly zero, and a balance multiplies, so zero stays zero. Instead
+each pixel was moved toward its own brightness by a fixed factor, which
+leaves brightness itself unchanged. The largest deviation across the frame
+is 0.667 of a digital number, which is 8-bit rounding.
 
 ### Two sheets
 
@@ -250,24 +252,12 @@ covered both flown blocks. One sheet could not show both.
   linkLabel="Open the full section sheet"
 />
 
-The section sheet shows 592 by 502 meters of the core from Drone2Map, with
-the lamp-string and sodium-district insets and the three-program roof
-comparison.
-
 <SheetFigure
   src={surveySheet}
   alt="Portrait map sheet titled Campus at Night, set in a serif face. The full reconstruction on black: a large rectangular block of lit walkways at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, and empty ground between them. In that empty lower-left corner a stacked column of figures reads 1,366 frames, 3 h 43 m airborne, 236 ha flown, 95.5 percent frames aligned, 3.21 cm ground sample, with the scale bar beneath. Labels name Montana Hall, Renne Library, Strand Union, Romney Quad, Miller Dining, Linfield Hall, Brick Breeden Fieldhouse and Bobcat Stadium, with italic street names for S 11th Ave, S 7th Ave, W Grant St and W Garfield St; a thin outlined rectangle tagged Section sheet marks the companion sheet's extent; a brightness histogram runs down the right side."
   caption="Complete-survey sheet: all 149 reconstructed hectares, from Metashape at 3.21 cm."
   linkLabel="Open the full complete-survey sheet"
 />
-
-The complete-survey sheet shows all 149 hectares from Metashape, with a
-brightness distribution measured across all 1.45 billion reconstructed
-pixels, the south block that only Metashape reconstructed, and the campus-scale
-comparison above. Half of that reconstruction is darker than brightness 14
-while the mean sits at 49, which is what a mostly dark site with a few very
-bright places looks like as a statistic. Each sheet declares its own source,
-its own transforms, and the absence of ground control.
 
 ## Outcome
 
@@ -287,22 +277,16 @@ minutes, six times the mesh density of the full-site build. That fixed flat grou
 trees, which still tear, because a 2.5D mesh cannot represent them at all.
 Drone2Map's seamline blending, with color
 balancing enabled, produced visibly worse output than leaving both switched
-off: seamline polygons showed as hard facets with parking stall lines
-running straight across brightness jumps. Both work by reading the
-imagery around each seam and adjusting to it, and frames this dark give
-them almost nothing to read.
+off: hard-edged seam polygons with parking stall lines running straight
+across brightness jumps. Both work by reading the imagery around each
+seam, and frames this dark give them almost nothing to read.
 
 Every difficulty above comes back to how the survey was flown, not to the
-processing. No setting in any of the three programs addresses drift down a 1.6
-kilometer leg when there are no cross-strips to tie it against. What I would
-change is the flight: cross-hatch it, or fly it with camera tilt, or place
+processing. No setting in any of the three programs addresses drift down a
+1.6 kilometer leg with no cross-strips to tie it against, so what I would
+change is the flight: cross-hatch it, fly it with camera tilt, or place
 ground control. The exposure is the other one. A single locked setting had
 to cover ground where 22 percent of the reconstruction sits below brightness
-3 while 16.6 percent of the brightest area runs above 240 out of 255. A
+3 while 16.6 percent of the brightest area runs above 240 out of 255; a
 bracketed pass, or a slower shutter on a second circuit, would have bought
 back both ends.
-
-Gamma 0.60 is applied identically to both sheets and to every panel on them.
-It is monotonic, so it never reorders two points, and every figure quoted
-here is raw brightness read before that curve. Both sheets are WGS 84 UTM
-12N.

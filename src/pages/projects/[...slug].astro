@@ -72,6 +72,15 @@ const shareImageUrl = coverShare
 	: undefined;
 
 /*
+  Full-size cover for the click-to-enlarge link (2026-08-15, his call in
+  the site-wide sweep). Native width, no upscaling — the same derivative
+  the Maps lightbox and SheetFigure use.
+*/
+const coverFull = project.data.cover
+	? await getImage({ src: project.data.cover.src, width: project.data.cover.src.width })
+	: null;
+
+/*
   CreativeWork rather than Article: these are case studies about projects,
   not published articles, and Article would want a publication date this
   content does not have. Only fields backed by the entry's own frontmatter
@@ -128,15 +137,33 @@ const projectLd = {
 			/* Through Astro's asset pipeline like the gallery: responsive WebP,
 			   explicit dimensions, no client-side JS. The raw <img> this replaced
 			   would have shipped the full committed derivative to every visitor. */
-			project.data.cover && (
+			project.data.cover && coverFull && (
 				<figure class="mt-8">
-					<Image
-						src={project.data.cover.src}
-						alt={project.data.cover.alt}
-						widths={[768, 1200, 1600]}
-						sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
-						class="w-full border border-line bg-white"
-					/>
+					{/* HEIGHT CAP + CLICK-TO-ENLARGE (2026-08-15, his call in the
+					    site-wide sweep). Tall covers — the estimator's Arizona map
+					    at 0.85 renders 847px tall at the 45rem column — pushed the
+					    first paragraph below a 900px fold. The cover is now capped
+					    at 70vh and sized by height (w-auto, centered), so landscape
+					    covers are unchanged and tall ones shrink to keep text on
+					    screen. NOT object-contain on a w-full box: that would paint
+					    white letterbox bars against the paper background. The
+					    anchor carries data-lightbox so the sheet dialog below
+					    upgrades the click; with JS off it opens the full derivative. */}
+					<a
+						href={coverFull.src}
+						data-lightbox
+						data-alt={project.data.cover.alt}
+						aria-label="Open the full-size cover image"
+						class="block"
+					>
+						<Image
+							src={project.data.cover.src}
+							alt={project.data.cover.alt}
+							widths={[768, 1200, 1600]}
+							sizes="(min-width: 816px) 45rem, calc(100vw - 3rem)"
+							class="mx-auto h-auto max-h-[70vh] w-auto max-w-full border border-line bg-white"
+						/>
+					</a>
 					{/* Caption and credit (2026-07-30). A cover that is someone
 					    else's photograph has to be able to carry attribution
 					    here, or moving an image from the body to the cover

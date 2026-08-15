@@ -66,10 +66,13 @@ const tools = published(await getCollection('tools'));
 							    is unclickable. This is the ONLY inbound route to an
 							    unlisted case study — see `caseStudy` in
 							    content.config.ts. */}
+							{/* 2026-08-15: link text "Read the case study" -> "Read the
+							    project", his call in the site-wide sweep (matches Maps;
+							    the only reader-facing "case study" on the site). */}
 							{tool.data.caseStudy && (
 								<p class="relative z-10 mt-2 text-sm">
 									<a href={`/projects/${tool.data.caseStudy}`}>
-										Read the case study
+										Read the project
 									</a>
 								</p>
 							)}
