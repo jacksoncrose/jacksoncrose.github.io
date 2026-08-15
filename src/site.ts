@@ -53,9 +53,13 @@ export const site = {
    * Identity sentence — SETTLED with Jackson 2026-07-29, written together
    * over several rounds (his calls: first person, high level, love of maps,
    * resources folded into the policy beat). Do not rewrite without him.
+   * 2026-08-14, his call: "most of all" removed; he picked "especially"
+   * over a two-sentence version and a maps-first version. The share card
+   * (public/share-card.png) and its alt in Base.astro carry the same line
+   * and moved with it.
    */
   identitySentence:
-    'I’m a geographer interested in rural places, energy and natural resource policy, and, most of all, making maps.' as string | null,
+    'I’m a geographer interested in rural places, energy and natural resource policy, and especially making maps.' as string | null,
 } as const;
 
 /**

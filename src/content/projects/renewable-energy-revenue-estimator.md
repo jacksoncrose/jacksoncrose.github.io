@@ -68,11 +68,17 @@ hasPage: true
 draft: false
 ---
 
-## Problem
+<!-- 2026-08-14, his direction: header "Problem" -> "Project Context" (this
+page only; the other case studies keep the problem/approach/delivered/
+outcome shape) and the opener rewritten to his supplied wording, with his
+typo fixed and "in terms of" trimmed. -->
 
-When a utility-scale energy project is proposed in Arizona, the first
-question local officials ask is what it would actually pay, and to whom.
-That answer was hard to get.
+## Project Context
+
+When a utility-scale energy project is proposed in Arizona, developers,
+policymakers, and rural communities want to know what it would mean in
+revenue over the life of the project. This tool helps answer that
+question.
 
 Property tax on generation equipment runs through a valuation statute with
 its own assessment factor and depreciation schedule. The resulting money
@@ -84,18 +90,29 @@ payments take its place. Getting from "a 200 MW solar project here" to
 "this much to this school district over 25 years" meant assembling data
 that had never been in one place.
 
-The Center for American Progress commissioned the work for the Arizona
-Governor's Office of Resiliency.
+<!-- 2026-08-14, his direction, "commissioned" -> "in partnership with".
+Still names CAP as the direct relationship and the Arizona office as the
+end user; the standing rule holds — no copy implying he was engaged
+directly by the State. -->
+The work was done in partnership with the Center for American Progress for
+the Arizona Governor's Office of Resiliency.
 
 ## Approach
 
-The work had a spatial half and a fiscal half, built to check each other.
+<!-- 2026-08-14, his call: the opener "The work had a spatial half and a
+fiscal half, built to check each other." (the plainer option he picked in
+the 08-05 pass) read as a consultant topic sentence and was CUT rather
+than rewritten — the next two paragraphs already open "On the spatial
+side" / "On the fiscal side", and the cross-checking claim lives in What
+was delivered (672 scenarios, match to the cent). -->
 
-On the spatial side, every taxing jurisdiction in Arizona was standardized
-into one consistent statewide layer: counties and school districts from
-Census TIGER/Line, fire service areas and other districts from state and
-agency GIS services, incorporated places filtered to those that actually
-levy. Overlapping school boundaries were intersected into composite tax
+<!-- 2026-08-14, his correction: it is many layers, not one statewide
+layer. Source attributions unchanged. -->
+On the spatial side, boundary data for every kind of taxing jurisdiction
+in Arizona was pulled together and cleaned to a common standard: counties
+and school districts from Census TIGER/Line, fire service areas and other
+districts from state and agency GIS services, and incorporated places
+filtered to those that actually levy. Overlapping school boundaries were intersected into composite tax
 units so that any point resolves to exactly one unit. Land ownership was
 dissolved into four non-overlapping taxability buckets, with priority given
 to the non-taxable categories where source polygons disagree, because
