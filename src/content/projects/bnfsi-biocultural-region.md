@@ -1,4 +1,16 @@
 ---
+# 2026-08-15 section pass, item 3, his "take it": the ArcGIS Online
+# limits paragraph and the second-phase paragraph MERGED into one; cut
+# "using chained raster functions", "The result gives the static map its
+# depth without the flat, mechanical look of a default hillshade", and
+# "so the web map and static map draw from one authoritative source
+# rather than divergent copies" (restated the consolidation). Dates,
+# sources, and the component list unchanged. OPEN FACT QUESTION, asked
+# and not yet answered: the Cree syllabics sentence ("...because the
+# platform does not support standard Roman orthography") reads backwards
+# — SRO is the Latin-alphabet system and should be the EASY one to
+# display. HELD VERBATIM until he says what happened. Do not reword it
+# without him; do not guess a mechanism.
 # 2026-08-15 second de-AI pass, his "implement all recommendations": the
 # Approach sentence ended "rather than a set of borders", the second
 # "rather than a set of" on one page (Problem has "...administrative
@@ -82,18 +94,13 @@ Working inside ArcGIS Online meant designing around its limits. Cree place
 names render in syllabics because the platform does not support standard
 Roman orthography, and I built a filter system to handle duplicate labels
 across dense clusters of small land parcels, which the platform cannot
-deduplicate on its own.
-
-A second phase in 2023 and 2024 rebuilt the map's terrain treatment.
-Rather than rely on a stock hillshade, I derived a custom relief from
-continental elevation data using chained raster functions, generating
-slope, edge, highlight, and multi-radius blur components and compositing
-them into a single blended surface. The result gives the static map its
-depth without the flat, mechanical look of a default hillshade. The same
-phase consolidated the project's scattered working data into a single
-geodatabase and migrated the shared thematic layers to hosted ArcGIS
-Online feature services, so the web map and static map draw from one
-authoritative source rather than divergent copies.
+deduplicate on its own. A second phase in 2023 and 2024 rebuilt the map's
+terrain: rather than rely on a stock hillshade, I derived a custom relief
+from continental elevation data, generating slope, edge, highlight, and
+multi-radius blur components and compositing them into one blended
+surface. The same phase consolidated the project's scattered working data
+into a single geodatabase and moved the shared thematic layers to hosted
+ArcGIS Online feature services.
 
 ## What was delivered
 

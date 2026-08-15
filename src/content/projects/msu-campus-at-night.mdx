@@ -91,8 +91,19 @@
 # the sensor's noise floor is." Plain description instead. The de-AI pass
 # removed the aphoristic constructions ("X is the measurement", "That is a
 # pedestal, not noise") while leaving every figure exactly as sourced.
+# 2026-08-14: SHEETS REVISED AGAIN (section v19, survey fa3), his direction:
+# Alegreya type family embedded in the sheets; campus labels placed from
+# OpenStreetMap footprints after georeferencing the survey mosaic (tie:
+# fieldhouse dome; checked against S 11th Ave, W Grant, W Garfield in the
+# imagery); ground control dropped from both stat bands; the survey sheet's
+# stats moved into the map's empty lower-left as a stacked column with a
+# NEW SET (frames, airborne, flown, frames aligned, 3.21 cm ground sample);
+# "engine" retired everywhere ("I would avoid using engine in general") in
+# favour of program / processing software; "transfer function" retired for
+# "brightness curve". "Centennial Mall" was proposed and he REMOVED it. Site
+# copy below carries the same word changes; every figure unchanged.
 title: "Campus at Night"
-summary: "Overnight UAV survey of the MSU campus, rebuilt through three photogrammetry engines. 1,366 exposure-locked frames over 236 hectares flown; 149 hectares is the most any engine reconstructed, and the two that came closest disagree by 2.6 times in shadow."
+summary: "Overnight UAV survey of the MSU campus, rebuilt through three photogrammetry programs. 1,366 exposure-locked frames over 236 hectares flown; 149 hectares is the most any of them reconstructed, and the two that came closest disagree by 2.6 times in shadow."
 year: 2023
 yearEnd: 2026
 tier: 3
@@ -129,9 +140,9 @@ a campus-wide picture of what that lighting produces on the
 ground.
 
 Night imagery is a hard case for the method that would produce that
-picture. Photogrammetry engines work by matching texture between frames,
+picture. Photogrammetry software works by matching texture between frames,
 and in imagery this dark most of the ground barely registers: the lit
-paths carry detail the engines can match, while the lawns between them
+paths carry detail the software can match, while the lawns between them
 carry almost none.
 
 ## Approach
@@ -140,8 +151,8 @@ In September 2023 I flew a Vision Aerial Switchblade over the MSU campus
 between 1:14 and 4:58 a.m., collecting 1,366 frames across 236 hectares at
 roughly 123 meters above ground. The Sony a6000 ran with the exposure
 locked at 1/60 second, ISO 12800, f/3.2, so every frame is directly
-comparable to every other frame. No engine applied color balancing or
-scene-adaptive normalization at any stage, which is what lets brightness
+comparable to every other frame. No color balancing or
+scene-adaptive normalization was applied at any stage, which is what lets brightness
 on the finished sheets be read as a measurement.
 
 Two things about how the survey was flown constrain everything downstream. The
@@ -171,7 +182,7 @@ version that was usable had to be cropped to 71 hectares to fit in memory.
 
 The first test was a flat unlit roof, 48.6 meters across, sampled through
 the same code path in every product. Nothing on that surface emits light,
-so anything above zero is the engine's own behavior in shadow.
+so anything above zero is the program's own behavior in shadow.
 
 | Product | mean | median | P95 |
 |---|---|---|---|
@@ -193,7 +204,7 @@ products are read on the same pixels rather than on their own.
 | bright, above 120 | 360,694 | 160.67 | 183.33 | 1.14× |
 
 The ratio falls steadily as the ground gets brighter. Where light
-falls, the engines agree to within 14 percent; in shadow they separate to
+falls, the three programs agree to within 14 percent; in shadow they separate to
 2.6 times. That matches the roof result, measured here across 113 hectares
 instead of one building.
 
@@ -214,30 +225,30 @@ number, which is 8-bit rounding rather than the operation.
 
 ### Two sheets
 
-Drone2Map produced the cleanest mosaic; Metashape was the only engine that
+Drone2Map produced the cleanest mosaic; Metashape was the only program that
 covered both flown blocks. One sheet could not show both.
 
 <SheetFigure
   src={sectionSheet}
-  alt="Portrait map sheet titled Campus at Night. A stat bar reads 1,366 frames, 3 h 43 m airborne, 236 ha flown, 2.43 cm ground sample, 3 engines compared, no ground control. Below it a large night orthomosaic of the campus core, two brighter insets down the right side, and a strip of three small dark panels along the bottom comparing the engines on one roof."
+  alt="Portrait map sheet titled Campus at Night, set in a serif face. A stat bar reads 1,366 frames, 3 h 43 m airborne, 236 ha flown, 2.43 cm ground sample, 3 programs compared. Below it a large night orthomosaic of the campus core with small-capital labels for Montana Hall, Reid Hall, Renne Library, Romney Quad, Romney Hall, Gaines Hall, Strand Union, Norm Asbjornson Hall and others, italic street names for S 11th Ave, S 7th Ave, W Grant St and W Garfield St, two brighter insets down the right side, and a strip of three small dark panels along the bottom comparing the programs on one roof."
   caption="Section sheet: 592 by 502 meters of the core, from Drone2Map at 2.43 cm."
   linkLabel="Open the full section sheet"
 />
 
 The section sheet shows 592 by 502 meters of the core from Drone2Map, with
-the lamp-string and sodium-district insets and the three-engine roof
+the lamp-string and sodium-district insets and the three-program roof
 comparison.
 
 <SheetFigure
   src={surveySheet}
-  alt="Portrait map sheet titled Campus at Night. A stat bar reads 95.5 percent frames aligned, 149 ha reconstructed, 236 ha flown, 35.5 ha Metashape only, 2.6 times brighter in shadow, no ground control. Below it the full reconstruction on black: a large rectangular block of lit walkways at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, empty ground between them, and a brightness histogram down the right side. Labels name Romney Quad, Brick Breeden Fieldhouse, and S 11th Ave, and an outlined rectangle marks the extent of the companion section sheet."
+  alt="Portrait map sheet titled Campus at Night, set in a serif face. The full reconstruction on black: a large rectangular block of lit walkways at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, and empty ground between them. In that empty lower-left corner a stacked column of figures reads 1,366 frames, 3 h 43 m airborne, 236 ha flown, 95.5 percent frames aligned, 3.21 cm ground sample, with the scale bar beneath. Labels name Montana Hall, Renne Library, Strand Union, Romney Quad, Miller Dining, Linfield Hall, Brick Breeden Fieldhouse and Bobcat Stadium, with italic street names for S 11th Ave, S 7th Ave, W Grant St and W Garfield St; a thin outlined rectangle tagged Section sheet marks the companion sheet's extent; a brightness histogram runs down the right side."
   caption="Complete-survey sheet: all 149 reconstructed hectares, from Metashape at 3.21 cm."
   linkLabel="Open the full complete-survey sheet"
 />
 
 The complete-survey sheet shows all 149 hectares from Metashape, with a
 brightness distribution measured across all 1.45 billion reconstructed
-pixels, the south block that no other engine produced, and the campus-scale
+pixels, the south block that only Metashape reconstructed, and the campus-scale
 comparison above. Half of that reconstruction is darker than luminance 14
 while the mean sits at 49, which is what a mostly dark site with a few very
 bright places looks like as a statistic. Each sheet declares its own source,
@@ -250,7 +261,7 @@ ground: coverage, gaps, and spill, at a resolution where individual lamp
 pools are legible.
 
 With no ground control at 2 a.m., neither product is the reference. The
-comparison identifies which failure mode each engine has, not which one is
+comparison identifies which failure mode each program has, not which one is
 right.
 
 Three failures cost the most time.
@@ -270,7 +281,7 @@ imagery around each seam and adjusting to it, and frames this dark give
 them almost nothing to read.
 
 Every difficulty above comes back to how the survey was flown, not to the
-processing. No parameter in any of the three engines addresses drift down a 1.6
+processing. No setting in any of the three programs addresses drift down a 1.6
 kilometer leg when there are no cross-strips to tie it against. What I would
 change is the flight: cross-hatch it, or fly it with camera tilt, or place
 ground control. The exposure is the other one. A single locked setting had

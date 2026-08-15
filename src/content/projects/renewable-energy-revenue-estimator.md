@@ -21,6 +21,15 @@
 #    standard", source attributions unchanged.
 #  - 08-15 "implement all recommendations": the announce-then-prove opener
 #    "The map does something the calculator cannot." CUT.
+#  - 08-15 section pass, item 1, his approval with one change: the fiscal
+#    Approach paragraph gained glosses on mill rates and straight-line
+#    depreciation, the school-levy colon became a period, and at his
+#    direction the one-district correction detail ("carrying only its
+#    high-school component") came OUT — that fact now lives only in the
+#    methods report. "Net assessed value" and "full cash value" stay
+#    unglossed on purpose: statute terms of art, and any plain substitute
+#    would be slightly false (assessment ratio sits between them). Flag-20
+#    wording ("backed out from published totals") preserved.
 # 2026-08-13 audit flag 20, his call: "resolved as a residual against
 # published totals" -> "backed out from published totals". Same operation.
 # The rest of the Approach paragraph (mill rates, net assessed value, the
@@ -125,15 +134,16 @@ it is taxed at all.
 
 On the fiscal side, Arizona Department of Revenue primary and secondary
 levy tables were combined into a single levy dataset and converted to mill
-rates against net assessed value. School levies took the most work, since
-they are the largest local component: per-district secondary levies were
-built up and reconciled to state totals for all fifteen counties, joint
-technical education district levies were backed out from published totals, and one district's entry was corrected where it had been
-carrying only its high-school component. Equipment valuation follows
-A.R.S. § 42-14155, which sets full cash value at twenty percent of
-depreciated cost, with straight-line depreciation over the useful life the
-Department adopts for each technology and a floor at ten percent. Nuclear
-is valued under a different statute and is handled separately.
+rates (dollars of tax per thousand dollars of taxable value) against net
+assessed value. School levies took the most work, since they are the
+largest local component. Per-district secondary levies were built up and
+reconciled to state totals for all fifteen counties, and joint technical
+education district levies were backed out from published totals.
+Equipment valuation follows A.R.S. § 42-14155, which sets full cash value
+at twenty percent of depreciated cost, with straight-line depreciation
+(equal annual steps) over the useful life the Department adopts for each
+technology and a floor at ten percent. Nuclear is valued under a
+different statute and is handled separately.
 
 Two caveats up front. The twenty percent
 valuation treatment is scheduled to sunset at the end of 2040; the model

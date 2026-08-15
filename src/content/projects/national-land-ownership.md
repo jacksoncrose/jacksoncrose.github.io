@@ -1,4 +1,12 @@
 ---
+# 2026-08-15 section pass, item 5, his approval: Outcome's "the remaining
+# deltas are exactly those predicted by the study's water-masking
+# methodology" -> "differences ... predicted by the study's removal of
+# open water from county boundaries" (same words Approach uses for the
+# same operation; "predicted" kept deliberately). "Canonical" REMOVED at
+# his direction — his words: "that is AI language usually" — and not
+# replaced; "authoritative benchmarks" opening the sentence already does
+# that work. ADD "canonical" TO THE WATCH LIST for future passes.
 # 2026-08-13 audit flag 19a, his call: "a prioritization and differencing
 # scheme that resolves those overlaps defensibly" rewritten in plain words.
 # "Defensibly" came out with it — the three sentences that follow (Fee as
@@ -101,10 +109,11 @@ study's Minnesota figures.
 The classification now powers the land use reports communities pull from
 EPS. Results were independently cross-validated
 against authoritative benchmarks: BLM and Forest Service acreage each landed
-within about one percent of the Congressional Research Service's canonical
+within about one percent of the Congressional Research Service's
 federal land figures, the national federal share of 27.6 percent matches
-the widely cited figure of roughly 28 percent, and the remaining deltas
-are exactly those predicted by the study's water-masking methodology.
+the widely cited figure of roughly 28 percent, and the remaining differences
+are exactly those predicted by the study's removal of open water from
+county boundaries.
 
 The results and the classification engine are also packaged as a
 self-contained interactive explorer: a county choropleth with
