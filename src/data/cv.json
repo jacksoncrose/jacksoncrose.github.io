@@ -92,23 +92,27 @@
   "skills": [
     {
       "label": "Analysis",
-      "known": "ArcGIS Pro, ArcGIS Spatial Analyst, Python (ArcPy, GeoPandas, NumPy, laspy)"
+      "known": "ArcGIS Pro, ArcGIS Spatial Analyst, QGIS, Python (ArcPy, GeoPandas, NumPy, laspy) in Jupyter notebooks, SQL and PostGIS, Esri demographic enrichment"
     },
     {
       "label": "Data collection",
-      "known": "UAS survey, airborne and terrestrial LiDAR, photogrammetry. Vision Aerial Switchblade with Sony a6000"
+      "known": "UAS survey (Vision Aerial Switchblade with Sony a6000, Skydio aircraft), airborne and terrestrial LiDAR, photogrammetry"
     },
     {
       "label": "Processing",
-      "known": "Agisoft Metashape, ArcGIS Pro raster function chains, Python point-cloud processing (laspy, NumPy)"
+      "known": "Agisoft Metashape, Drone2Map, ArcGIS Pro raster function chains, Python point-cloud processing (laspy, NumPy)"
     },
     {
       "label": "Development",
-      "known": "JavaScript (Three.js, Leaflet, d3), self-contained single-file web applications, Excel model development"
+      "known": "JavaScript (Three.js, Leaflet, d3), self-contained single-file web applications, Excel model development, Astro static sites deployed through GitHub Actions, Git and GitHub"
     },
     {
       "label": "Data management",
-      "known": "Geodatabase design and consolidation, hosted feature services, data dictionaries and metadata transfer to client ownership, imagery cataloging and archiving"
+      "known": "Geodatabase design and consolidation, ArcGIS Online hosted feature services, data dictionaries and metadata transfer to client ownership, Google Earth deliverables, imagery cataloging and archiving"
+    },
+    {
+      "label": "Management",
+      "known": "Operating budgets and service rate models, scopes of work and client quotes, sponsored-program budgets and amendments through the Office of Sponsored Programs, Canvas LMS course administration"
     },
     {
       "label": "Certifications",
