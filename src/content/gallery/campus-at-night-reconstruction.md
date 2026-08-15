@@ -19,11 +19,11 @@
 # or unreconstructed, and Jackson's instruction was not to fill gaps by
 # inference. Ask him before writing a cause for it.
 title: "All 149 hectares, from Metashape"
-blurb: "Everything Metashape reconstructed, out of 236 hectares flown. It was the only engine of the three that solved the south block, at lower right, which is why this survey needed two sheets rather than one."
+blurb: "Everything Metashape reconstructed, out of 236 hectares flown. It was the only one of the three programs that reconstructed the south block, at lower right, which is why this survey needed two sheets rather than one."
 year: 2023
 tools: ["UAV", "Agisoft Metashape"]
 image: "../../assets/images/campus-at-night-reconstruction.jpg"
-alt: "Irregular night orthomosaic of the MSU campus on black: a large rectangular block of lit walkways and parking lots at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, and empty black ground between them. Labels name Romney Quad, Brick Breeden Fieldhouse, and S 11th Ave."
+alt: "Irregular night orthomosaic of the MSU campus on black: a large rectangular block of lit walkways and parking lots at upper left, a second block at lower right containing the round roof of Brick Breeden Fieldhouse, and empty black ground between them. Small-capital labels name Montana Hall, Renne Library, Strand Union, Romney Quad, Miller Dining, Linfield Hall, Brick Breeden Fieldhouse and Bobcat Stadium; italic street names mark S 11th Ave, S 7th Ave, W Grant St and W Garfield St."
 group: "campus-at-night"
 groupOrder: 2
 order: 3

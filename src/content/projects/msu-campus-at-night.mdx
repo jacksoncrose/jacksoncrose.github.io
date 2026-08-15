@@ -1,4 +1,13 @@
 ---
+# 2026-08-15 section pass, item 2, his call "remove that bit entirely":
+# the OpenDroneMap --build-overviews / exit code 2 / opendm/orthophoto.py
+# sentence is GONE from Outcome (a plainer rewrite was offered; he chose
+# removal). "Three failures" -> "Two failures"; the "And" opening the
+# Drone2Map sentence dropped. The bug stays recorded in 00_summary.md.
+# RE-APPLIED 2026-08-15 on top of the sheets-v20/fa4 session's version of
+# this file: that session's write landed on his disk after this session's
+# hash-verified write-back and rode into 87c216f, dropping this edit
+# (see handoff F8). Everything else in this file is that session's.
 # 2026-08-15 second de-AI pass, his "implement all recommendations": two
 # "actually" dropped (Problem picture line; "Where light falls"), the
 # transitional "Coverage followed from that." cut, and "are worth
@@ -264,16 +273,13 @@ With no ground control at 2 a.m., neither product is the reference. The
 comparison identifies which failure mode each program has, not which one is
 right.
 
-Three failures cost the most time.
+Two failures cost the most time.
 OpenDroneMap ran into memory limits at this scale: in 48 GB it would not
 texture the full 280 hectare site above roughly 400,000 faces. Restricting
 the reconstruction to 71 hectares let it texture 600,000 faces in thirteen
 minutes, six times the mesh density of the full-site build. That fixed flat ground and did nothing for
 trees, which still tear, because a 2.5D mesh cannot represent them at all.
-Passing `--build-overviews` killed an otherwise complete run with exit code
-2, from a missing space in a GDAL command string in
-`opendm/orthophoto.py`, so the orthophoto gets written and the run then
-dies on the step after it. And Drone2Map's seamline blending, with color
+Drone2Map's seamline blending, with color
 balancing enabled, produced visibly worse output than leaving both switched
 off: seamline polygons showed as hard facets with parking stall lines
 running straight across brightness jumps. Both work by reading the

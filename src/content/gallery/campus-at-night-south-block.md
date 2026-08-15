@@ -11,7 +11,7 @@
 # produced ground no other engine did — that is coverage, not accuracy.
 # Do not let this blurb drift toward "Metashape was the best engine."
 title: "The south block"
-blurb: "An inset from the complete-survey sheet: 250 meters of ground no other engine reconstructed. Seventy-one percent of it reads darker than 10 of 255, and the middle value is 3: one lit parking lot in a block otherwise close to dark."
+blurb: "An inset from the complete-survey sheet: 250 meters of ground that only Metashape reconstructed. Seventy-one percent of it reads darker than 10 of 255, and the middle value is 3: one lit parking lot in a block otherwise close to dark."
 year: 2023
 tools: ["UAV", "Agisoft Metashape"]
 image: "../../assets/images/campus-at-night-south-block.jpg"

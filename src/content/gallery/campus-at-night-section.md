@@ -19,11 +19,11 @@
 # a lossless reference, WORSE than mozjpeg quality 82 at 489 KB and
 # 2.27/255 — this is continuous-tone night imagery, not a figure.
 title: "The core, from Drone2Map"
-blurb: "A 592 by 502 meter section of the campus core, from the engine with the cleanest mosaic. Each pixel covers 2.43 cm of ground. Exposure was locked and nothing was color-balanced, so brightness differences are differences on the ground."
+blurb: "A 592 by 502 meter section of the campus core, from the program with the cleanest mosaic. Each pixel covers 2.43 cm of ground. Exposure was locked and nothing was color-balanced, so brightness differences are differences on the ground."
 year: 2023
 tools: ["UAV", "Esri Drone2Map"]
 image: "../../assets/images/campus-at-night-section.jpg"
-alt: "Night orthomosaic of the Montana State University core: a street grid picked out by white-green lamp pools along walkways and parking lots, a dark oval quad at center, and amber sodium-vapor lighting across the block at lower right."
+alt: "Night orthomosaic of the Montana State University core: a street grid picked out by white-green lamp pools along walkways and parking lots, a dark oval quad at center labeled Romney Quad, and amber sodium-vapor lighting across the block at lower right. Small-capital labels name Montana Hall, Leon Johnson Hall, Reid Hall, Traphagen Hall, Renne Library, Strand Union, A.J.M. Johnson Hall, Romney Hall, Gaines Hall and Norm Asbjornson Hall; italic street names mark S 11th Ave, S 7th Ave, W Grant St and W Garfield St."
 group: "campus-at-night"
 groupOrder: 1
 order: 3
