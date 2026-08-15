@@ -66,6 +66,14 @@ interface Props {
 	 * columns to span.
 	 */
 	featureFirst?: boolean;
+	/**
+	 * Last card spans both grid columns (2026-08-15, Jackson's call). The
+	 * Campus at Night group dropped to three cards when the two insets
+	 * were withdrawn; his settled order keeps the two sheet crops side by
+	 * side with the 2023 delivered map closing, so the stranded card is
+	 * the LAST one. Same mechanism as featureFirst, other end.
+	 */
+	featureLast?: boolean;
 }
 
 const {
@@ -78,6 +86,7 @@ const {
 	label = 'Maps',
 	class: className = '',
 	featureFirst = false,
+	featureLast = false,
 } = Astro.props;
 
 const GRID = 'grid list-none grid-cols-1 gap-x-8 gap-y-12 p-0 sm:grid-cols-2';
@@ -153,7 +162,7 @@ const pairMeta = (entry: Entry) =>
 	) : (
 		<ul class={`${hasPair ? STACK : GRID} ${className}`}>
 			{items.map((item, index) => (
-				<li class={featureFirst && !hasPair && index === 0 ? 'sm:col-span-2' : ''}>
+				<li class={!hasPair && ((featureFirst && index === 0) || (featureLast && index === items.length - 1)) ? 'sm:col-span-2' : ''}>
 					{item.kind === 'pair' ? (
 						<MapCompare
 							title={item.a.data.title}

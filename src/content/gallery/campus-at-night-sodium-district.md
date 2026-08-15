@@ -1,4 +1,12 @@
 ---
+# WITHDRAWN FROM THE GALLERY 2026-08-15, Jackson's call: "I don't really
+# think the sodium district and south block insets need in the map gallery
+# at all." Held as draft rather than deleted, same as Democrat: the
+# derivative and its _staging original stay in place, so republishing is
+# draft: false. Both insets still reach a reader from the sheets
+# themselves on the project page. The blurb below was aligned to the
+# v20/fa4 sheet caption the same day, minutes before withdrawal; it is
+# current if this ever comes back.
 # 2026-08-15 alignment with the v20/fa4 sheets, his "do them all": the
 # middle sentence now carries the sheet's own caption wording ("73%
 # sodium-class, against 94% cool in the mapped core"). THIS REVERSES the
@@ -38,5 +46,5 @@ alt: "Aerial night close-up of a curved parking loop lit amber by high-pressure 
 group: "campus-at-night"
 groupOrder: 3
 order: 3
-draft: false
+draft: true
 ---

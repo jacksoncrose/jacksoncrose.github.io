@@ -73,6 +73,13 @@ export type GalleryGroupMeta = {
    * only enhanced parts.
    */
   carousel?: boolean;
+  /**
+   * For grid groups with an odd card count: which card spans both
+   * columns so none is stranded alone in its row. Added 2026-08-15 when
+   * Campus at Night dropped to three cards. 'first' mirrors the lead
+   * run's featureFirst; 'last' makes the closing card the full-width one.
+   */
+  feature?: 'first' | 'last';
 };
 
 export const galleryGroups: Record<string, GalleryGroupMeta> = {
@@ -89,6 +96,16 @@ export const galleryGroups: Record<string, GalleryGroupMeta> = {
   },
   'campus-at-night': {
     title: 'Campus at Night',
+    /* 2026-08-15: the sodium-district and south-block insets were
+       WITHDRAWN (his call), leaving three cards. Both feature ends were
+       rendered at delivered width and shown to him; 'first' chosen on
+       recommendation: the section crop is the one image whose labels read
+       at card size, and a full-width lead matches the page's opening run
+       ("All federal land" over a pair). This supersedes the 08-13
+       "two engine documents side by side" order for this block; the
+       reconstruction still follows immediately, paired with the 2023 map.
+       Reversal is one word: 'last' puts the 2023 map full-width at the end. */
+    feature: 'first',
     /* 2026-08-15 alignment with the v20/fa4 sheets, his call: "neither
        result ... the other" (two) -> "none of the three results ... the
        others", matching the roof panel's "none of them can serve as the
