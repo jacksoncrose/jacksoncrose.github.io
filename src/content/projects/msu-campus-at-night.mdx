@@ -1,4 +1,10 @@
 ---
+# 2026-08-15 gallery-to-sheets alignment, his "do them all": "luminance"
+# -> "brightness" in all five body instances, matching the v20/fa4 sheets
+# ("raw brightness, 0-255"; "darker than 14"; "leaves every brightness
+# value exactly where it was"). No figure moved. The color-decision
+# paragraph reads the same with the swap because the sheet already states
+# that operation in brightness terms.
 # 2026-08-15 section pass, item 2, his call "remove that bit entirely":
 # the OpenDroneMap --build-overviews / exit code 2 / opendm/orthophoto.py
 # sentence is GONE from Outcome (a plainer rewrite was offered; he chose
@@ -227,8 +233,8 @@ stays zero. Neutralising those shadows would mean adding blue the sensor
 never recorded.
 
 What I used instead is a global chroma scale, moving each pixel toward its
-own luminance by a fixed factor. Because luminance is the measurement, and
-every channel moves toward the value being measured, luminance comes out
+own brightness by a fixed factor. Because brightness is the measurement, and
+every channel moves toward the value being measured, brightness comes out
 unchanged. The largest deviation across the frame is 0.667 of a digital
 number, which is 8-bit rounding rather than the operation.
 
@@ -258,7 +264,7 @@ comparison.
 The complete-survey sheet shows all 149 hectares from Metashape, with a
 brightness distribution measured across all 1.45 billion reconstructed
 pixels, the south block that only Metashape reconstructed, and the campus-scale
-comparison above. Half of that reconstruction is darker than luminance 14
+comparison above. Half of that reconstruction is darker than brightness 14
 while the mean sits at 49, which is what a mostly dark site with a few very
 bright places looks like as a statistic. Each sheet declares its own source,
 its own transforms, and the absence of ground control.
@@ -291,12 +297,12 @@ processing. No setting in any of the three programs addresses drift down a 1.6
 kilometer leg when there are no cross-strips to tie it against. What I would
 change is the flight: cross-hatch it, or fly it with camera tilt, or place
 ground control. The exposure is the other one. A single locked setting had
-to cover ground where 22 percent of the reconstruction sits below luminance
+to cover ground where 22 percent of the reconstruction sits below brightness
 3 while 16.6 percent of the brightest area runs above 240 out of 255. A
 bracketed pass, or a slower shutter on a second circuit, would have bought
 back both ends.
 
 Gamma 0.60 is applied identically to both sheets and to every panel on them.
 It is monotonic, so it never reorders two points, and every figure quoted
-here is raw luminance read before that curve. Both sheets are WGS 84 UTM
+here is raw brightness read before that curve. Both sheets are WGS 84 UTM
 12N.

@@ -89,7 +89,11 @@ export const galleryGroups: Record<string, GalleryGroupMeta> = {
   },
   'campus-at-night': {
     title: 'Campus at Night',
-    note: "One overnight survey of the MSU campus, rebuilt through three photogrammetry programs. Drone2Map produced the cleaner mosaic but never solved the south block; Metashape covered both flown blocks, reaching 149 of the 236 hectares flown. No surveyed markers were placed on the ground, so neither result is the reference for the other.",
+    /* 2026-08-15 alignment with the v20/fa4 sheets, his call: "neither
+       result ... the other" (two) -> "none of the three results ... the
+       others", matching the roof panel's "none of them can serve as the
+       reference". */
+    note: "One overnight survey of the MSU campus, rebuilt through three photogrammetry programs. Drone2Map produced the cleaner mosaic but never solved the south block; Metashape covered both flown blocks, reaching 149 of the 236 hectares flown. No surveyed markers were placed on the ground, so none of the three results is the reference for the others.",
     href: '/projects/msu-campus-at-night',
   },
   'rooney-ranch-atlas': {

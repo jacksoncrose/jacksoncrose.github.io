@@ -1,4 +1,9 @@
 ---
+# 2026-08-15 alignment with the v20/fa4 sheets, his "do them all":
+# "cleanest mosaic" -> "cleaner mosaic wherever it reached" and
+# "brightness differences are differences on the ground" -> "what looks
+# brighter was brighter on the ground", both the sheet's own phrasing.
+# Figures unmoved. 240-cap: "wherever it reached" trimmed (248 -> 228).
 # 2026-08-13 audit flag 15, his call: "at 2.43 cm ground sample" says
 # what the number means instead of naming the measure. The 240-char cap
 # paid for it out of "that produced the" and "no colour balancing was
@@ -19,7 +24,7 @@
 # a lossless reference, WORSE than mozjpeg quality 82 at 489 KB and
 # 2.27/255 — this is continuous-tone night imagery, not a figure.
 title: "The core, from Drone2Map"
-blurb: "A 592 by 502 meter section of the campus core, from the program with the cleanest mosaic. Each pixel covers 2.43 cm of ground. Exposure was locked and nothing was color-balanced, so brightness differences are differences on the ground."
+blurb: "A 592 by 502 meter section of the campus core, from the program with the cleaner mosaic. Each pixel covers 2.43 cm of ground. Exposure was locked and nothing was color-balanced, so what looks brighter was brighter on the ground."
 year: 2023
 tools: ["UAV", "Esri Drone2Map"]
 image: "../../assets/images/campus-at-night-section.jpg"

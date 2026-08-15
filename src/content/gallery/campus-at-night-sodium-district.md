@@ -1,4 +1,12 @@
 ---
+# 2026-08-15 alignment with the v20/fa4 sheets, his "do them all": the
+# middle sentence now carries the sheet's own caption wording ("73%
+# sodium-class, against 94% cool in the mapped core"). THIS REVERSES the
+# 08-13 flag-13 plain-words reading ("that warm type ... white and
+# blue-white") — flagged to him at the time as a divergence he might
+# prefer to keep; he said do them all. The first sentence keeps the
+# plain gloss so "sodium-class" is explained before it appears. Figures
+# unmoved.
 # 2026-08-13, his call: groupOrder 2 -> 3, half of the reorder recorded
 # on the reconstruction entry.
 # 2026-08-13 audit flag 13, his call, TWICE: he chose the full plain-words
@@ -22,7 +30,7 @@
 # ingest re-encodes at q82 (one extra lossy pass, checked by eye at
 # delivered size).
 title: "The sodium district"
-blurb: "An inset from the section sheet: the block where the older orange sodium lamps still run. 73% of the light there is that warm type, against 94% white and blue-white in the mapped core, at an average brightness of 40.7 of 255."
+blurb: "An inset from the section sheet: the block where the older orange sodium lamps still run. Lighting here is 73% sodium-class, against 94% cool in the mapped core, at an average brightness of 40.7 of 255."
 year: 2023
 tools: ["UAV", "Esri Drone2Map"]
 image: "../../assets/images/campus-at-night-sodium-district.jpg"

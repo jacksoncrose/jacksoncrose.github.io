@@ -1,4 +1,9 @@
 ---
+# 2026-08-15 alignment with the v20/fa4 sheets, his "do them all": now
+# the sheet's own "sits below brightness 10 ... and the median is 3"
+# (with the 0-255 scale kept for the reader). This SUPERSEDES the 08-13
+# flag-14 wording ("reads darker than 10 of 255, and the middle value is
+# 3") — his call, matching the sheet. Figures unmoved.
 # 2026-08-13 audit flag 14, his call: "below luminance 10" and "the
 # median" rewritten for a reader who has no sheet in front of them. The
 # 240-char blurb cap forced the tightening ("otherwise close to dark").
@@ -11,7 +16,7 @@
 # produced ground no other engine did — that is coverage, not accuracy.
 # Do not let this blurb drift toward "Metashape was the best engine."
 title: "The south block"
-blurb: "An inset from the complete-survey sheet: 250 meters of ground that only Metashape reconstructed. Seventy-one percent of it reads darker than 10 of 255, and the middle value is 3: one lit parking lot in a block otherwise close to dark."
+blurb: "An inset from the complete-survey sheet: 250 meters of ground that only Metashape reconstructed. Seventy-one percent of it sits below brightness 10 of 255, and the median is 3: one lit parking lot in a block otherwise close to dark."
 year: 2023
 tools: ["UAV", "Agisoft Metashape"]
 image: "../../assets/images/campus-at-night-south-block.jpg"
