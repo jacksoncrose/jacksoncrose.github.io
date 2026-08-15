@@ -78,7 +78,11 @@ export type GalleryGroupMeta = {
 export const galleryGroups: Record<string, GalleryGroupMeta> = {
   'rural-school-access': {
     title: 'Montana rural school access',
-    note: "Distance to the nearest school across Montana, in hexagons of about 16 square miles, for the MSU Center for Research on Rural Education. The pair sets current access against a bounding case in which all 129 of the state's small rural schools close at once. No such closure has been proposed; the scenario is there to measure what those schools cover.",
+    /* 2026-08-15 second de-AI pass, his "implement all recommendations":
+       "a bounding case" -> "a case" (jargon rule). The next sentence is
+       the sourcing constraint (no closure proposed; the scenario measures
+       coverage) and is unchanged word for word. */
+    note: "Distance to the nearest school across Montana, in hexagons of about 16 square miles, for the MSU Center for Research on Rural Education. The pair sets current access against a case in which all 129 of the state's small rural schools close at once. No such closure has been proposed; the scenario is there to measure what those schools cover.",
     /* No `href`: this project is a card-only entry on the Projects index
        (hasPage: false), so there is no page to send a reader to. Do not
        point this at /projects as a consolation link. */

@@ -1,4 +1,10 @@
 ---
+# 2026-08-15 second de-AI pass, his "implement all recommendations": the
+# Approach sentence ended "rather than a set of borders", the second
+# "rather than a set of" on one page (Problem has "...administrative
+# jurisdictions"); the tail came off. NOTE: in .md files, body <!-- -->
+# comments render into the served HTML — provenance lives here in the
+# frontmatter only.
 # 2026-08-05 de-AI pass: "Design choices reinforced..." topic sentence
 # cut; "built that picture twice over" flattened to the two deliverables
 # (his call: don't say it twice). "Contracted independently" stays — it is
@@ -67,7 +73,7 @@ a merged authority table.
 
 The published web map
 omits state, provincial, and federal boundaries so the region reads as a
-network of relationships rather than a set of borders. Symbology was drawn
+network of relationships. Symbology was drawn
 from cultural imagery, including a hand-scanned medicine wheel vectorized
 to SVG and custom bison, feather, and lodge symbols, packaged into a
 reusable style library so future editors inherit the same visual language.

@@ -1,4 +1,26 @@
 ---
+# PROVENANCE NOTES LIVE HERE, NOT IN THE BODY. In .md files, body
+# <!-- --> comments PASS THROUGH INTO THE SERVED HTML — the 2026-08-14
+# batch shipped four editorial notes into this page's public source
+# before that was caught on 08-15. Frontmatter comments never render.
+# Use YAML comments here for .md files; {/* */} in .mdx is safe (stripped
+# at build, verified).
+#
+# 2026-08-14/15 de-AI edits, all his direction, in order:
+#  - Header "Problem" -> "Project Context" (this page only) and the opener
+#    rewritten to his supplied wording (typo fixed, "in terms of" trimmed).
+#  - "The Center for American Progress commissioned the work for" -> "The
+#    work was done in partnership with ... for". CAP stays the direct
+#    relationship; the standing rule below still holds.
+#  - Approach topic sentence "The work had a spatial half and a fiscal
+#    half, built to check each other." CUT (the plainer option he picked
+#    08-05; he then judged the shape itself the tell). The cross-check
+#    claim lives in What was delivered (672 scenarios, to the cent).
+#  - His correction: many jurisdiction layers, not "one consistent
+#    statewide layer"; now "pulled together and cleaned to a common
+#    standard", source attributions unchanged.
+#  - 08-15 "implement all recommendations": the announce-then-prove opener
+#    "The map does something the calculator cannot." CUT.
 # 2026-08-13 audit flag 20, his call: "resolved as a residual against
 # published totals" -> "backed out from published totals". Same operation.
 # The rest of the Approach paragraph (mill rates, net assessed value, the
@@ -68,11 +90,6 @@ hasPage: true
 draft: false
 ---
 
-<!-- 2026-08-14, his direction: header "Problem" -> "Project Context" (this
-page only; the other case studies keep the problem/approach/delivered/
-outcome shape) and the opener rewritten to his supplied wording, with his
-typo fixed and "in terms of" trimmed. -->
-
 ## Project Context
 
 When a utility-scale energy project is proposed in Arizona, developers,
@@ -90,24 +107,11 @@ payments take its place. Getting from "a 200 MW solar project here" to
 "this much to this school district over 25 years" meant assembling data
 that had never been in one place.
 
-<!-- 2026-08-14, his direction, "commissioned" -> "in partnership with".
-Still names CAP as the direct relationship and the Arizona office as the
-end user; the standing rule holds — no copy implying he was engaged
-directly by the State. -->
 The work was done in partnership with the Center for American Progress for
 the Arizona Governor's Office of Resiliency.
 
 ## Approach
 
-<!-- 2026-08-14, his call: the opener "The work had a spatial half and a
-fiscal half, built to check each other." (the plainer option he picked in
-the 08-05 pass) read as a consultant topic sentence and was CUT rather
-than rewritten — the next two paragraphs already open "On the spatial
-side" / "On the fiscal side", and the cross-checking claim lives in What
-was delivered (672 scenarios, match to the cent). -->
-
-<!-- 2026-08-14, his correction: it is many layers, not one statewide
-layer. Source attributions unchanged. -->
 On the spatial side, boundary data for every kind of taxing jurisdiction
 in Arizona was pulled together and cleaned to a common standard: counties
 and school districts from Census TIGER/Line, fire service areas and other
@@ -147,7 +151,7 @@ map built from it. The map is a single self-contained HTML file with all
 data and mapping libraries embedded, so it runs with no server and no
 internet connection.
 
-The map does something the calculator cannot. Where the calculator works at
+Where the calculator works at
 the county level, the map resolves the specific school tax unit and fire
 district at a clicked point or across a drawn project footprint and applies
 that jurisdiction's actual rate. It computes the federal right-of-way
