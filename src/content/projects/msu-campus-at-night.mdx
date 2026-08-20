@@ -1,4 +1,16 @@
 ---
+# 2026-08-20, from his own LinkedIn post on this project, his approvals:
+# Approach gains the flight parameters (80/60 overlap GLOSSED per this
+# page's register rule — "80 percent overlap along each leg and 60
+# percent between legs" — one frame every 6 seconds, 16 mm lens) and
+# Outcome gains one clause: "Metashape had built its full-site surface
+# in 40.8 GB." These figures are NOT in 00_summary.md; their source is
+# the post itself (his voice, 2026-08-20). The post's other compute
+# figures (runtimes) stay off the page — the 08-15 length cut stands.
+# DIVERGENCES flagged and left: the post says 120 m AGL and "midnight
+# to 4 a.m."; this page keeps 123 m and 1:14–4:58 a.m. from
+# 00_summary.md, the sourced record. Do not reconcile the page to the
+# post's rounding.
 # 2026-08-20 de-AI pass, flag 6, his call ("Align it"): Outcome's
 # "neither product is the reference" -> "none of the three results is
 # the reference", matching the survey sheet and the gallery group note
@@ -185,9 +197,10 @@ carry almost none.
 
 In September 2023 I flew a Vision Aerial Switchblade over the MSU campus
 between 1:14 and 4:58 a.m., collecting 1,366 frames across 236 hectares at
-roughly 123 meters above ground. The Sony a6000 ran with the exposure
-locked at 1/60 second, ISO 12800, f/3.2, so every frame is directly
-comparable to every other frame. No color balancing or
+roughly 123 meters above ground, with 80 percent overlap along each leg
+and 60 percent between legs, one frame every 6 seconds. The Sony a6000,
+with a 16 mm lens, ran with the exposure locked at 1/60 second, ISO 12800,
+f/3.2, so every frame is directly comparable to every other frame. No color balancing or
 scene-adaptive normalization was applied at any stage, which is what lets brightness
 on the finished sheets be read as a measurement.
 
@@ -280,7 +293,8 @@ right.
 
 Two failures cost the most time.
 OpenDroneMap ran into memory limits at this scale: in 48 GB it would not
-texture the full 280 hectare site above roughly 400,000 faces. Restricting
+texture the full 280 hectare site above roughly 400,000 faces; Metashape
+had built its full-site surface in 40.8 GB. Restricting
 the reconstruction to 71 hectares let it texture 600,000 faces in thirteen
 minutes, six times the mesh density of the full-site build. That fixed flat ground and did nothing for
 trees, which still tear, because a 2.5D mesh cannot represent them at all.
