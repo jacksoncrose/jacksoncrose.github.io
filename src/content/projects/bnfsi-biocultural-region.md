@@ -1,16 +1,23 @@
 ---
+# 2026-08-20: the Cree syllabics question is RESOLVED. Asked a third time
+# with options (cut the reason / the source data was in syllabics / it is
+# correct as written), his answer: "Remove the discussion of Cree place
+# names." The whole clause came out of the Approach paragraph below; the
+# duplicate-label filter sentence it shared a sentence with stays. Do not
+# reintroduce the topic and never supply a mechanism — the syllabics
+# detail is a write-up fact only, same standing as American Indian Hall.
 # 2026-08-15 section pass, item 3, his "take it": the ArcGIS Online
 # limits paragraph and the second-phase paragraph MERGED into one; cut
 # "using chained raster functions", "The result gives the static map its
 # depth without the flat, mechanical look of a default hillshade", and
 # "so the web map and static map draw from one authoritative source
 # rather than divergent copies" (restated the consolidation). Dates,
-# sources, and the component list unchanged. OPEN FACT QUESTION, asked
-# and not yet answered: the Cree syllabics sentence ("...because the
-# platform does not support standard Roman orthography") reads backwards
-# — SRO is the Latin-alphabet system and should be the EASY one to
-# display. HELD VERBATIM until he says what happened. Do not reword it
-# without him; do not guess a mechanism.
+# sources, and the component list unchanged. FACT QUESTION, RESOLVED
+# 2026-08-20 (see the note at the top of this block): the Cree syllabics
+# sentence ("...because the platform does not support standard Roman
+# orthography") read backwards — SRO is the Latin-alphabet system and
+# should be the EASY one to display. Held verbatim from 08-15 until his
+# answer removed it.
 # 2026-08-15 second de-AI pass, his "implement all recommendations": the
 # Approach sentence ended "rather than a set of borders", the second
 # "rather than a set of" on one page (Problem has "...administrative
@@ -90,17 +97,16 @@ from cultural imagery, including a hand-scanned medicine wheel vectorized
 to SVG and custom bison, feather, and lodge symbols, packaged into a
 reusable style library so future editors inherit the same visual language.
 
-Working inside ArcGIS Online meant designing around its limits. Cree place
-names render in syllabics because the platform does not support standard
-Roman orthography, and I built a filter system to handle duplicate labels
-across dense clusters of small land parcels, which the platform cannot
-deduplicate on its own. A second phase in 2023 and 2024 rebuilt the map's
-terrain: rather than rely on a stock hillshade, I derived a custom relief
-from continental elevation data, generating slope, edge, highlight, and
-multi-radius blur components and compositing them into one blended
-surface. The same phase consolidated the project's scattered working data
-into a single geodatabase and moved the shared thematic layers to hosted
-ArcGIS Online feature services.
+Working inside ArcGIS Online meant designing around its limits. I built a
+filter system to handle duplicate labels across dense clusters of small
+land parcels, which the platform cannot deduplicate on its own. A second
+phase in 2023 and 2024 rebuilt the map's terrain: rather than rely on a
+stock hillshade, I derived a custom relief from continental elevation
+data, generating slope, edge, highlight, and multi-radius blur components
+and compositing them into one blended surface. The same phase
+consolidated the project's scattered working data into a single
+geodatabase and moved the shared thematic layers to hosted ArcGIS Online
+feature services.
 
 ## What was delivered
 
