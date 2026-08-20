@@ -1,4 +1,11 @@
 ---
+# 2026-08-20 de-AI pass, flags 3 and 4, his calls: "inherit the same
+# visual language" -> "inherit the same symbol system" (his pick over
+# "symbols", which repeated the word within the sentence; sibling of the Rooney
+# "visual grammar" -> "symbol system" call, 08-15), and the
+# announce-then-prove opener "Working inside ArcGIS Online meant
+# designing around its limits." CUT — the filter-system sentence opens
+# the paragraph now. No figure, date, or source moved.
 # 2026-08-20: the Cree syllabics question is RESOLVED. Asked a third time
 # with options (cut the reason / the source data was in syllabics / it is
 # correct as written), his answer: "Remove the discussion of Cree place
@@ -95,11 +102,12 @@ omits state, provincial, and federal boundaries so the region reads as a
 network of relationships. Symbology was drawn
 from cultural imagery, including a hand-scanned medicine wheel vectorized
 to SVG and custom bison, feather, and lodge symbols, packaged into a
-reusable style library so future editors inherit the same visual language.
+reusable style library so future editors inherit the same symbol
+system.
 
-Working inside ArcGIS Online meant designing around its limits. I built a
-filter system to handle duplicate labels across dense clusters of small
-land parcels, which the platform cannot deduplicate on its own. A second
+I built a filter system to handle duplicate labels across dense
+clusters of small land parcels, which the platform cannot deduplicate
+on its own. A second
 phase in 2023 and 2024 rebuilt the map's terrain: rather than rely on a
 stock hillshade, I derived a custom relief from continental elevation
 data, generating slope, edge, highlight, and multi-radius blur components

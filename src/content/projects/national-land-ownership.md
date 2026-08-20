@@ -1,4 +1,9 @@
 ---
+# 2026-08-20 de-AI pass, flag 1, his call ("Swap both"): "reclassification
+# engine" -> "decision tree" (Approach) and "classification engine" ->
+# "classifier" (Outcome), per his 08-14 "I would avoid using engine in
+# general." Both match the explorer app's own vocabulary ("decision
+# tree", "Owner classifier" tab). No figure, source, or attribution moved.
 # 2026-08-15 section pass, item 5, his approval: Outcome's "the remaining
 # deltas are exactly those predicted by the study's water-masking
 # methodology" -> "differences ... predicted by the study's removal of
@@ -79,7 +84,7 @@ intersect Fee parcels. Designation parcels were excluded entirely after QC
 revealed many were privately held land, a finding verified against the
 Montana Cadastral Framework.
 
-A rule-based Python reclassification engine then reads eight PAD-US
+A rule-based Python decision tree then reads eight PAD-US
 attribute fields per parcel to assign one of twelve ownership classes,
 from national forests and BLM rangeland to state trust lands, tribal
 lands, municipal parks, and private conservation easements, with
@@ -115,7 +120,7 @@ the widely cited figure of roughly 28 percent, and the remaining differences
 are exactly those predicted by the study's removal of open water from
 county boundaries.
 
-The results and the classification engine are also packaged as a
+The results and the classifier are also packaged as a
 self-contained interactive explorer: a county choropleth with
 change-since-2019 analysis, state ownership profiles, county lookup, and a
 live demonstration of the parcel classification decision tree ported from
